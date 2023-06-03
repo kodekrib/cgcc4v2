@@ -35,7 +35,7 @@
                   <div class="card mb-4 text-white bg-success-gradient" style="height: 150px">
                 	<div class="card-body p-4 pb-0 d-flex justify-content-between align-items-start">
                   		<div>
-                    		<div class="fs-4 fw-semibold">{{ number_format($settings2['total_number']) }} <span class="fs-6 fw-normal">(-12.4%
+                    		<div class="fs-4 fw-semibold">{{ number_format($settings2['total_number']) }} <span class="fs-6 fw-normal">(-12.5%
                               <svg class="icon">
                                 <use xlink:href="coreui/vendors/@coreui/icons/svg/free.svg#cil-arrow-bottom"></use>
                               </svg>)</span>
