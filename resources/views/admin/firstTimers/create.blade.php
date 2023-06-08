@@ -140,10 +140,10 @@
             </div>
             <div class="form-group">
                 <label>{{ trans('cruds.firstTimer.fields.country') }}</label>
-                <select class="form-control {{ $errors->has('country') ? 'is-invalid' : '' }}" name="country" id="country">
-                    <option value disabled {{ old('country', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
-                    @foreach(App\Models\FirstTimer::COUNTRY_SELECT as $key => $label)
-                        <option value="{{ $key }}" {{ old('country', '') === (string) $key ? 'selected' : '' }}>{{ $label }}</option>
+                <select class="form-control {{ $errors->has('nationality') ? 'is-invalid' : '' }}" name="nationality" id="nationality" onchange="changeCountry()">
+                    <option value disabled {{ old('nationality', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
+                    @foreach ($countries as $country => $data)
+                    <option value="{{ $data['name'] }}" {{ old('country_of_birth', '') === (string) $data['name'] ? 'selected' : '' }}>{{ $data['name']}}</option>
                     @endforeach
                 </select>
                 @if($errors->has('country'))
@@ -155,10 +155,11 @@
             </div>
             <div class="form-group">
                 <label>{{ trans('cruds.firstTimer.fields.state') }}</label>
-                <select class="form-control {{ $errors->has('state') ? 'is-invalid' : '' }}" name="state" id="state">
-                    <option value disabled {{ old('state', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
-                    @foreach(App\Models\FirstTimer::STATE_SELECT as $key => $label)
-                        <option value="{{ $key }}" {{ old('state', '') === (string) $key ? 'selected' : '' }}>{{ $label }}</option>
+
+                <select class="form-control {{ $errors->has('state_of_origin') ? 'is-invalid' : '' }}" name="state_of_origin" >
+                    <option value disabled {{ old('state_of_origin', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
+                    @foreach ($states as $state => $label)
+                        <option value="{{ $label['state'] }}" {{ old('state_of_origin', '') === (string) $label['state'] ? 'selected' : '' }}>{{ $label['state'] }}</option>
                     @endforeach
                 </select>
                 @if($errors->has('state'))
@@ -170,12 +171,13 @@
             </div>
             <div class="form-group">
                 <label>{{ trans('cruds.firstTimer.fields.city') }}</label>
-                <select class="form-control {{ $errors->has('city') ? 'is-invalid' : '' }}" name="city" id="city">
+                <input class="form-control {{ $errors->has('city') ? 'is-invalid' : '' }}" type="text" name="city" id="city" value="{{ old('city', '') }}">
+                {{-- <select class="form-control {{ $errors->has('city') ? 'is-invalid' : '' }}" name="city" id="city">
                     <option value disabled {{ old('city', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
                     @foreach(App\Models\FirstTimer::CITY_SELECT as $key => $label)
                         <option value="{{ $key }}" {{ old('city', '') === (string) $key ? 'selected' : '' }}>{{ $label }}</option>
                     @endforeach
-                </select>
+                </select> --}}
                 @if($errors->has('city'))
                     <div class="invalid-feedback">
                         {{ $errors->first('city') }}
@@ -214,7 +216,7 @@
                 <span class="help-block">{{ trans('cruds.firstTimer.fields.start_ats_helper') }}</span>
             </div>
             <div class="form-group">
-                <label>{{ trans('cruds.firstTimer.fields.ats_mode') }}</label>
+                <label>ATS Mode</label>
                 <select class="form-control {{ $errors->has('ats_mode') ? 'is-invalid' : '' }}" name="ats_mode" id="ats_mode">
                     <option value disabled {{ old('ats_mode', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
                     @foreach(App\Models\FirstTimer::ATS_MODE_SELECT as $key => $label)

@@ -29,7 +29,17 @@ class FirstTimerController extends Controller
 
         $marital_statuses = MaritalStatus::pluck('marital_status', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.firstTimers.create', compact('marital_statuses'));
+        $jsonCountry = file_get_contents('Json/countries.json');
+        $json_Countrydata = json_decode($jsonCountry,true);
+
+        $countries = $json_Countrydata; //Country::all();
+
+        $jsonState = file_get_contents('Json/nigeria-state-and-lgas.json');
+        $json_Statedata = json_decode($jsonState,true);
+
+        $states = $json_Statedata; //State::all();
+
+        return view('admin.firstTimers.create', compact('countries', 'states', 'marital_statuses'));
     }
 
     public function store(StoreFirstTimerRequest $request)
@@ -47,7 +57,17 @@ class FirstTimerController extends Controller
 
         $firstTimer->load('marital_status');
 
-        return view('admin.firstTimers.edit', compact('firstTimer', 'marital_statuses'));
+        $jsonCountry = file_get_contents('Json/countries.json');
+        $json_Countrydata = json_decode($jsonCountry,true);
+
+        $countries = $json_Countrydata; //Country::all();
+
+        $jsonState = file_get_contents('Json/nigeria-state-and-lgas.json');
+        $json_Statedata = json_decode($jsonState,true);
+
+        $states = $json_Statedata; //State::all();
+
+        return view('admin.firstTimers.edit', compact('countries', 'states', 'firstTimer', 'marital_statuses'));
     }
 
     public function update(UpdateFirstTimerRequest $request, FirstTimer $firstTimer)
