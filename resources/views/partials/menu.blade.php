@@ -3,7 +3,7 @@
             <svg class="nav-icon">
               <use xlink:href="coreui/vendors/@coreui/icons/svg/free.svg#cil-speedometer"></use>
             </svg> {{ trans('global.dashboard') }}</a></li>
-        
+
   		@can('church_affiliation_access')
         <li class="nav-group {{ request()->is("admin/ats-memberships*") ? "c-show" : "" }} {{ request()->is("admin/join-departments*") ? "c-show" : "" }} {{ request()->is("admin/members-affinity-groups*") ? "c-show" : "" }} {{ request()->is("admin/cihmembers*") ? "c-show" : "" }} {{ request()->is("admin/mfs*") ? "c-show" : "" }}"><a class="nav-link nav-group-toggle" href="#">
             <svg class="nav-icon">
@@ -41,7 +41,7 @@
             <li class="nav-item"><a class="nav-link {{ request()->is("admin/type-of-appoinments") || request()->is("admin/type-of-appoinments/*") ? "c-active" : "" }}" href="{{ route("admin.type-of-appoinments.index") }}"> {{ trans('cruds.typeOfAppoinment.title') }}</a></li>
             @endcan
           </ul>
-        </li>           
+        </li>
         @endcan
   		@can('meeting_management_access')
   		<li class="nav-group {{ request()->is("admin/meetings*") ? "c-show" : "" }} {{ request()->is("admin/attendance-managements*") ? "c-show" : "" }} {{ request()->is("admin/meeting-types*") ? "c-show" : "" }}"><a class="nav-link nav-group-toggle" href="#">
@@ -134,7 +134,7 @@
             <li class="nav-item"><a class="nav-link" href="notifications/toasts.html"><span class="nav-icon"></span> Toasts</a></li>
           </ul>
         </li>
-        @endcan        
+        @endcan
         @can('outreach_and_mission_access')
   		<li class="nav-group{{ request()->is("admin/outreaches*") ? "c-show" : "" }} {{ request()->is("admin/outreach-types*") ? "c-show" : "" }} {{ request()->is("admin/e-flyers*") ? "c-show" : "" }} {{ request()->is("admin/outreaches*") ? "c-show" : "" }} {{ request()->is("admin/outreach-types*") ? "c-show" : "" }} {{ request()->is("admin/e-flyers*") ? "c-show" : "" }}" ><a class="nav-link nav-group-toggle" href="#">
             <svg class="nav-icon">
@@ -152,10 +152,10 @@
             @endcan
            </ul>
         </li>
-        @endcan      
-         
-  
-  
+        @endcan
+
+
+
  		@can('ancillary_service_access')
             <li class="nav-group {{ request()->is("admin/ancillary-managements*") ? "c-show" : "" }} {{ request()->is("admin/service-types*") ? "c-show" : "" }}">
                 <a class="nav-link nav-group-toggle" href="#">
@@ -217,28 +217,34 @@
                 <a class="nav-link nav-group-toggle" href="#">
                     <svg class="nav-icon">
                         <use xlink:href="coreui/vendors/@coreui/icons/svg/free.svg#cil-bell"></use>
-                </svg> {{ trans('cruds.assetManagement.title') }}
+                </svg>
+                {{ trans('cruds.assetManagement.title') }}
                 </a>
                 <ul class="nav-group-items">
                     @can('asset_category_access')
                         <li class="nav-item"><a href="{{ route("admin.asset-categories.index") }}" class="nav-link {{ request()->is("admin/asset-categories") || request()->is("admin/asset-categories/*") ? "c-active" : "" }}">
-                                <i class="fa-fw fas fa-tags c-sidebar-nav-icon"> {{ trans('cruds.assetCategory.title') }}
+                                <!-- <i class="fa-fw fas fa-tags c-sidebar-nav-icon"></i>  -->
+                                {{ trans('cruds.assetCategory.title') }}
                             </a>
                         </li>
                     @endcan
                     @can('asset_location_access')
-                        <li class="nav-item"><a href="{{ route("admin.asset-locations.index") }}" class="nav-link {{ request()->is("admin/asset-locations") || request()->is("admin/asset-locations/*") ? "c-active" : "" }}">
-                                <i class="fa-fw fas fa-map-marker c-sidebar-nav-icon"> {{ trans('cruds.assetLocation.title') }}
+                        <li class="nav-item">
+                            <a href="{{ route("admin.asset-locations.index") }}" class="nav-link {{ request()->is("admin/asset-locations") || request()->is("admin/asset-locations/*") ? "c-active" : "" }}">
+                                <!-- <i class="fa-fw fas fa-map-marker c-sidebar-nav-icon"></i> -->
+                                     {{ trans('cruds.assetLocation.title') }}
                             </a>
                         </li>
                     @endcan
                     @can('asset_status_access')
-                        <li class="nav-item"><a href="{{ route("admin.asset-statuses.index") }}" class="nav-link {{ request()->is("admin/asset-statuses") || request()->is("admin/asset-statuses/*") ? "c-active" : "" }}"> {{ trans('cruds.assetStatus.title') }}
+                        <li class="nav-item">
+                            <a href="{{ route("admin.asset-statuses.index") }}" class="nav-link {{ request()->is("admin/asset-statuses") || request()->is("admin/asset-statuses/*") ? "c-active" : "" }}"> {{ trans('cruds.assetStatus.title') }}
                             </a>
                         </li>
                     @endcan
                     @can('asset_access')
-                        <li class="nav-item"><a href="{{ route("admin.assets.index") }}" class="nav-link {{ request()->is("admin/assets") || request()->is("admin/assets/*") ? "c-active" : "" }}"> {{ trans('cruds.asset.title') }}
+                        <li class="nav-item">
+                            <a href="{{ route("admin.assets.index") }}" class="nav-link {{ request()->is("admin/assets") || request()->is("admin/assets/*") ? "c-active" : "" }}"> {{ trans('cruds.asset.title') }}
                             </a>
                         </li>
                     @endcan
@@ -260,48 +266,57 @@
                 </a>
                 <ul class="nav-group-items">
                     @can('first_timer_access')
-                        <li class="nav-item"><a href="{{ route("admin.first-timers.index") }}" class="nav-link {{ request()->is("admin/first-timers") || request()->is("admin/first-timers/*") ? "c-active" : "" }}"> {{ trans('cruds.firstTimer.title') }}
+                        <li class="nav-item">
+                            <a href="{{ route("admin.first-timers.index") }}" class="nav-link {{ request()->is("admin/first-timers") || request()->is("admin/first-timers/*") ? "c-active" : "" }}"> {{ trans('cruds.firstTimer.title') }}
                             </a>
                         </li>
                     @endcan
                     @can('dedication_access')
-                        <li class="nav-item"><a href="{{ route("admin.dedications.index") }}" class="nav-link {{ request()->is("admin/dedications") || request()->is("admin/dedications/*") ? "c-active" : "" }}"> {{ trans('cruds.dedication.title') }}
+                        <li class="nav-item">
+                            <a href="{{ route("admin.dedications.index") }}" class="nav-link {{ request()->is("admin/dedications") || request()->is("admin/dedications/*") ? "c-active" : "" }}"> {{ trans('cruds.dedication.title') }}
                             </a>
                         </li>
                     @endcan
                     @can('christening_access')
-                        <li class="nav-item"><a href="{{ route("admin.christenings.index") }}" class="nav-link {{ request()->is("admin/christenings") || request()->is("admin/christenings/*") ? "c-active" : "" }}"> {{ trans('cruds.christening.title') }}
+                        <li class="nav-item">
+                             <a href="{{ route("admin.christenings.index") }}" class="nav-link {{ request()->is("admin/christenings") || request()->is("admin/christenings/*") ? "c-active" : "" }}"> {{ trans('cruds.christening.title') }}
                             </a>
                         </li>
                     @endcan
                     @can('cih_request_access')
-                        <li class="nav-item"><a href="{{ route("admin.cih-requests.index") }}" class="nav-link {{ request()->is("admin/cih-requests") || request()->is("admin/cih-requests/*") ? "c-active" : "" }}"> {{ trans('cruds.cihRequest.title') }}
+                        <li class="nav-item">
+                            <a href="{{ route("admin.cih-requests.index") }}" class="nav-link {{ request()->is("admin/cih-requests") || request()->is("admin/cih-requests/*") ? "c-active" : "" }}"> {{ trans('cruds.cihRequest.title') }}
                             </a>
                         </li>
                     @endcan
                     @can('cihzone_access')
-                        <li class="nav-item"><a href="{{ route("admin.cihzones.index") }}" class="nav-link {{ request()->is("admin/cihzones") || request()->is("admin/cihzones/*") ? "c-active" : "" }}"> {{ trans('cruds.cihzone.title') }}
+                        <li class="nav-item">
+                            <a href="{{ route("admin.cihzones.index") }}" class="nav-link {{ request()->is("admin/cihzones") || request()->is("admin/cihzones/*") ? "c-active" : "" }}"> {{ trans('cruds.cihzone.title') }}
                             </a>
                         </li>
                     @endcan
                     @can('centre_access')
-                        <li class="nav-item"><a href="{{ route("admin.centres.index") }}" class="nav-link {{ request()->is("admin/centres") || request()->is("admin/centres/*") ? "c-active" : "" }}"> {{ trans('cruds.centre.title') }}
+                        <li class="nav-item">
+                            <a href="{{ route("admin.centres.index") }}" class="nav-link {{ request()->is("admin/centres") || request()->is("admin/centres/*") ? "c-active" : "" }}"> {{ trans('cruds.centre.title') }}
                             </a>
                         </li>
                     @endcan
                     @can('cih_types_of_request_access')
                         <li class="nav-item"><a href="{{ route("admin.cih-types-of-requests.index") }}" class="nav-link {{ request()->is("admin/cih-types-of-requests") || request()->is("admin/cih-types-of-requests/*") ? "c-active" : "" }}">
-                                <i class="fa-fw far fa-envelope c-sidebar-nav-icon"> {{ trans('cruds.cihTypesOfRequest.title') }}
+                                <!-- <i class="fa-fw far fa-envelope c-sidebar-nav-icon"> </i> -->
+                                    {{ trans('cruds.cihTypesOfRequest.title') }}
                             </a>
                         </li>
                     @endcan
                     @can('cih_centers_inspection_access')
-                        <li class="nav-item"><a href="{{ route("admin.cih-centers-inspections.index") }}" class="nav-link {{ request()->is("admin/cih-centers-inspections") || request()->is("admin/cih-centers-inspections/*") ? "c-active" : "" }}"> {{ trans('cruds.cihCentersInspection.title') }}
+                        <li class="nav-item">
+                            <a href="{{ route("admin.cih-centers-inspections.index") }}" class="nav-link {{ request()->is("admin/cih-centers-inspections") || request()->is("admin/cih-centers-inspections/*") ? "c-active" : "" }}"> {{ trans('cruds.cihCentersInspection.title') }}
                             </a>
                         </li>
                     @endcan
                     @can('inspectorate_group_access')
-                        <li class="nav-item"><a href="{{ route("admin.inspectorate-groups.index") }}" class="nav-link {{ request()->is("admin/inspectorate-groups") || request()->is("admin/inspectorate-groups/*") ? "c-active" : "" }}"> {{ trans('cruds.inspectorateGroup.title') }}
+                        <li class="nav-item">
+                            <a href="{{ route("admin.inspectorate-groups.index") }}" class="nav-link {{ request()->is("admin/inspectorate-groups") || request()->is("admin/inspectorate-groups/*") ? "c-active" : "" }}"> {{ trans('cruds.inspectorateGroup.title') }}
                             </a>
                         </li>
                     @endcan
@@ -380,7 +395,7 @@
                         </li>
                     @endcan
                     @can('tasks_calendar_access')
-                        <li class="nav-item"><a href="{{ route("admin.tasks-calendars.index") }}" class="nav-link {{ request()->is("admin/tasks-calendars") || request()->is("admin/tasks-calendars/*") ? "c-active" : "" }}"> 
+                        <li class="nav-item"><a href="{{ route("admin.tasks-calendars.index") }}" class="nav-link {{ request()->is("admin/tasks-calendars") || request()->is("admin/tasks-calendars/*") ? "c-active" : "" }}">
                                 {{ trans('cruds.tasksCalendar.title') }}
                             </a>
                         </li>
@@ -397,31 +412,31 @@
                 </a>
                 <ul class="nav-group-items">
                     @can('bank_account_detail_access')
-                        <li class="nav-item"><a href="{{ route("admin.bank-account-details.index") }}" class="nav-link {{ request()->is("admin/bank-account-details") || request()->is("admin/bank-account-details/*") ? "c-active" : "" }}"> 
+                        <li class="nav-item"><a href="{{ route("admin.bank-account-details.index") }}" class="nav-link {{ request()->is("admin/bank-account-details") || request()->is("admin/bank-account-details/*") ? "c-active" : "" }}">
                                 {{ trans('cruds.bankAccountDetail.title') }}
                             </a>
                         </li>
                     @endcan
                     @can('bank_account_type_access')
-                        <li class="nav-item"><a href="{{ route("admin.bank-account-types.index") }}" class="nav-link {{ request()->is("admin/bank-account-types") || request()->is("admin/bank-account-types/*") ? "c-active" : "" }}"> 
+                        <li class="nav-item"><a href="{{ route("admin.bank-account-types.index") }}" class="nav-link {{ request()->is("admin/bank-account-types") || request()->is("admin/bank-account-types/*") ? "c-active" : "" }}">
                                 {{ trans('cruds.bankAccountType.title') }}
                             </a>
                         </li>
                     @endcan
                     @can('currency_access')
-                        <li class="nav-item"><a href="{{ route("admin.currencies.index") }}" class="nav-link {{ request()->is("admin/currencies") || request()->is("admin/currencies/*") ? "c-active" : "" }}"> 
+                        <li class="nav-item"><a href="{{ route("admin.currencies.index") }}" class="nav-link {{ request()->is("admin/currencies") || request()->is("admin/currencies/*") ? "c-active" : "" }}">
                                 {{ trans('cruds.currency.title') }}
                             </a>
                         </li>
                     @endcan
                     @can('flutterwave_apikey_access')
-                        <li class="nav-item"><a href="{{ route("admin.flutterwave-apikeys.index") }}" class="nav-link {{ request()->is("admin/flutterwave-apikeys") || request()->is("admin/flutterwave-apikeys/*") ? "c-active" : "" }}"> 
+                        <li class="nav-item"><a href="{{ route("admin.flutterwave-apikeys.index") }}" class="nav-link {{ request()->is("admin/flutterwave-apikeys") || request()->is("admin/flutterwave-apikeys/*") ? "c-active" : "" }}">
                                 {{ trans('cruds.flutterwaveApikey.title') }}
                             </a>
                         </li>
                     @endcan
                     @can('cgcc_payment_form_access')
-                        <li class="nav-item"><a href="{{ route("admin.cgcc-payment-forms.index") }}" class="nav-link {{ request()->is("admin/cgcc-payment-forms") || request()->is("admin/cgcc-payment-forms/*") ? "c-active" : "" }}"> 
+                        <li class="nav-item"><a href="{{ route("admin.cgcc-payment-forms.index") }}" class="nav-link {{ request()->is("admin/cgcc-payment-forms") || request()->is("admin/cgcc-payment-forms/*") ? "c-active" : "" }}">
                                 {{ trans('cruds.cgccPaymentForm.title') }}
                             </a>
                         </li>
@@ -439,13 +454,13 @@
                 </a>
                 <ul class="nav-group-items">
                     @can('faq_category_access')
-                        <li class="nav-item"><a href="{{ route("admin.faq-categories.index") }}" class="nav-link {{ request()->is("admin/faq-categories") || request()->is("admin/faq-categories/*") ? "c-active" : "" }}"> 
+                        <li class="nav-item"><a href="{{ route("admin.faq-categories.index") }}" class="nav-link {{ request()->is("admin/faq-categories") || request()->is("admin/faq-categories/*") ? "c-active" : "" }}">
                                 {{ trans('cruds.faqCategory.title') }}
                             </a>
                         </li>
                     @endcan
                     @can('faq_question_access')
-                        <li class="nav-item"><a href="{{ route("admin.faq-questions.index") }}" class="nav-link {{ request()->is("admin/faq-questions") || request()->is("admin/faq-questions/*") ? "c-active" : "" }}"> 
+                        <li class="nav-item"><a href="{{ route("admin.faq-questions.index") }}" class="nav-link {{ request()->is("admin/faq-questions") || request()->is("admin/faq-questions/*") ? "c-active" : "" }}">
                                 {{ trans('cruds.faqQuestion.title') }}
                             </a>
                         </li>
@@ -580,20 +595,23 @@
                 <ul class="nav-group-items">
                     @can('content_category_access')
                         <li class="nav-item"><a href="{{ route("admin.content-categories.index") }}" class="nav-link {{ request()->is("admin/content-categories") || request()->is("admin/content-categories/*") ? "c-active" : "" }}">
-                                <i class="fa-fw fas fa-folder c-sidebar-nav-icon"> 
+                                <!-- <i class="fa-fw fas fa-folder c-sidebar-nav-icon"></i> -->
                                 {{ trans('cruds.contentCategory.title') }}
                             </a>
                         </li>
                     @endcan
                     @can('content_tag_access')
-                        <li class="nav-item"><a href="{{ route("admin.content-tags.index") }}" class="nav-link {{ request()->is("admin/content-tags") || request()->is("admin/content-tags/*") ? "c-active" : "" }}"> 
+                        <li class="nav-item">
+                            <a href="{{ route("admin.content-tags.index") }}" class="nav-link {{ request()->is("admin/content-tags") || request()->is("admin/content-tags/*") ? "c-active" : "" }}">
                                 {{ trans('cruds.contentTag.title') }}
                             </a>
                         </li>
                     @endcan
                     @can('content_page_access')
-                        <li class="nav-item"><a href="{{ route("admin.content-pages.index") }}" class="nav-link {{ request()->is("admin/content-pages") || request()->is("admin/content-pages/*") ? "c-active" : "" }}">
-                                <i class="fa-fw fas fa-file c-sidebar-nav-icon"> {{ trans('cruds.contentPage.title') }}
+                        <li class="nav-item">
+                            <a href="{{ route("admin.content-pages.index") }}" class="nav-link {{ request()->is("admin/content-pages") || request()->is("admin/content-pages/*") ? "c-active" : "" }}">
+                                <!-- <i class="fa-fw fas fa-file c-sidebar-nav-icon"> </i> -->
+                                    {{ trans('cruds.contentPage.title') }}
                             </a>
                         </li>
                     @endcan
@@ -610,13 +628,16 @@
                 </a>
                 <ul class="nav-group-items">
                     @can('contact_company_access')
-                        <li class="nav-item"><a href="{{ route("admin.contact-companies.index") }}" class="nav-link {{ request()->is("admin/contact-companies") || request()->is("admin/contact-companies/*") ? "c-active" : "" }}">
-                                <i class="fa-fw fas fa-building c-sidebar-nav-icon"> {{ trans('cruds.contactCompany.title') }}
+                        <li class="nav-item">
+                            <a href="{{ route("admin.contact-companies.index") }}" class="nav-link {{ request()->is("admin/contact-companies") || request()->is("admin/contact-companies/*") ? "c-active" : "" }}">
+                                <!-- <i class="fa-fw fas fa-building c-sidebar-nav-icon"> </i> -->
+                                    {{ trans('cruds.contactCompany.title') }}
                             </a>
                         </li>
                     @endcan
                     @can('contact_contact_access')
-                        <li class="nav-item"><a href="{{ route("admin.contact-contacts.index") }}" class="nav-link {{ request()->is("admin/contact-contacts") || request()->is("admin/contact-contacts/*") ? "c-active" : "" }}"> {{ trans('cruds.contactContact.title') }}
+                        <li class="nav-item">
+                            <a href="{{ route("admin.contact-contacts.index") }}" class="nav-link {{ request()->is("admin/contact-contacts") || request()->is("admin/contact-contacts/*") ? "c-active" : "" }}"> {{ trans('cruds.contactContact.title') }}
                             </a>
                         </li>
                     @endcan
@@ -706,4 +727,3 @@
             </a>
         </li>
   </ul>
-   
