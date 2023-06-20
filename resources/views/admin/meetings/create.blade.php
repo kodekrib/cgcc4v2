@@ -338,7 +338,7 @@
       </div>
         <div class="modal-body">
             <div class="table-responsive" style="width: 100% !important">
-                    <table class="table table-bordered table-striped table-hover datatable" id="memberListTable">
+                    <table class="table table-bordered table-striped table-hover datatable" id="memberListTable" style="width: 100% !important">
                         <thead style="width: 100% !important;">
                             <tr>
                                 <th>
@@ -377,7 +377,7 @@
       </div>
         <div class="modal-body">
             <div class="table-responsive" style="width: 100% !important">
-                    <table class="table table-bordered table-striped table-hover datatable" id="dateListTable">
+                    <table class="table table-bordered table-striped table-hover datatable" id="dateListTable" style="width: 100% !important">
                         <thead style="width: 100% !important;">
                             <tr>
                                 <th>
@@ -558,6 +558,8 @@ Dropzone.options.filesDropzone = {
             $('#affinity_group').val(null);
             table.clear().draw();
             if(selected_groups === 'all'){
+                GetMemberList(selected_groups, null);
+            } else {
                 GetMemberList(selected_groups, null);
             }
         } else if(selected_groups === 'affinity_group'){
@@ -909,7 +911,15 @@ Dropzone.options.filesDropzone = {
                                     },
 
                                     { data: 'email', name: 'email' },
-                                    { data: 'mobile', name: 'mobile' },
+                                    //{ data: 'mobile', name: 'mobile' },
+                                    {
+                                        className: 'none',
+                                        data: 'mobile',
+                                        defaultContent: '',
+                                        render: function (data, type, full, meta) {
+                                            return data??'N/A';
+                                        }
+                                    },
                                 ],
 
                             });
@@ -938,7 +948,15 @@ Dropzone.options.filesDropzone = {
                     { data: 'id', name: 'id',  },
                     { data: 'member_name', name: 'member_name' },
                     { data: 'email', name: 'email' },
-                    { data: 'mobile', name: 'mobile' },
+                    //{ data: 'mobile', name: 'mobile' },
+                    {
+                        className: 'none',
+                        data: 'mobile',
+                        defaultContent: '',
+                        render: function (data, type, full, meta) {
+                            return data??'N/A';
+                        }
+                    },
                 ],
 
             });

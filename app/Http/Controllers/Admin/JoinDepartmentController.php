@@ -45,7 +45,7 @@ class JoinDepartmentController extends Controller
         $userId = Auth::user()->email;
 
         $member =Member::all()->where('email', $userId)->first();
-
+        //dd($member);
         if($member == null) return redirect()->route('admin.join-departments.index');
 
         $dept = Department::with(['hod', 'organization_type', 'created_by'])->where('id', $request['department_id'])->first();
@@ -63,11 +63,11 @@ class JoinDepartmentController extends Controller
             $email = $mailSeting->GetEmailList(1, $member->id,$joinDepartment->department_id);
             $data['subject'] = 'Notification For Joining a Department';
             $data['template'] =  $mailSeting->BuildEmailTemplate('1', $member->id);
-
+            info(json_encode($email));
             try {
                 Mail::to($email)->send(new MailNotify($data));
             } catch (Exception $th) {
-
+                info($th);
             }
         }
 
@@ -135,11 +135,11 @@ class JoinDepartmentController extends Controller
                'reason' => (string)$resquest['reason'],
         ];
 
-        $template = $mailSeting->BuildEmailTemplate('4', $dept->created_by_id, $userDefined);
+        $template = $mailSeting->BuildEmailTemplate('4', $dept['created_by_id'], $userDefined);
         $data['template'] =   $template;//'<p>'.(string)$request['reason'] . '</p>';//$mailSeting->BuildEmailTemplate('1', $member->id);
 
         try {
-            Mail::to($dept->created_by->email)->send(new MailNotify($data));
+            Mail::to($dept['member']->email)->send(new MailNotify($data));
         } catch (Exception $th) {
 
         }

@@ -10,7 +10,7 @@ class AddMeetingChange extends Migration
     public function up()
     {
         Schema::table('meetings', function (Blueprint $table) {
-            $table->json('date_of_meeting')->change();
+            $table->json('date_of_meeting')->nullable();
             $table->string('selected_groups');
             $table->integer('department_id')->nullable();
             $table->string('affinity_group')->nullable();

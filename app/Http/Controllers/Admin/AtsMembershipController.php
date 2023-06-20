@@ -34,10 +34,6 @@ class AtsMembershipController extends Controller
 
     public function store(StoreAtsMembershipRequest $request)
     {
-        if (AtsMembership::count() > 0) {
-            return redirect()->back()->withInput()->withErrors(['error' => 'Only one ATS record is allowed']);
-           }
-
         $atsMembership = AtsMembership::create($request->all());
 
         return redirect()->route('admin.ats-memberships.index');

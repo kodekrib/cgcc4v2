@@ -48,7 +48,7 @@ class JoinDepartment extends Model
         'approval_status',
         'status',
         'reason',
-      	'member_Id',
+        'member_Id',
         'created_by_id',
         'created_at',
         'updated_at',
@@ -64,8 +64,7 @@ class JoinDepartment extends Model
     {
         return $this->belongsTo(User::class, 'created_by_id');
     }
-
-  public function member()
+public function member()
     {
         return $this->belongsTo(Member::class, 'member_Id');
     }

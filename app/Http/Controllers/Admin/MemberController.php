@@ -60,24 +60,19 @@ class MemberController extends Controller
 
     public function store(StoreMemberRequest $request)
     {
-    
-     // Check if a record already exists
-    if (Member::count() > 0) {
-        return redirect()->back()->withInput()->withErrors(['error' => 'Only one member record is allowed']);
-       }
+        $member = Member::create($request->all());
 
-      $member = Member::create($request->all());
-       $memberId = $member->id;
-    
+        $memberId = $member->id;
+
         $affintyStore = [
             'member_name' => $request->input('member_name'),
             'affinity_group'   => $request->input('affinity_group'),
             'member_Id'   => $memberId,
             'created_by_id' => Auth::id()
         ];
-        
+
         $membersAffinityGroup = MembersAffinityGroup::create( $affintyStore);
-      
+
         if ($request->input('image', false)) {
             $member->addMedia(storage_path('tmp/uploads/' . basename($request->input('image'))))->toMediaCollection('image');
         }

@@ -166,13 +166,17 @@ class MeetingController extends Controller
         if($member_group == 'all'){
             $member = Member::all();
         }elseif($member_group == 'department'){
-            $member =JoinDepartment::with(['created_by'])->where('department_id',$member_type)->where('approval_status', '!=', 3)->get()->map(function($mem){
-               return $mem-> created_by;
+            $member =JoinDepartment::with(['created_by', 'member'])->where('department_id',$member_type)->where('approval_status', '!=', 3)->get()->map(function($mem){
+               return $mem->member;
             });
         }elseif($member_group == 'affinity_group'){
 
             $member = Member::where('affinity_group', 'like', '%'.$member_type.'%')->get();//Member::whereHas('affinity_group',$member_type);
+        }elseif($member_group == 'hod'){
+
+            $member = Department::with(['hod'])->get()->pluck('hod')->flatten();
         }
+
 
         return  response()->json($member, Response::HTTP_CREATED);
     }

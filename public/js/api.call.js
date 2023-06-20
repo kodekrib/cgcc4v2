@@ -1,13 +1,14 @@
 function Post(url, data, isLoading = false, contentType = "multipart/form-data") {
-
+    debugger;
     return new Promise((resolve, reject) => {
         if(isLoading){
             $("div.spanner").addClass("show");
             $("div.overlay").addClass("show");
         }
 
+
         $.ajax({
-            headers: { "x-csrf-token": _token },
+            headers: { "x-csrf-token": token },
             url: url,
             type: "POST",
             //contentType: contentType,
@@ -35,7 +36,7 @@ function Get(url, isLoading = false) {
         }
 
         $.ajax({
-            headers: { "x-csrf-token": _token },
+            headers: { "x-csrf-token": token },
             url: url,
             type: "GET",
             success: (dt) =>  {

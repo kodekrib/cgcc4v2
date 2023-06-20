@@ -14,7 +14,7 @@ class AddRelationshipFieldsToMembersTable extends Migration
             $table->unsignedBigInteger('employment_status_id')->nullable();
             $table->foreign('employment_status_id', 'employment_status_fk_7612204')->references('id')->on('employment_statuses');
             $table->unsignedBigInteger('created_by_id')->nullable();
-            $table->foreign('created_by_id', 'created_by_fk_7612295')->references('id')->on('members');
+            $table->foreign('created_by_id', 'created_by_fk_7612295')->references('id')->on('users');
         });
     }
 }

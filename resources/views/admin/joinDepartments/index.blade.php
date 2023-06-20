@@ -88,7 +88,8 @@
                                         {{ $joinDepartment->id ?? '' }}
                                     </td>
 
-									<td style="width: 150px">
+
+                                    <td style="width: 150px">
                                         {{ $joinDepartment->member->member_name ?? '' }}
                                     </td>
                                     <td>
@@ -96,7 +97,7 @@
                                     </td>
                                     <td>
                                         {{ $joinDepartment->member->mobile ?? '' }}
-                                    </td>   
+                                    </td>
 
 
                                     <td>
@@ -166,7 +167,7 @@
                                         @can('join_department_delete')
                                             <form action="{{ route('admin.join-departments.destroy', $joinDepartment->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
                                                 <input type="hidden" name="_method" value="DELETE">
-                                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                <input type="hidden" name="_token" id="_token" value="{{ csrf_token() }}">
                                                 <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
                                             </form>
                                         @endcan
@@ -339,18 +340,22 @@
 <script>
 
     var selectMemberTodDelist;
-
+    //window._token = $('#_token').val();
 
     function onDelistAMember(){
         const txt = $('#reason').val();
         AskQuestion('Do want to delist this department member').then(ask =>{
             if(ask){
-                Post("{{ route('admin.join-departments.delist-member') }}", {id: selectMemberTodDelist, reason: txt}, true)
+                debugger;
+                this.Post("{{ route('admin.join-departments.delist-member') }}", {id: selectMemberTodDelist, reason: txt}, true)
                 .then(res => {
                     console.log(res);
                     selectMemberTodDelist = null;
                     $('#exampleModal').modal('hide');
-                    window.location.reload();
+                    NotificationWithAction(res).then(() => {
+                        window.location.reload();
+                    });
+
                 });
             }
         })

@@ -43,7 +43,7 @@ class EmploymentDetailsController extends Controller
 
     public function store(StoreEmploymentDetailRequest $request)
     {
-       $request['created_by_id']= Auth::id();
+        $request['created_by_id']= Auth::id();
         $employmentDetail = EmploymentDetail::create($request->all());
 
         return redirect()->route('admin.employment-details.index');

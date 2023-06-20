@@ -15,12 +15,12 @@
         <span class="help-block">{{ trans('cruds.mailingSetup.fields.mailing_operation_code') }}</span>
     </div>
 </div>
-<div id="parameter" style="padding-bottom: 10px;">
+<div id="parameter" style="padding-bottom: 10px; width: 80%; margin: auto;">
 
 </div>
 <diV>
-    <textarea class="ckeditor"  id="editor" name="template" style="height: 100%;">
-    </textarea>
+
+    @include('partials.email')
 </diV>
 <div style="height: 50px; padding-top: 20px;">
     <button class="btn btn-success pull-right" onclick="submitMailTemplate()" style="display: block;" id="btnSubmitTemplate">

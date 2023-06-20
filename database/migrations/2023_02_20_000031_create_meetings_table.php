@@ -10,7 +10,7 @@ class CreateMeetingsTable extends Migration
     {
         Schema::create('meetings', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->date('date_of_meeting')->nullable();
+            //$table->date('date_of_meeting')->nullable();
             $table->string('time_duration')->nullable();
             $table->string('meeting_title');
             //$table->boolean('processing')->default(0)->nullable();

@@ -12,6 +12,7 @@ class AddJoinDepartment extends Migration
         Schema::table('join_departments', function (Blueprint $table) {
             $table->integer('approval_status')->default(0);
             $table->integer('status')->default(1);
+
         });
     }
 

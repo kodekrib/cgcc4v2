@@ -33,7 +33,7 @@ class Meeting extends Model implements HasMedia
     public const AFFINITY_GROUP = [
         'Legacy Fellowship' => 'Legacy Fellowship',
         'Crown of Glory' => ' Crown of Glory',
-        'Couples Fellowship' => 'Couples Fellowship',
+        'Couple Fellowship' => 'Couple Fellowship',
         '686 Fellowship' => '686 Fellowship',
     ];
 

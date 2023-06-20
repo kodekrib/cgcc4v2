@@ -123,7 +123,7 @@ class MailingSetupController extends Controller
             }
           } else if($item->category== 'department'){
             if($userId == 0) continue ;
-            $dataUser = JoinDepartment::with(['department'])->get()->where('created_by_id', $userId)->first();
+            $dataUser = JoinDepartment::with(['department'])->get()->where('member_Id', $userId)->first();
 
             if($dataUser != null){
                 //$deptMail= json_decode($item->member_ids);
@@ -147,12 +147,13 @@ class MailingSetupController extends Controller
     public function BuildEmailTemplate(string $operationCode, $userId, $userParameter = [], $isMember = true){
 
         $template = $this->getMailingTemplaterationCode($operationCode);
-        $html = (string)$template->template;
+        $html=view('partials.email')->render();
+        $html = str_replace('{html}',(string)$template->template,$html) ;
         $members = Member::with(['title', 'employment_status', 'created_by', 'media'])->where('id', $userId)->first();
         if( $isMember == false){
             $members = User::where('id', $userId)->first();
         }
-        $joinDepartments = JoinDepartment::with(['department', 'created_by'])->where('created_by_id', $userId)->first();
+        $joinDepartments = JoinDepartment::with(['department', 'created_by'])->where('member_Id', $userId)->first();
 
         foreach ($this->inbuiltParameter as $value) {
             if($value == 'memberName' &&  $members != null){

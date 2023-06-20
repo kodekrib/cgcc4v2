@@ -91,7 +91,7 @@
 
 
     function GetEmailSettingByOperationCode(operationCode){
-        this.Get('mailingSetup/getMailingSetup/' + operationCode).then(res => {
+        this.Get('/admin/mailingSetup/getMailingSetup/' + operationCode).then(res => {
             console.log(res)
             const list = document.getElementById('emailCOntainer');
             list.innerHTML = "";
@@ -128,7 +128,7 @@
 
 
     function submitMailSetup(){
-        this.Post('mailingSetup/AddMailSetting', {data: mailList}).then(res =>{
+        this.Post('/admin/mailingSetup/AddMailSetting', {data: mailList}, true).then(res =>{
            SuccessNotification("Successfull Save");
             GetEmailSettingByOperationCode(operationCode);
         }).catch((error) => {
@@ -156,7 +156,7 @@
 
        // editor.then(res => item.template = res.getData());
 
-        this.Post('mailingSetup/CreateMailingTemplate', item).then(res =>{
+        this.Post('/admin/mailingSetup/CreateMailingTemplate', item).then(res =>{
             SuccessNotification('Successfully Saved');
             GetMailTemplateByOperaionCode();
         }).catch((error) => {
@@ -167,7 +167,7 @@
 
     function GetMailTemplateByOperaionCode(){
         const mailing_operation_code = $('#mailing_operation_code_template').val();
-        this.Get('mailingSetup/getMailingTemplate/' + mailing_operation_code).then(res => {
+        this.Get('/admin/mailingSetup/getMailingTemplate/' + mailing_operation_code).then(res => {
             console.log(res)
             if(res !== null){
                 editor.setData(res.template);
@@ -236,7 +236,7 @@
     }
 
     function GetDepartmentList(){
-        this.Get('departments/getDepartmentList').then(res => {
+        this.Get('/admin/departments/getDepartmentList').then(res => {
             DepartmentList = res;
         }).catch(err => {
 
@@ -392,6 +392,7 @@
     }
 </script>
 <script>
+    document.querySelector( '#editor' ).innerHTML="";
     function InbuiltParameter(){
         let btnParm = ``;
         $.each(inbuiltParameter, (i, v) => {
@@ -408,66 +409,117 @@
         editor.model.insertContent(modelFragment, editor.model.document.selection)
     }
      $(document).ready(function () {
-        var _token = $('#_token').val();
+        window._token = $('#_token').val();
         GetMemberList();
         GetDepartmentList();
         InbuiltParameter();
         category = JSON.parse("{{ $category }}".replace(/&quot;/g,'"'))  ;
 
-        ClassicEditor.create(
-                document.querySelector( '#editor' ), {
-                    ckfinder: {
-                    uploadUrl: "{{route('admin.image.upload').'?_token='.csrf_token()}}",
-                },
-                //plugins: [ 'Essentials', 'Autoformat', 'Bold', 'Italic', 'BlockQuote', 'Heading', 'Link', 'List', 'MediaEmbed', 'Paragraph', 'PasteFromOffice', 'Table', 'SourceEditing' ],
-              //  toolbar: [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote', '|', 'table', 'mediaEmbed', '|', 'undo', 'redo', '|', 'sourceEditing' ],
+        // ClassicEditor.create(
+        //         document.querySelector( '#editor' ), {
+        //             ckfinder: {
+        //             uploadUrl: "{{route('admin.image.upload').'?_token='.csrf_token()}}",
+        //         },
+        //         //plugins: [ 'Essentials', 'Autoformat', 'Bold', 'Italic', 'BlockQuote', 'Heading', 'Link', 'List', 'MediaEmbed', 'Paragraph', 'PasteFromOffice', 'Table', 'SourceEditing' ],
+        //       //  toolbar: [ 'heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote', '|', 'table', 'mediaEmbed', '|', 'undo', 'redo', '|', 'sourceEditing' ],
 
-               // extraPlugins: [MyUploadAdapterPlugin],//SimpleUploadAdapter
+        //        // extraPlugins: [MyUploadAdapterPlugin],//SimpleUploadAdapter
 
-                list: {
-                    properties: {
-                        styles: true,
-                        startIndex: true,
-                        reversed: true
-                    }
-                },
-                heading: {
-                    options: [
-                        { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
-                        { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
-                        { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' },
-                        { model: 'heading3', view: 'h3', title: 'Heading 3', class: 'ck-heading_heading3' },
-                        { model: 'heading4', view: 'h4', title: 'Heading 4', class: 'ck-heading_heading4' },
-                        { model: 'heading5', view: 'h5', title: 'Heading 5', class: 'ck-heading_heading5' },
-                        { model: 'heading6', view: 'h6', title: 'Heading 6', class: 'ck-heading_heading6' }
-                    ]
-                },
-                fontFamily: {
-                    options: [
-                        'default',
-                        'Arial, Helvetica, sans-serif',
-                        'Courier New, Courier, monospace',
-                        'Georgia, serif',
-                        'Lucida Sans Unicode, Lucida Grande, sans-serif',
-                        'Tahoma, Geneva, sans-serif',
-                        'Times New Roman, Times, serif',
-                        'Trebuchet MS, Helvetica, sans-serif',
-                        'Verdana, Geneva, sans-serif'
-                    ],
-                    supportAllValues: true
-                },
-                fontSize: {
-                    options: [ 10, 12, 14, 'default', 18, 20, 22 ],
-                    supportAllValues: true
-                },
-            }).then(res =>{
-                // res.model.document.on('change:data', () => {
+        //         list: {
+        //             properties: {
+        //                 styles: true,
+        //                 startIndex: true,
+        //                 reversed: true
+        //             }
+        //         },
+        //         heading: {
+        //             options: [
+        //                 { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
+        //                 { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
+        //                 { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' },
+        //                 { model: 'heading3', view: 'h3', title: 'Heading 3', class: 'ck-heading_heading3' },
+        //                 { model: 'heading4', view: 'h4', title: 'Heading 4', class: 'ck-heading_heading4' },
+        //                 { model: 'heading5', view: 'h5', title: 'Heading 5', class: 'ck-heading_heading5' },
+        //                 { model: 'heading6', view: 'h6', title: 'Heading 6', class: 'ck-heading_heading6' }
+        //             ]
+        //         },
+        //         fontFamily: {
+        //             options: [
+        //                 'default',
+        //                 'Arial, Helvetica, sans-serif',
+        //                 'Courier New, Courier, monospace',
+        //                 'Georgia, serif',
+        //                 'Lucida Sans Unicode, Lucida Grande, sans-serif',
+        //                 'Tahoma, Geneva, sans-serif',
+        //                 'Times New Roman, Times, serif',
+        //                 'Trebuchet MS, Helvetica, sans-serif',
+        //                 'Verdana, Geneva, sans-serif'
+        //             ],
+        //             supportAllValues: true
+        //         },
+        //         fontSize: {
+        //             options: [ 10, 12, 14, 'default', 18, 20, 22 ],
+        //             supportAllValues: true
+        //         },
+        //     }).then(res =>{
+        //         // res.model.document.on('change:data', () => {
 
-                     editor = res;
-                // });
+        //              editor = res;
+        //         // });
 
+        //     });
+
+
+        const config = {
+             toolbar: {
+            items: [
+                'undo', 'redo',
+                '|', 'heading',
+                '|', 'bold', 'italic',
+                '|', 'link', 'uploadImage', 'insertTable', 'mediaEmbed',
+                '|', 'bulletedList', 'numberedList', 'outdent', 'indent'
+            ]
+        }};
+
+
+        InlineEditor.create( document.querySelector( '#editor' ), config )
+        .then( res => {
+            editor = res;
+            res.model.document.on('change:data', () => {
+
+                editor = res;
             });
+        } )
+        .catch( err => {
+            console.log( err );
+        } );
 
-     });
+
+
+//             RichTextEditorInit.RichTextEditor.Inject(RichTextEditorInit.Toolbar, RichTextEditorInit.Link, RichTextEditorInit.Image, RichTextEditorInit.HtmlEditor, RichTextEditorInit.QuickToolbar);
+
+// let defaultRTE = new RichTextEditorInit.RichTextEditor({
+//   height: 340,
+//   quickToolbarSettings: {
+// image: [
+//   'Replace', 'Align', 'Caption', 'Remove', 'InsertLink', 'OpenImageLink', '-',
+//   'EditImageLink', 'RemoveImageLink', 'Display', 'AltText', 'Dimension'
+// ],
+// link: ['Open', 'Edit', 'UnLink']
+// },
+//   toolbarSettings: {
+//   items: ['Bold', 'Italic', 'Underline', 'StrikeThrough',
+//     'FontName', 'FontSize', 'FontColor', 'BackgroundColor',
+//     'LowerCase', 'UpperCase', '|',
+//     'Formats', 'Alignments', 'OrderedList', 'UnorderedList',
+//     'Outdent', 'Indent', '|',
+//     'CreateLink', 'Image', '|', 'ClearFormat', 'Print',
+//     'SourceCode', 'FullScreen', '|', 'Undo', 'Redo']
+// }
+
+// });
+//defaultRTE.appendTo('#defaultRTE');
+
+    });
 </script>
 @endsection

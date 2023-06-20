@@ -107,3 +107,21 @@ function AskQuestion(message){
       });
 }
 
+function NotificationWithAction(message, type = "Success"){
+    if(type == "Error"){
+        return swal({
+            title: "Error",
+            text: message,
+            icon: "error",
+            button: "Okay",
+          });
+    } else {
+        return swal({
+            title: "Successful",
+            text: message,
+            icon: "success",
+            button: "Okay",
+          });
+    }
+}
+

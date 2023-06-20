@@ -139,9 +139,9 @@
               </div>
 
 
-              <div class="form-group" id="affinity_group">
+              <div class="form-group">
                 <label for="affinity_group">{{ trans('cruds.member.fields.affinity_group') }}</label>
-                <input class="form-control {{ $errors->has('affinity_group') ? 'is-invalid' : '' }}" type="text" name="affinity_group" value="{{ old('affinity_group', '') }}" readonly required>
+                <input class="form-control {{ $errors->has('affinity_group') ? 'is-invalid' : '' }}" type="text" name="affinity_group" id="affinity_group" value="{{ old('affinity_group', '') }}" readonly required>
                 @if($errors->has('affinity_group'))
                     <div class="invalid-feedback">
                         {{ $errors->first('affinity_group') }}
@@ -381,9 +381,6 @@
 @endsection
 
 @section('scripts')
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
 <script>
     Dropzone.options.imageDropzone = {
     url: '{{ route('admin.members.storeMedia') }}',
@@ -479,66 +476,7 @@
     });
 </script>
 
-<script>
-    function fillAffinityGroup(age) {
-      var marital_status = $('#marital_status_select').val();
-      if (marital_status === undefined) return;
-      var affinity_group = $('[name=affinity_group]');
-      marital_status = marital_status.toLowerCase();
-      if (marital_status === "single") {
-        if (age >= 14 && age <= 49) {
-          affinity_group.val("Legacy Fellowship");
-        } else if (age >= 50) {
-          affinity_group.val("Crown of Glory");
-        }
-      } else if (marital_status === "married") {
-        if (age >= 50) {
-          affinity_group.val("Crown of Glory, Couple Fellowship");
-        } else {
-          affinity_group.val("Couple Fellowship");
-        }
-      } else if (
-        ["widow", "widower", "divorced", "separated", "single parent"].includes(
-          marital_status
-        )
-      ) {
-        if (age >= 50) {
-          affinity_group.val("Crown of Glory, 686 Fellowship");
-        } else {
-          affinity_group.val("686 Fellowship");
-        }
-      } else {
-        affinity_group.val("");
-      }
-    }
-  
-    function calculateAge() {
-      var dt = new Date(); // Create a new Date object with the current date
-      $("#date_of_birth").val(formatDate());
-      var selectDate = new Date($("#date_of_birth_date").val());
-      $("#member_age").val(dt.getFullYear() - selectDate.getFullYear());
-      fillAffinityGroup(dt.getFullYear() - selectDate.getFullYear()); // Removed 'this' keyword
-    }
-  
-    function formatDate() {
-      const value = document.getElementById("date_of_birth_date").value;
-      const date = new Date(value);
-  
-      const year = date.getFullYear() + "";
-      let month = (date.getMonth() + 1) + "";
-      let day = date.getDate() + "";
-  
-      if (day.length === 1) day = "0" + day;
-      if (month.length === 1) month = "0" + month;
-  
-      const formattedDate = day + "/" + month + "/" + year;
-  
-      return formattedDate;
-    }
-  </script>
-  
-
- {{-- <script>
+ <script>
    function fillAffinityGroup(age) {
       var marital_status =  $('#marital_status_select').val();
       if(marital_status === undefined) return;
@@ -595,7 +533,7 @@
 
         return formattedDate;
 }
-  </script> --}}
+  </script>
 
 <script>
     $(document).ready(function () {

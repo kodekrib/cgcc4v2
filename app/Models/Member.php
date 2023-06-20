@@ -12,7 +12,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
-use App\Models\User;
 
 class Member extends Model implements HasMedia
 {
@@ -188,31 +187,9 @@ class Member extends Model implements HasMedia
         return $this->belongsTo(User::class, 'created_by_id');
     }
 
+
     protected function serializeDate(DateTimeInterface $date)
     {
         return $date->format('Y-m-d H:i:s');
     }
-
-    // public function user()
-    // {
-    //     return $this->belongsTo(User::class, 'created_by_id');
-    // }
-
-    // public function setMaritalStatusAttribute($value)
-    // {
-    //     $this->attributes['marital_status'] = $value;
-
-    //     // Check if the authenticated user exists
-    //     if (auth()->check()) {
-    //         // Get the authenticated user
-    //         $user = auth()->user();
-
-    //         // Check if the user's current role is not "Single" and the member's marital status is "Single"
-    //         if ($user->role !== 'Single' && $value === 'Single') {
-    //             // Update the user's role to "Single"
-    //             $user->role = 'Single';
-    //             $user->save();
-    //         }
-    //     }
-    // }
 }
