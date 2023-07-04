@@ -1,0 +1,6 @@
+/* mobile */
+@import url("mobile.css") only screen and (max-width:685px);
+/* tablets */
+@import url("tables.css") only screen and (min-width:686px) and (max-width:999px);
+/* laptops */
+@import url("main.css") only screen and (min-width:1000px);
