@@ -60,12 +60,15 @@ class MemberController extends Controller
 
     public function store(StoreMemberRequest $request)
     {
+<<<<<<< HEAD
         
         // Check if a record already exists
          if (Member::count() > 0) {
              return redirect()->back()->withInput()->withErrors(['error' => 'Only one member record is allowed']);
          }
 
+=======
+>>>>>>> 2e212d7621958a3609c223bf230ff43c4465e2c7
         $member = Member::create($request->all());
 
         $memberId = $member->id;

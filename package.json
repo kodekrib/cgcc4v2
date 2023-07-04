@@ -20,7 +20,10 @@
         "@ckeditor/ckeditor5-build-inline": "^37.1.0",
         "@ckeditor/ckeditor5-essentials": "^37.0.1",
         "@ckeditor/ckeditor5-source-editing": "^37.0.1",
+<<<<<<< HEAD
         "bootstrap-icons": "^1.10.5",
+=======
+>>>>>>> 2e212d7621958a3609c223bf230ff43c4465e2c7
         "ckeditor5": "^37.0.1"
     }
 }
