@@ -22,7 +22,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 
->>>>>>> 2e212d7621958a3609c223bf230ff43c4465e2c7
     // Permissions
     Route::resource('permissions', 'PermissionsController', ['except' => ['destroy']]);
 
