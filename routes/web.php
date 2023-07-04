@@ -3,11 +3,8 @@
 use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-<<<<<<< HEAD
 use App\Http\Controllers\DashboardController;
 
-=======
->>>>>>> 2e212d7621958a3609c223bf230ff43c4465e2c7
 Route::redirect('/', '/login');
 Route::get('/home', function () {
     if (session('status')) {
@@ -22,11 +19,9 @@ Auth::routes();
 Route::post('/user/login', [LoginController::class, 'sendLoginLink'])->name('userLogin');
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth']], function () {
     Route::get('/', 'HomeController@index')->name('home');
-<<<<<<< HEAD
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 
-=======
 >>>>>>> 2e212d7621958a3609c223bf230ff43c4465e2c7
     // Permissions
     Route::resource('permissions', 'PermissionsController', ['except' => ['destroy']]);
