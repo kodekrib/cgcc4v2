@@ -38,6 +38,11 @@
     <link rel="stylesheet" href="coreui/css/vendors/simplebar.css">
     <!-- Main styles for this application-->
     <link href="coreui/css/style.css" rel="stylesheet">
+<<<<<<< HEAD
+    <link href="{{ asset('node_modules/bootstrap-icons/font/bootstrap-icons.css') }}" rel="stylesheet">
+
+=======
+>>>>>>> 2e212d7621958a3609c223bf230ff43c4465e2c7
     @yield('styles')
 </head>
 

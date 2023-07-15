@@ -31,6 +31,15 @@ class SpouseDetailsController extends Controller
 
     public function store(StoreSpouseDetailRequest $request)
     {
+<<<<<<< HEAD
+        
+        // Check if a record already exists
+        if (SpouseDetail::count() > 0) {
+            return redirect()->back()->withInput()->withErrors(['error' => 'Oops! Looks like you are already married to an amazing spouse. No room for another! 🤵❤️👰']);
+        }
+
+=======
+>>>>>>> 2e212d7621958a3609c223bf230ff43c4465e2c7
         $spouseDetail = SpouseDetail::create($request->all());
 
         return redirect()->route('admin.spouse-details.index');

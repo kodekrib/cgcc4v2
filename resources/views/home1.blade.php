@@ -1,15 +1,5 @@
 @extends('layouts.admin')
 @section('content')
-<<<<<<< HEAD
-
-<style>
-    .bg-gold {
-        background-color: #DDA73C;
-    }
-</style>
-
-=======
->>>>>>> 2e212d7621958a3609c223bf230ff43c4465e2c7
 <div class="content">
     <div class="row">
         <div class="col-lg-12">
@@ -28,11 +18,7 @@
                     <div class="row">
                     @can('dash_board_member_info')
                         <div class="{{ $settings1['column_class'] }}">
-<<<<<<< HEAD
-                            <div class="card text-white bg-dark">
-=======
                             <div class="card text-white bg-primary">
->>>>>>> 2e212d7621958a3609c223bf230ff43c4465e2c7
                                 <div class="card-body pb-0">
                                     <div class="text-value">{{ number_format($settings1['total_number']) }}</div>
                                     <div>{{ $settings1['chart_title'] }}</div>

@@ -37,6 +37,14 @@ class InterestsController extends Controller
 
     public function store(StoreInterestRequest $request)
     {
+<<<<<<< HEAD
+        // Check if a record already exists
+        if (Interest::count() > 0) {
+            return redirect()->back()->withInput()->withErrors(['error' => 'Only one interest record is allowed']);
+        }
+        
+=======
+>>>>>>> 2e212d7621958a3609c223bf230ff43c4465e2c7
         $interest = Interest::create($request->all());
         $interest->interests()->sync($request->input('interests', []));
 
