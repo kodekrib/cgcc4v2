@@ -50,9 +50,9 @@
                         <label style="display:block;margin-top:-15px;font-weight: bold;">Date of Attendance</label>
                         <!-- <label style="display:block;margin-top:-10px;" id="date_of_meeting"></label> -->
 
-                           <ul style="display:block;margin-top:-10px;" >
+                           <ul style="display:block;margin-top:-10px; list-style: none;" >
                                 <li class="nav-item dropdown" id="dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="date_of_meeting" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <a class="nav-link dropdown-toggle" id="date_of_meeting" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="color: black !important;">
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="date_of_meeting" style="margin-left: 100px;" id="date_of_meeting_list">
                                     <!-- <li><a class="dropdown-item" href="#">Action</a></li>
@@ -235,7 +235,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="rescheduledLabel">Reschedule Meeting</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -269,7 +269,7 @@
             </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary" onclick="Rescheduled()">Save</button>
       </div>
     </div>
@@ -284,7 +284,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="CancelLabel">Cancel Meeting</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -309,7 +309,7 @@
             </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary" onclick="Canceled()">Save</button>
       </div>
     </div>
@@ -322,13 +322,13 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="dateModal">Date list</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
         <div class="modal-body">
             <div class="table-responsive" style="width: 100% !important">
-                    <table class="table table-bordered table-striped table-hover datatable" id="dateListTable">
+                    <table class="table table-bordered table-striped table-hover datatable" id="dateListTable" style="width: 100% !important">
                         <thead style="width: 100% !important;">
                             <tr>
                                 <th>
@@ -354,7 +354,7 @@
         </div>
 
         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             <!-- <button type="button" class="btn btn-primary" onclick="onDelistAMember()">Delist Member</button> -->
         </div>
     </div>
@@ -523,6 +523,11 @@ Dropzone.options.externalFilesDropzone = {
                 $('#date_of_meeting_list').toggleClass('show');
 
             });
+
+            $("button[data-bs-dismiss=modal]").click(function()
+            {
+                $(".modal").modal('hide');
+            });
     });
 
     function onMeeting_title(){
@@ -685,15 +690,15 @@ Dropzone.options.externalFilesDropzone = {
         $('#date_of_meeting_list').empty();
         $.each(date_of_meetingList, (i, v) => {
             if(v.status === 'awaiting'){
-                $('#date_of_meeting_list').append(`<li><a class="dropdown-item ${v.date === pendingDate.date && v.time === pendingDate.time?'active':''}" href="#" id="itemDate${i}" onclick="Awaiting('${v.date}', 'itemDate${i}')">${v.date}</a></li>`);
+                $('#date_of_meeting_list').append(`<li><a class="dropdown-item ${v.date === pendingDate.date && v.time === pendingDate.time?'active':''}"  id="itemDate${i}" onclick="Awaiting('${v.date}', 'itemDate${i}')">${v.date}</a></li>`);
             } else if(v.status === 'active'){
-                $('#date_of_meeting_list').append(`<li><a class="dropdown-item ${v.date === pendingDate.date && v.time === pendingDate.time?'active':''}" href="#" id="itemDate${i}" onclick="Active('${v.date}', 'itemDate${i}')">${v.date}</a></li>`);
+                $('#date_of_meeting_list').append(`<li><a class="dropdown-item ${v.date === pendingDate.date && v.time === pendingDate.time?'active':''}"  id="itemDate${i}" onclick="Active('${v.date}', 'itemDate${i}')">${v.date}</a></li>`);
             } else if(v.status === 'Closed'){
-                $('#date_of_meeting_list').append(`<li><a class="dropdown-item ${v.date === pendingDate.date && v.time === pendingDate.time?'active':''}" href="#" id="itemDate${i}" onclick="Closed('${v.date}', 'itemDate${i}')">${v.date}</a></li>`);
+                $('#date_of_meeting_list').append(`<li><a class="dropdown-item ${v.date === pendingDate.date && v.time === pendingDate.time?'active':''}"  id="itemDate${i}" onclick="Closed('${v.date}', 'itemDate${i}')">${v.date}</a></li>`);
             } else if(v.status === 'Canceled'){
-                $('#date_of_meeting_list').append(`<li><a class="dropdown-item ${v.date === pendingDate.date && v.time === pendingDate.time?'active':''}" href="#" id="itemDate${i}" onclick="Cancel('${v.date}', 'itemDate${i}')">${v.date}</a></li>`);
+                $('#date_of_meeting_list').append(`<li><a class="dropdown-item ${v.date === pendingDate.date && v.time === pendingDate.time?'active':''}"  id="itemDate${i}" onclick="Cancel('${v.date}', 'itemDate${i}')">${v.date}</a></li>`);
             } else {
-                $('#date_of_meeting_list').append(`<li><a class="dropdown-item ${v.date === pendingDate.date && v.time === pendingDate.time?'active':''}" href="#" id="itemDate${i}" onclick="YetNotStarted('${v.date}')">${v.date}</a></li>`);
+                $('#date_of_meeting_list').append(`<li><a class="dropdown-item ${v.date === pendingDate.date && v.time === pendingDate.time?'active':''}"  id="itemDate${i}" onclick="YetNotStarted('${v.date}')">${v.date}</a></li>`);
             }
 
         });

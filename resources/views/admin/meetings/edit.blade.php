@@ -1013,6 +1013,12 @@ Dropzone.options.filesDropzone = {
             {
                 destroy: true,
                 data: [],
+                dom: 'Bfrtip',
+                select: true,
+                select: {
+                    style: 'os',
+                    selector: 'td:first-child'
+                },
                 buttons: [
                     {extend:'selectAll', text: 'Select All' , className: 'btn-primary' },
                     {extend: 'selectNone', text: 'Deselect All', enabled: false, className: 'btn-primary'},
@@ -1069,7 +1075,16 @@ Dropzone.options.filesDropzone = {
                 processing: true,
 
                 columns: [
-                    { data: 'id', name: 'id',  },
+                    {
+                        orderable: false,
+                        className: 'select-checkbox',
+                        data: 'id',
+                        defaultContent: '',
+                        name: 'id',
+                        render: function(data, type, full, meta) {
+                            return '';
+                        }
+                    },
                     { data: 'member_name', name: 'member_name' },
                     { data: 'email', name: 'email' },
                     { data: 'mobile', name: 'mobile' },

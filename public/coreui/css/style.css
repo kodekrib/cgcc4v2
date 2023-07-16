@@ -16345,4 +16345,7 @@ html:not([dir="rtl"]) .wrapper {
     line-height: 20px;
 }
 
+.tableCursor tbody tr {
+    cursor: pointer;
+}
 /*# sourceMappingURL=style.css.map */
