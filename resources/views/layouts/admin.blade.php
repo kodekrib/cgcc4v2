@@ -536,6 +536,11 @@
         }
     }
 
+    $("button[data-dismiss=modal]").click(function()
+    {
+        $(".modal").modal('hide');
+    });
+
     function handleThemeChange(src) {
         var event = document.createEvent('Event');
         event.initEvent('themeChange', true, true);

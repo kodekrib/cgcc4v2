@@ -122,7 +122,7 @@
                     <span class="btn btn-info btn-xs select-all" style="border-radius: 0">{{ trans('global.select_all') }}</span>
                     <span class="btn btn-info btn-xs deselect-all" style="border-radius: 0">{{ trans('global.deselect_all') }}</span>
                 </div>
-                <select class="form-control select2 {{ $errors->has('members_in_attendances') ? 'is-invalid' : '' }}" name="members_in_attendancesL[]" id="members_in_attendances" multiple onchange="OnchangeAttendees()">
+                <select class="form-control select2 {{ $errors->has('members_in_attendances') ? 'is-invalid' : '' }}" name="members_in_attendancesL[]" id="members_in_attendances" multiple onchange="OnchangeAttendees()" style="width: 100% !important;">
 
                 </select>
                 @if($errors->has('members_in_attendances'))

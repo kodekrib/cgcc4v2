@@ -164,10 +164,10 @@
 
                                     @if($joinDepartment->status == 1)
                                     @can('join_department_edit')
-                                    <a class="btn btn-xs btn-warning" data-memberId="{{$joinDepartment->id}}"
-                                        onclick="onShownDialog('{{$joinDepartment->id}}')">
+                                    <button class="btn btn-xs btn-warning" data-memberId="{{$joinDepartment->id}}"
+                                        onclick="ShownDialog('{{$joinDepartment->id}}')">
                                         Delist
-                                    </a>
+                                    </button>
                                     @endcan
                                     @endif
                                     @can('join_department_delete')
@@ -376,7 +376,7 @@ function onDelistAMember() {
 
 }
 
-function onShownDialog(Id) {
+function ShownDialog(Id) {
     $('#exampleModal').modal('show');
     selectMemberTodDelist = Id;
 }
@@ -391,8 +391,7 @@ $('#exampleModal').on('show.bs.modal', function(event) {
 $(function() {
     let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
     @can('join_department_delete')
-    let deleteButtonTrans = '{{ trans('
-    global.datatables.delete ') }}'
+    let deleteButtonTrans = '{{ trans('global.datatables.delete') }}'
     let deleteButton = {
         text: deleteButtonTrans,
         url: "{{ route('admin.join-departments.massDestroy') }}",
@@ -405,14 +404,12 @@ $(function() {
             });
 
             if (ids.length === 0) {
-                alert('{{ trans('
-                    global.datatables.zero_selected ') }}')
+                alert('{{ trans('global.datatables.zero_selected') }}')
 
                 return
             }
 
-            if (confirm('{{ trans('
-                    global.areYouSure ') }}')) {
+            if (confirm('{{ trans('global.areYouSure') }}')) {
                 $.ajax({
                         headers: {
                             'x-csrf-token': _token
