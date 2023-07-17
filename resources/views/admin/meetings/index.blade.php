@@ -71,9 +71,9 @@
                                 {{ $meeting->meeting_type->types ?? '' }}
                             </td>
                             <td>
-                                <a class="btn btn-xs btn-primary" href="#" onclick="loadDialog('{{$meeting->id }}')" >
+                                <button class="btn btn-xs btn-primary"  onclick="loadDialog('{{$meeting->id }}')" >
                                         {{ trans('global.view') }}  Date List
-                                </a>
+                                </button>
                             </td>
                             <td>
                                 {{ $meeting->time_duration ?? '' }}
@@ -85,9 +85,9 @@
                                 {{ $meeting->venue->venue_name ?? '' }}
                             </td>
                             <td>
-                                <a class="btn btn-xs btn-primary" href="#" onclick="GetMeetingAttendee('{{$meeting->id }}')" >
+                                <button class="btn btn-xs btn-primary" onclick="GetMeetingAttendee('{{$meeting->id }}')" >
                                         {{ trans('global.view') }}  Attendee List
-                                </a>
+                                </button>
                             </td>
                             <td>
                                 @foreach($meeting->meeting_minutes as $key => $media)
@@ -165,13 +165,13 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="dateModal">Date list</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="closeModal2()">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
         <div class="modal-body">
             <div class="table-responsive" style="width: 100% !important">
-                    <table class="table table-bordered table-striped table-hover datatable" id="dateListTable">
+                    <table class="table table-bordered table-striped table-hover datatable" id="dateListTable" style="width:  100% !important;">
                         <thead style="width: 100% !important;">
                             <tr>
                                 <th>
@@ -194,7 +194,7 @@
         </div>
 
         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="closeModal2()">Close</button>
             <!-- <button type="button" class="btn btn-primary" onclick="onDelistAMember()">Delist Member</button> -->
         </div>
     </div>
@@ -208,13 +208,13 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="addMoreModal">Member list</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="closeModal()">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
         <div class="modal-body">
             <div class="table-responsive" style="width: 100% !important">
-                    <table class="table table-bordered table-striped table-hover datatable" id="memberListTable">
+                    <table class="table table-bordered table-striped table-hover datatable" id="memberListTable" style="width: 100% !important;">
                         <thead style="width: 100% !important;">
                             <tr>
                                 <th>
@@ -234,7 +234,7 @@
         </div>
 
         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="closeModal()">Close</button>
             <!-- <button type="button" class="btn btn-primary" onclick="onDelistAMember()">Delist Member</button> -->
         </div>
     </div>
@@ -374,9 +374,10 @@
 <script>
     function GetMeetingAttendee(id){
         Get(`/admin/meetings/GetMeetingAttendee/${id}`,true).then(res => {
+
+            $('#addMoreModal').modal('show');
             tableList.clear().draw();
             tableList.rows.add(res).draw();
-            $('#addMoreModal').modal('show');
             setTimeout(function(){
                 tableList.columns.adjust()
 
@@ -412,6 +413,14 @@
         ];
         var dt  = new Date(date);
         return weeks[dt.getDay()];
+    }
+
+    function closeModal(){
+        $('#addMoreModal').modal('hide');
+    }
+
+    function closeModal2(){
+        $('#dateListmodal').modal('hide');
     }
 </script>
 @endsection
