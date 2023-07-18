@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\RoleController;
 
 Route::redirect('/', '/login');
 Route::get('/home', function () {
@@ -20,6 +21,15 @@ Route::post('/user/login', [LoginController::class, 'sendLoginLink'])->name('use
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth']], function () {
     Route::get('/', 'HomeController@index')->name('home');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+  
+    // Route for switching to admin
+    Route::post('switch-to-admin', [RoleController::class, 'switchToAdmin'])->name('switchToAdmin');
+
+    // Route for switching to HOD
+    Route::post('switch-to-hod', [RoleController::class, 'switchToHOD'])->name('switchToHOD');
+
+    // Route for switching to User
+    Route::post('switch-to-user', [RoleController::class, 'switchToUser'])->name('switchToUser');
 
 
     // Permissions
