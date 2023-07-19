@@ -59,7 +59,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
@@ -86,7 +86,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
@@ -104,7 +104,7 @@
                     <div class="form-group">
                         <label class="required" for="date_of_birth">{{ trans('cruds.member.fields.date_of_birth') }}</label>
                         <input name="date_of_birth" id="date_of_birth" hidden/>
-                        <input class="form-control {{ $errors->has('date_of_birth') ? 'is-invalid' : '' }}"  type="date" id="date_of_birth_date" value="{{ old('date_of_birth') }}" required onchange="calculateAge()">
+                        <input class="form-control {{ $errors->has('date_of_birth') ? 'is-invalid' : '' }}"  type="text" id="date_of_birth_date" value="{{ old('date_of_birth') }}" required onchange="calculateAge()">
                         @if($errors->has('date_of_birth'))
                             <div class="invalid-feedback">
                                 {{ $errors->first('date_of_birth') }}
@@ -567,6 +567,17 @@
 <script>
     $(document).ready(function () {
         // On change of state select field
+
+        $('#date_of_birth').datetimepicker({
+        format: 'MM-DD-YYYY',
+        locale: 'en',
+        icons: {
+            up: 'fas fa-chevron-up',
+            down: 'fas fa-chevron-down',
+            previous: 'fas fa-chevron-left',
+            next: 'fas fa-chevron-right'
+            }
+        });
 
         $('#state_of_origin').on('change', function () {
             $('#lga').empty();

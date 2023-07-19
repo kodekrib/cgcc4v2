@@ -59,7 +59,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
@@ -84,7 +84,7 @@
                         @endif
                     </div>
                 </div>
-                
+
                 {{-- <div class="col-md-6" id="maiden_name" style="display: none;">
                     <div class="form-group">
                         <label for="maiden_name">Maiden Name</label>
@@ -109,7 +109,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
@@ -127,7 +127,7 @@
                     <div class="form-group">
                         <label class="required" for="date_of_birth">{{ trans('cruds.member.fields.date_of_birth') }}</label>
                         <input name="date_of_birth" id="date_of_birth" hidden/>
-                        <input class="form-control {{ $errors->has('date_of_birth') ? 'is-invalid' : '' }}"  type="date" id="date_of_birth_date" value="{{ old('date_of_birth') }}" required onchange="calculateAge()">
+                        <input class="form-control {{ $errors->has('date_of_birth') ? 'is-invalid' : '' }}"  type="text" id="date_of_birth_date" value="{{ old('date_of_birth') }}" required onchange="calculateAge()">
                         @if($errors->has('date_of_birth'))
                             <div class="invalid-feedback">
                                 {{ $errors->first('date_of_birth') }}
@@ -195,7 +195,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
@@ -222,7 +222,7 @@
                     </div>
                 </div>
             </div>
-            
+
             {{-- <div class="form-group">
                 <label class="required">{{ trans('cruds.member.fields.marital_status') }}</label>
                 <select class="form-control {{ $errors->has('marital_status') ? 'is-invalid' : '' }}" name="marital_status" id="marital_status" required>
@@ -333,7 +333,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group" id="lgaContainer">
@@ -365,7 +365,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
@@ -392,8 +392,8 @@
                             </div>
                         </div>
                     </div>
-                    
-                            
+
+
             <div class="form-group">
                 <button class="btn btn-danger" type="submit">
                     {{ trans('global.save') }}
@@ -542,6 +542,7 @@
      $('#date_of_birth').val(formatDate());
      var selectDate = (new Date($('#date_of_birth_date').val()));
      $('member_age').val(dt.getFullYear() - selectDate.getFullYear());
+     debugger;
      this.fillAffinityGroup(dt.getFullYear() - selectDate.getFullYear());
     }
 
@@ -564,8 +565,23 @@
 
 <script>
     $(document).ready(function () {
-        // On change of state select field
+         // Restrict dates to 5 years ago
+        var today = new Date();
+        var fiveYearsAgo = new Date(today.getFullYear() - 5, today.getMonth(), today.getDate());
+        var formattedFiveYearsAgo = fiveYearsAgo.toISOString().split('T')[0];
 
+        // On change of state select field
+        $('#date_of_birth_date').datetimepicker({
+        format: 'MM-DD-YYYY',
+        locale: 'en',
+        maxDate: new Date(formattedFiveYearsAgo),
+        icons: {
+            up: 'fas fa-chevron-up',
+            down: 'fas fa-chevron-down',
+            previous: 'fas fa-chevron-left',
+            next: 'fas fa-chevron-right'
+            },
+        });
         $('#state_of_origin').on('change', function () {
             $('#lga').empty();
                 // Use Ajax to get the LGAs for the selected state
@@ -593,13 +609,7 @@
     });
 </script>
 
-<script>
-    // Restrict dates to 5 years ago
-    var today = new Date();
-    var fiveYearsAgo = new Date(today.getFullYear() - 5, today.getMonth(), today.getDate());
-    var formattedFiveYearsAgo = fiveYearsAgo.toISOString().split('T')[0];
-    document.getElementById("date_of_birth_date").setAttribute("max", formattedFiveYearsAgo);
-</script>
+
 
 
 @endsection

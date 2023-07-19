@@ -77,7 +77,7 @@
             </div>
             <div class="form-group">
                 <label class="required" for="date_of_birth">{{ trans('cruds.member.fields.date_of_birth') }}</label>
-                <input class="form-control date {{ $errors->has('date_of_birth') ? 'is-invalid' : '' }}" type="text" name="date_of_birth" id="date_of_birth" value="{{ old('date_of_birth', $member->date_of_birth) }}" required>
+                <input class="form-control {{ $errors->has('date_of_birth') ? 'is-invalid' : '' }}" type="text" name="date_of_birth" id="date_of_birth" value="{{ old('date_of_birth', $member->date_of_birth) }}" required>
                 @if($errors->has('date_of_birth'))
                     <div class="invalid-feedback">
                         {{ $errors->first('date_of_birth') }}
@@ -475,6 +475,23 @@
 
     $(document).ready(function () {
         // On change of state select field
+        var today = new Date();
+        var fiveYearsAgo = new Date(today.getFullYear() - 5, today.getMonth(), today.getDate());
+        var formattedFiveYearsAgo = fiveYearsAgo.toISOString().split('T')[0];
+
+        // On change of state select field
+        $('#date_of_birth').datetimepicker({
+        format: 'MM-DD-YYYY',
+        locale: 'en',
+        maxDate: new Date(formattedFiveYearsAgo),
+        date: "{{ old('date_of_birth', $member->date_of_birth) }}",
+        icons: {
+            up: 'fas fa-chevron-up',
+            down: 'fas fa-chevron-down',
+            previous: 'fas fa-chevron-left',
+            next: 'fas fa-chevron-right'
+            },
+        });
 
         $("#date_of_birth").on("dp.change", function() {
 
