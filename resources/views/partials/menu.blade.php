@@ -24,12 +24,19 @@
                     <use xlink:href="coreui/vendors/@coreui/icons/svg/free.svg#cil-group"></use>
                 </svg> {{ trans('cruds.membership.title') }}</a>
             <ul class="nav-group-items">
-                @can('member_access')
+                @can('dash_board_venue_info')
                 <li class="nav-item"><a class="nav-link {{ request()->is("admin/members") || request()->is("admin/members/*") ? "c-active" : "" }}"
                         href="{{ route('admin.members.index') }}"><span class="nav-icon"></span>
                         {{ trans('cruds.member.title') }}</a>
                   </li>
                   @endcan
+
+                @can('member_access')
+                  <li class="nav-item"><a class="nav-link {{ request()->is("admin/members/create") || request()->is("admin/members/create/*") ? "c-active" : "" }}"
+                          href="{{ route('admin.members.create') }}"><span class="nav-icon"></span>
+                          Create Member</a>
+                    </li>
+                @endcan
 
               @can('qualification_access')
                 <li class="nav-item"><a class="nav-link {{ request()->is("admin/members") || request()->is("admin/members/*") ? "c-active" : "" }}"

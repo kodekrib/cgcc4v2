@@ -11,7 +11,8 @@
 @endcan
 <div class="card">
     <div class="card-header">
-        {{ trans('cruds.joinDepartment.title_singular') }} {{ trans('global.list') }}
+        {{-- {{ trans('cruds.joinDepartment.title_singular') }} {{ trans('global.list') }} --}}
+        <h4>Department: {{ Auth::user()->department->department_name ?? 'No Department' }}</h4>
     </div>
 
     <div class="card-body">
@@ -38,9 +39,9 @@
                                 <th width="10">
 
                                 </th>
-                                <th>
+                                {{-- <th>
                                     {{ trans('cruds.joinDepartment.fields.id') }}
-                                </th>
+                                </th> --}}
 
                                 <th style="width: 150px">
                                     {{ trans('cruds.joinDepartment.fields.member_name') }}
@@ -56,9 +57,9 @@
                                 <th>
                                     {{ trans('cruds.joinDepartment.fields.department') }}
                                 </th>
-                                <th>
+                                {{-- <th>
                                     {{ trans('cruds.department.fields.department_email') }}
-                                </th>
+                                </th> --}}
                                 <th>
                                     {{ trans('cruds.joinDepartment.fields.member_type') }}
                                 </th>
@@ -87,9 +88,9 @@
                                 <td>
 
                                 </td>
-                                <td>
+                                {{-- <td>
                                     {{ $joinDepartment->id ?? '' }}
-                                </td>
+                                </td> --}}
 
 
                                 <td style="width: 150px">
@@ -106,9 +107,9 @@
                                 <td>
                                     {{ $joinDepartment->department->department_name ?? '' }}
                                 </td>
-                                <td>
+                                {{-- <td>
                                     {{ $joinDepartment->department->department_email ?? '' }}
-                                </td>
+                                </td> --}}
                                 <td>
                                     {{ App\Models\JoinDepartment::MEMBER_TYPE_SELECT[$joinDepartment->member_type] ?? 'N/A' }}
                                 </td>
@@ -196,9 +197,9 @@
                                 <th width="10">
 
                                 </th>
-                                <th>
+                                {{-- <th>
                                     {{ trans('cruds.joinDepartment.fields.id') }}
-                                </th>
+                                </th> --}}
 
                                 <th style="width: 150px">
                                     {{ trans('cruds.joinDepartment.fields.member_name') }}
@@ -214,9 +215,9 @@
                                 <th>
                                     {{ trans('cruds.joinDepartment.fields.department') }}
                                 </th>
-                                <th>
+                                {{-- <th>
                                     {{ trans('cruds.department.fields.department_email') }}
-                                </th>
+                                </th> --}}
                                 <th>
                                     {{ trans('cruds.joinDepartment.fields.member_type') }}
                                 </th>
@@ -245,17 +246,17 @@
                                 <td>
 
                                 </td>
-                                <td>
+                                {{-- <td>
                                     {{ $joinDepartment->id ?? '' }}
-                                </td>
+                                </td> --}}
 
 
                                 <td style="width: 150px">
                                     {{ $joinDepartment->member->member_name ?? '' }}
                                 </td>
-                                <td>
+                                {{-- <td>
                                     {{ $joinDepartment->member->email ?? '' }}
-                                </td>
+                                </td> --}}
                                 <td>
                                     {{ $joinDepartment->member->mobile ?? '' }}
                                 </td>
@@ -264,9 +265,9 @@
                                 <td>
                                     {{ $joinDepartment->department->department_name ?? '' }}
                                 </td>
-                                <td>
+                                {{-- <td>
                                     {{ $joinDepartment->department->department_email ?? '' }}
-                                </td>
+                                </td> --}}
                                 <td>
                                     {{ App\Models\JoinDepartment::MEMBER_TYPE_SELECT[$joinDepartment->member_type] ?? 'N/A' }}
                                 </td>
