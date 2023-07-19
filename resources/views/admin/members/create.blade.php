@@ -31,6 +31,34 @@
             </div>
             <div class="row">
                 <div class="col-md-6">
+                    <div class="form-group" id="title">
+                    <label>{{ trans('cruds.member.fields.title') }}</label>
+                    <select class="form-control {{ $errors->has('title') ? 'is-invalid' : '' }}" name="title">
+                        <option value disabled {{ old('title', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
+                        <option value="Mr" {{ old('title', '') === 'Mr' ? 'selected' : '' }}>Mr</option>
+                        <option value="Mrs" {{ old('title', '') === 'Mrs' ? 'selected' : '' }}>Mrs</option>
+                        <option value="Miss" {{ old('title', '') === 'Miss' ? 'selected' : '' }}>Miss</option>
+                        <option value="Master" {{ old('title', '') === 'Master' ? 'selected' : '' }}>Master</option>
+                        <option value="Pastor" {{ old('title', '') === 'Pastor' ? 'selected' : '' }}>Pastor</option>
+                        <option value="Dr" {{ old('title', '') === 'Dr' ? 'selected' : '' }}>Dr</option>
+                        <option value="Arch" {{ old('title', '') === 'Arch' ? 'selected' : '' }}>Arch</option>
+                        <option value="Evangelist" {{ old('title', '') === 'Evangelist' ? 'selected' : '' }}>Evangelist</option>
+                        <option value="Chief" {{ old('title', '') === 'Chief' ? 'selected' : '' }}>Chief</option>
+                        <option value="Chief Mrs" {{ old('title', '') === 'Chief Mrs' ? 'selected' : '' }}>Chief Mrs</option>
+                        <option value="Prophet" {{ old('title', '') === 'Prophet' ? 'selected' : '' }}>Prophet</option>
+                        <option value="Deacon" {{ old('title', '') === 'Deacon' ? 'selected' : '' }}>Deacon</option>
+                        <option value="Deaconess" {{ old('title', '') === 'Deaconess' ? 'selected' : '' }}>Deaconess</option>
+                        <option value="Pharm" {{ old('title', '') === 'Pharm' ? 'selected' : '' }}>Pharm</option>
+                    </select>
+                    @if($errors->has('title'))
+                        <div class="invalid-feedback">
+                            {{ $errors->first('title') }}
+                        </div>
+                    @endif
+                </div>
+            </div>
+
+                {{-- <div class="col-md-6">
                     <div class="form-group">
                         <label class="required" for="title_id">{{ trans('cruds.member.fields.title') }}</label>
                         <select class="form-control select2 {{ $errors->has('title') ? 'is-invalid' : '' }}" name="title_id" id="title_id" required>
@@ -45,7 +73,8 @@
                         @endif
                         <span class="help-block">{{ trans('cruds.member.fields.title_helper') }}</span>
                     </div>
-                </div>
+                </div> --}}
+
                 <div class="col-md-6">
                     <div class="form-group">
                         <label class="required" for="member_name">{{ trans('cruds.member.fields.member_name') }}</label>
@@ -73,17 +102,19 @@
                         <span class="help-block">{{ trans('cruds.member.fields.middlename_helper') }}</span>
                     </div>
                 </div>
+
                 <div class="col-md-6" id="maiden_name" style="display: none;">
                     <div class="form-group">
-                        <label for="maiden_name">Maiden Name</label>
-                        <input class="form-control {{ $errors->has('maiden_name') ? 'is-invalid' : '' }}" type="text" name="maiden_name" value="{{ old('maiden_name', '') }}">
-                        @if($errors->has('maiden_name'))
-                            <div class="invalid-feedback">
-                                {{ $errors->first('maiden_name') }}
-                            </div>
-                        @endif
-                    </div>
+                    <label for="maiden_name">Maiden Name</label>
+                    <input class="form-control {{ $errors->has('maiden_name') ? 'is-invalid' : '' }}" type="text" name="maiden_name" id="maiden_name" value="{{ old('maiden_name', '') }}">
+                    @if($errors->has('maiden_name'))
+                        <div class="invalid-feedback">
+                            {{ $errors->first('maiden_name') }}
+                        </div>
+                    @endif
+
                 </div>
+            </div>
 
                 {{-- <div class="col-md-6" id="maiden_name" style="display: none;">
                     <div class="form-group">
@@ -96,6 +127,7 @@
                         @endif
                     </div>
                 </div> --}}
+
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="mobile">{{ trans('cruds.member.fields.mobile') }}</label>
@@ -609,6 +641,47 @@
     });
 </script>
 
+
+
+{{-- <script>
+    const titleSelect = document.querySelector('select[name="title"]');
+    const maidenName = document.querySelector('#maiden_name');
+
+    titleSelect.addEventListener('change', function() {
+        if (this.value === 'Mr') {
+            maidenName.style.display = 'block';
+        } else {
+            maidenName.style.display = 'none';
+        }
+    });
+</script>  --}}
+
+<script>
+    const titleSelect = document.querySelector('select[name="title"]');
+    const maidenName = document.querySelector('#maiden_name');
+
+    titleSelect.addEventListener('change', function() {
+        if (
+            this.value === 'Pastor' ||
+            this.value === 'Dr' ||
+            this.value === 'Mrs' ||
+            this.value === 'Chief Mrs' ||
+            this.value === 'Evangelist' ||
+            this.value === 'Engr' ||
+            this.value === 'Rev' ||
+            this.value === 'Prophet' ||
+            this.value === 'Deacon' ||
+            this.value === 'Deaconess' ||
+            this.value === 'Pharm' ||
+            this.value === 'Arch' ||
+            this.value === 'Chief'
+        ) {
+            maidenName.style.display = 'block';
+        } else {
+            maidenName.style.display = 'none';
+        }
+    });
+</script>
 
 
 

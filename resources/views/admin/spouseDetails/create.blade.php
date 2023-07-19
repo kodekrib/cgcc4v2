@@ -139,6 +139,7 @@
             maidenName.style.display = 'none';
         }
     });
+    
 </script> 
 
 <script>
@@ -159,8 +160,5 @@
         $("#date_of_birth_input").attr("value", formattedThreeYearsAgo);
     });
 </script>
-
-
-
 
 @endsection
