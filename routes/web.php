@@ -21,7 +21,7 @@ Route::post('/user/login', [LoginController::class, 'sendLoginLink'])->name('use
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth']], function () {
     Route::get('/', 'HomeController@index')->name('home');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-  
+
     // Route for switching to admin
     Route::post('switch-to-admin', [RoleController::class, 'switchToAdmin'])->name('switchToAdmin');
 

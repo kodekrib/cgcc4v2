@@ -3,7 +3,7 @@
     .nav-icon {
         color: white !important;
     }
-    
+
     .nav-icon::after,
     .nav-group-toggle::after {
         border-color: white !important;
@@ -17,7 +17,7 @@
                 <svg class="nav-icon">
                     <use xlink:href="coreui/vendors/@coreui/icons/svg/free.svg#cil-speedometer"></use>
                 </svg> {{ trans('global.dashboard') }}</a></li>
-    
+
           <li class="nav-group {{ request()->is("admin/members*") ? "c-show" : "" }} {{ request()->is("admin/join-departments*") ? "c-show" : "" }} {{ request()->is("admin/members-affinity-groups*") ? "c-show" : "" }} {{ request()->is("admin/cihmembers*") ? "c-show" : "" }} {{ request()->is("admin/mfs*") ? "c-show" : "" }}">
             <a class="nav-link nav-group-toggle" href="#">
                 <svg class="nav-icon">
@@ -30,51 +30,51 @@
                         {{ trans('cruds.member.title') }}</a>
                   </li>
                   @endcan
-              
+
               @can('qualification_access')
                 <li class="nav-item"><a class="nav-link {{ request()->is("admin/members") || request()->is("admin/members/*") ? "c-active" : "" }}"
                         href="{{ route('admin.qualifications.index') }}"><span class="nav-icon"></span>
                         {{ trans('cruds.qualification.title') }}</a>
                   </li>
                   @endcan
-              
+
                   @can('employment_detail_access')
                 <li class="nav-item"><a class="nav-link {{ request()->is("admin/members") || request()->is("admin/members/*") ? "c-active" : "" }}"
                         href="{{ route("admin.employment-details.index") }}"><span class="nav-icon"></span>
                         {{ trans('cruds.employmentDetail.title') }}</a>
                   </li>
                   @endcan
-              
+
                @can('spouse_detail_access')
                 <li class="nav-item"><a class="nav-link {{ request()->is("admin/members") || request()->is("admin/members/*") ? "c-active" : "" }}"
                         href="{{ route('admin.spouse-details.index') }}"><span class="nav-icon"></span>
                         {{ trans('cruds.spouseDetail.title') }}</a>
                   </li>
                   @endcan
-              
+
                 @can('child_access')
                 <li class="nav-item"><a class="nav-link {{ request()->is("admin/members") || request()->is("admin/members/*") ? "c-active" : "" }}"
                         href="{{ route('admin.children.index') }}"><span class="nav-icon"></span>
                         {{ trans('cruds.child.title') }}</a>
                   </li>
                   @endcan
-              
+
                 @can('interest_access')
                 <li class="nav-item"><a class="nav-link {{ request()->is("admin/members") || request()->is("admin/members/*") ? "c-active" : "" }}"
                         href="{{ route('admin.interests.index') }}"><span class="nav-icon"></span>
                         {{ trans('cruds.interest.title') }}</a>
                   </li>
                   @endcan
-              
+
                 @can('mountain_of_influence_access')
                 <li class="nav-item"><a class="nav-link {{ request()->is("admin/members") || request()->is("admin/members/*") ? "c-active" : "" }}"
                         href="{{ route('admin.mountain-of-influences.index') }}"><span class="nav-icon"></span>
                         {{ trans('cruds.mountainOfInfluence.title') }}</a>
                   </li>
-                  @endcan                
+                  @endcan
               </ul>
         </li>
-      
+
         @can('church_affiliation_access')
         <li class="nav-group {{ request()->is("admin/ats-memberships*") ? "c-show" : "" }} {{ request()->is("admin/join-departments*") ? "c-show" : "" }} {{ request()->is("admin/members-affinity-groups*") ? "c-show" : "" }} {{ request()->is("admin/cihmembers*") ? "c-show" : "" }} {{ request()->is("admin/mfs*") ? "c-show" : "" }}">
             <a class="nav-link nav-group-toggle" href="#">
@@ -297,9 +297,9 @@
             </ul>
         </li>
         @endcan
-    
-    
-    
+
+
+
         @can('ancillary_service_access')
         <li
             class="nav-group {{ request()->is("admin/ancillary-managements*") ? "c-show" : "" }} {{ request()->is("admin/service-types*") ? "c-show" : "" }}">
@@ -800,7 +800,7 @@
                             </a>
                         </li>
                         @endcan
-    
+
                         @can('sport_access')
                         <li class="nav-item">
                             <a href="{{ route("admin.mailingSetup.index") }}"
@@ -983,27 +983,27 @@
                 {{ trans('global.systemCalendar') }}
             </a>
         </li>
-      
+
         <div style="display: flex; flex-direction: column; align-items: center;">
             <div style="width: 100%; height: 1px; background-color: white; margin-bottom: 10px;"></div>
-            <form action="{{ route('admin.switchToAdmin') }}" method="POST">
+            <form action="admin/switch-to-admin" method="POST">
                 @csrf
                 <button type="submit" class="bg-black text-white btn btn-lg" style="font-size: 20px;">Switch to Admin Dashboard</button>
             </form>
         {{-- @endcan --}}
-         
+
             <div style="width: 100%; height: 1px; background-color: white; margin-bottom: 10px;"></div>
-            <form action="{{ route('admin.switchToHOD') }}" method="POST">
+            <form action="admin/switch-to-hod" method="POST">
                 @csrf
                 <button type="submit" class="bg-black text-white btn btn-lg" style="font-size: 20px;">Switch to HOD Dashboard</button>
             </form>
-    
+
             <div style="width: 100%; height: 1px; background-color: white; margin-bottom: 10px;"></div>
-            <form action="{{ route('admin.switchToUser') }}" method="POST">
+            <form action="admin/switch-to-user" method="POST">
                 @csrf
                 <button type="submit" class="bg-black text-white btn btn-lg" style="font-size: 20px;">Switch to User Dashboard</button>
             </form>
             <div style="width: 100%; height: 1px; background-color: white; margin-bottom: 10px;"></div>
         </div>
-          
+
     </ul>
