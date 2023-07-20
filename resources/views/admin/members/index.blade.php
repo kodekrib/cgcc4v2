@@ -4,7 +4,8 @@
     <div style="margin-bottom: 10px;" class="row">
         <div class="col-lg-12">
             <a class="btn btn-success" href="{{ route('admin.members.create') }}">
-                {{ trans('global.add') }} {{ trans('cruds.member.title_singular') }}
+                {{-- {{ trans('global.add') }} {{ trans('cruds.member.title_singular') }} --}}
+                Add Biodata
             </a>
             <button class="btn btn-warning" data-toggle="modal" data-target="#csvImportModal">
                 {{ trans('global.app_csvImport') }}
@@ -15,7 +16,8 @@
 @endcan
 <div class="card">
     <div class="card-header">
-        {{ trans('cruds.member.title_singular') }} {{ trans('global.list') }}
+     {{-- {{ trans('cruds.member.title_singular') }} {{ trans('global.list') }} --}}
+        My Biodata List
     </div>
 
     <div class="card-body">
@@ -42,6 +44,10 @@
                             {{ trans('cruds.member.fields.middlename') }}
                         </th>
                         <th>
+                            {{-- {{ trans('cruds.member.fields.maiden_name') }} --}}
+                            Maiden Name
+                        </th>
+                        <th>
                             {{ trans('cruds.member.fields.mobile') }}
                         </th>
                         <th>
@@ -58,6 +64,9 @@
                         </th>
                         <th>
                             {{ trans('cruds.member.fields.marital_status') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.member.fields.affinity_group') }}
                         </th>
                         <th>
                             {{ trans('cruds.member.fields.employment_status') }}
@@ -90,9 +99,6 @@
                             {{ trans('cruds.member.fields.nearest_bus_stop') }}
                         </th>
                         <th>
-                            {{ trans('cruds.member.fields.affinity_group') }}
-                        </th>
-                        <th>
                             &nbsp;
                         </th>
                     </tr>
@@ -123,6 +129,9 @@
                                 {{ $member->middlename ?? '' }}
                             </td>
                             <td>
+                                {{ $member->maiden_name ?? '' }}
+                            </td>
+                            <td>
                                 {{ $member->mobile ?? '' }}
                             </td>
                             <td>
@@ -139,6 +148,9 @@
                             </td>
                             <td>
                                 {{ $member->marital_status?? '' }}
+                            </td>
+                            <td>
+                                {{ $member->affinity_group ?? '' }}
                             </td>
                             <td>
                                 {{ $member->employment_status->employment_status ?? '' }}
@@ -170,9 +182,6 @@
                             </td>
                             <td>
                                 {{ $member->nearest_bus_stop ?? '' }}
-                            </td>
-                            <td>
-                                {{ $member->affinity_group ?? '' }}
                             </td>
                             <td>
                                 @can('member_show')

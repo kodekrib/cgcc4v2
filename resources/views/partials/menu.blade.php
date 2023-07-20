@@ -8,6 +8,9 @@
 .nav-group-toggle::after {
     border-color: white !important;
 }
+.custom-select{
+  min-width: 60px;
+}
 </style>
 <ul class="sidebar-nav" data-coreui="navigation" data-simplebar="" style="color: white;">
     <li class="nav-item"><a class="nav-link" href="{{ route('admin.home') }}">
@@ -15,12 +18,68 @@
                 <use xlink:href="coreui/vendors/@coreui/icons/svg/free.svg#cil-speedometer"></use>
             </svg> {{ trans('global.dashboard') }}</a></li>
 
-    @can('church_affiliation_access')
-    <li
-        class="nav-group {{ request()->is("admin/ats-memberships*") ? "c-show" : "" }} {{ request()->is("admin/join-departments*") ? "c-show" : "" }} {{ request()->is("admin/members-affinity-groups*") ? "c-show" : "" }} {{ request()->is("admin/cihmembers*") ? "c-show" : "" }} {{ request()->is("admin/mfs*") ? "c-show" : "" }}">
+  	<li class="nav-group {{ request()->is("admin/members*") ? "c-show" : "" }} {{ request()->is("admin/join-departments*") ? "c-show" : "" }} {{ request()->is("admin/members-affinity-groups*") ? "c-show" : "" }} {{ request()->is("admin/cihmembers*") ? "c-show" : "" }} {{ request()->is("admin/mfs*") ? "c-show" : "" }}">
         <a class="nav-link nav-group-toggle" href="#">
             <svg class="nav-icon">
-                <use xlink:href="coreui/vendors/@coreui/icons/svg/free.svg#cil-cursor"></use>
+                <use xlink:href="coreui/vendors/@coreui/icons/svg/free.svg#cil-group"></use>
+            </svg> {{ trans('cruds.membership.title') }}</a>
+        <ul class="nav-group-items">
+            @can('member_access')
+            <li class="nav-item"><a class="nav-link {{ request()->is("admin/members") || request()->is("admin/members/*") ? "c-active" : "" }}"
+                    href="{{ route('admin.members.index') }}"><span class="nav-icon"></span>
+                    {{ trans('cruds.member.title') }}</a>
+          	</li>
+          	@endcan
+          
+          @can('qualification_access')
+            <li class="nav-item"><a class="nav-link {{ request()->is("admin/members") || request()->is("admin/members/*") ? "c-active" : "" }}"
+                    href="{{ route('admin.qualifications.index') }}"><span class="nav-icon"></span>
+                    {{ trans('cruds.qualification.title') }}</a>
+          	</li>
+          	@endcan
+          
+      		@can('employment_detail_access')
+            <li class="nav-item"><a class="nav-link {{ request()->is("admin/members") || request()->is("admin/members/*") ? "c-active" : "" }}"
+                    href="{{ route("admin.employment-details.index") }}"><span class="nav-icon"></span>
+                    {{ trans('cruds.employmentDetail.title') }}</a>
+          	</li>
+          	@endcan
+          
+           @can('spouse_detail_access')
+            <li class="nav-item"><a class="nav-link {{ request()->is("admin/members") || request()->is("admin/members/*") ? "c-active" : "" }}"
+                    href="{{ route('admin.spouse-details.index') }}"><span class="nav-icon"></span>
+                    {{ trans('cruds.spouseDetail.title') }}</a>
+          	</li>
+          	@endcan
+          
+            @can('child_access')
+            <li class="nav-item"><a class="nav-link {{ request()->is("admin/members") || request()->is("admin/members/*") ? "c-active" : "" }}"
+                    href="{{ route('admin.children.index') }}"><span class="nav-icon"></span>
+                    {{ trans('cruds.child.title') }}</a>
+          	</li>
+          	@endcan
+          
+            @can('interest_access')
+            <li class="nav-item"><a class="nav-link {{ request()->is("admin/members") || request()->is("admin/members/*") ? "c-active" : "" }}"
+                    href="{{ route('admin.interests.index') }}"><span class="nav-icon"></span>
+                    {{ trans('cruds.interest.title') }}</a>
+          	</li>
+          	@endcan
+          
+            @can('mountain_of_influence_access')
+            <li class="nav-item"><a class="nav-link {{ request()->is("admin/members") || request()->is("admin/members/*") ? "c-active" : "" }}"
+                    href="{{ route('admin.mountain-of-influences.index') }}"><span class="nav-icon"></span>
+                    {{ trans('cruds.mountainOfInfluence.title') }}</a>
+          	</li>
+          	@endcan                
+  		</ul>
+    </li>
+  
+    @can('church_affiliation_access')
+    <li class="nav-group {{ request()->is("admin/ats-memberships*") ? "c-show" : "" }} {{ request()->is("admin/join-departments*") ? "c-show" : "" }} {{ request()->is("admin/members-affinity-groups*") ? "c-show" : "" }} {{ request()->is("admin/cihmembers*") ? "c-show" : "" }} {{ request()->is("admin/mfs*") ? "c-show" : "" }}">
+        <a class="nav-link nav-group-toggle" href="#">
+            <svg class="nav-icon">
+                <use xlink:href="coreui/vendors/@coreui/icons/svg/free.svg#cil-building"></use>
             </svg> {{ trans('cruds.churchAffiliation.title') }}</a>
         <ul class="nav-group-items">
             @can('ats_membership_access')
@@ -83,7 +142,7 @@
         class="nav-group {{ request()->is("admin/meetings*") ? "c-show" : "" }} {{ request()->is("admin/attendance-managements*") ? "c-show" : "" }} {{ request()->is("admin/meeting-types*") ? "c-show" : "" }}">
         <a class="nav-link nav-group-toggle" href="#">
             <svg class="nav-icon">
-                <use xlink:href="coreui/vendors/@coreui/icons/svg/free.svg#cil-star"></use>
+                <use xlink:href="coreui/vendors/@coreui/icons/svg/free.svg#cil-group"></use>
             </svg> {{ trans('cruds.meetingManagement.title') }}</a>
         <ul class="nav-group-items">
             @can('meeting_access')
@@ -110,7 +169,7 @@
         class="nav-group {{ request()->is("admin/bookings*") ? "c-show" : "" }} {{ request()->is("admin/venues*") ? "c-show" : "" }} {{ request()->is("admin/venue-accessories*") ? "c-show" : "" }} {{ request()->is("admin/accessibility-features*") ? "c-show" : "" }} {{ request()->is("admin/locations*") ? "c-show" : "" }}">
         <a class="nav-link nav-group-toggle" href="#">
             <svg class="nav-icon">
-                <use xlink:href="coreui/vendors/@coreui/icons/svg/free.svg#cil-bell"></use>
+                <use xlink:href="coreui/vendors/@coreui/icons/svg/free.svg#cil-industry"></use>
             </svg> {{ trans('cruds.venueManagement.title') }}</a>
         <ul class="nav-group-items">
             @can('booking_access')
@@ -148,7 +207,7 @@
         class="nav-group {{ request()->is("admin/events*") ? "c-show" : "" }} {{ request()->is("admin/event-types*") ? "c-show" : "" }} {{ request()->is("admin/attendees*") ? "c-show" : "" }}">
         <a class="nav-link nav-group-toggle" href="#">
             <svg class="nav-icon">
-                <use xlink:href="coreui/vendors/@coreui/icons/svg/free.svg#cil-star"></use>
+                <use xlink:href="coreui/vendors/@coreui/icons/svg/free.svg#cil-globe-alt"></use>
             </svg> {{ trans('cruds.eventChurchProgram.title') }}</a>
         <ul class="nav-group-items">
             @can('event_access')
@@ -174,7 +233,7 @@
             class="nav-link {{ request()->is("admin/issue-managements") || request()->is("admin/issue-managements/*") ? "c-active" : "" }}"
             href="{{ route("admin.issue-managements.index") }}">
             <svg class="nav-icon">
-                <use xlink:href="coreui/vendors/@coreui/icons/svg/free.svg#cil-calculator"></use>
+                <use xlink:href="coreui/vendors/@coreui/icons/svg/free.svg#cil-grid-slash"></use>
             </svg> {{ trans('cruds.issueManagement.title') }}</a>
     </li>
     @endcan
@@ -183,7 +242,7 @@
             class="nav-link {{ request()->is("admin/goals") || request()->is("admin/goals/*") ? "c-active" : "" }}"
             href="{{ route("admin.goals.index") }}">
             <svg class="nav-icon">
-                <use xlink:href="coreui/vendors/@coreui/icons/svg/free.svg#cil-calculator"></use>
+                <use xlink:href="coreui/vendors/@coreui/icons/svg/free.svg#cil-golf"></use>
             </svg> {{ trans('cruds.goal.title') }}</a>
     </li>
     @endcan
@@ -217,7 +276,7 @@
         class="nav-group{{ request()->is("admin/outreaches*") ? "c-show" : "" }} {{ request()->is("admin/outreach-types*") ? "c-show" : "" }} {{ request()->is("admin/e-flyers*") ? "c-show" : "" }} {{ request()->is("admin/outreaches*") ? "c-show" : "" }} {{ request()->is("admin/outreach-types*") ? "c-show" : "" }} {{ request()->is("admin/e-flyers*") ? "c-show" : "" }}">
         <a class="nav-link nav-group-toggle" href="#">
             <svg class="nav-icon">
-                <use xlink:href="coreui/vendors/@coreui/icons/svg/free.svg#cil-bell"></use>
+                <use xlink:href="coreui/vendors/@coreui/icons/svg/free.svg#cil-bullhorn"></use>
             </svg> {{ trans('cruds.outreachAndMission.title') }}</a>
         <ul class="nav-group-items">
             @can('outreach_access')
@@ -246,7 +305,7 @@
         class="nav-group {{ request()->is("admin/ancillary-managements*") ? "c-show" : "" }} {{ request()->is("admin/service-types*") ? "c-show" : "" }}">
         <a class="nav-link nav-group-toggle" href="#">
             <svg class="nav-icon">
-                <use xlink:href="coreui/vendors/@coreui/icons/svg/free.svg#cil-bell"></use>
+                <use xlink:href="coreui/vendors/@coreui/icons/svg/free.svg#cil-browser"></use>
             </svg> {{ trans('cruds.ancillaryService.title') }}</a>
         <ul class="nav-group-items">
             @can('ancillary_management_access')
@@ -269,7 +328,7 @@
         <a href="{{ route("admin.chat-managements.index") }}"
             class="nav-link {{ request()->is("admin/chat-managements") || request()->is("admin/chat-managements/*") ? "c-active" : "" }}">
             <svg class="nav-icon">
-                <use xlink:href="coreui/vendors/@coreui/icons/svg/free.svg#cil-bell"></use>
+                <use xlink:href="coreui/vendors/@coreui/icons/svg/free.svg#cil-chat-bubble"></use>
             </svg>
             {{ trans('cruds.chatManagement.title') }}
         </a>
@@ -280,7 +339,7 @@
         class="nav-group {{ request()->is("admin/permissions*") ? "c-show" : "" }} {{ request()->is("admin/roles*") ? "c-show" : "" }} {{ request()->is("admin/audit-logs*") ? "c-show" : "" }}">
         <a class="nav-link nav-group-toggle" href="#">
             <svg class="nav-icon">
-                <use xlink:href="coreui/vendors/@coreui/icons/svg/free.svg#cil-bell"></use>
+                <use xlink:href="coreui/vendors/@coreui/icons/svg/free.svg#cil-user-plus"></use>
             </svg>
             {{ trans('cruds.userManagement.title') }}
         </a>
@@ -314,7 +373,7 @@
         class="nav-group {{ request()->is("admin/asset-categories*") ? "c-show" : "" }} {{ request()->is("admin/asset-locations*") ? "c-show" : "" }} {{ request()->is("admin/asset-statuses*") ? "c-show" : "" }} {{ request()->is("admin/assets*") ? "c-show" : "" }} {{ request()->is("admin/assets-histories*") ? "c-show" : "" }}">
         <a class="nav-link nav-group-toggle" href="#">
             <svg class="nav-icon">
-                <use xlink:href="coreui/vendors/@coreui/icons/svg/free.svg#cil-bell"></use>
+                <use xlink:href="coreui/vendors/@coreui/icons/svg/free.svg#cil-chart"></use>
             </svg> {{ trans('cruds.assetManagement.title') }}
         </a>
         <ul class="nav-group-items">
@@ -363,7 +422,7 @@
         class="nav-group {{ request()->is("admin/first-timers*") ? "c-show" : "" }} {{ request()->is("admin/dedications*") ? "c-show" : "" }} {{ request()->is("admin/christenings*") ? "c-show" : "" }} {{ request()->is("admin/cih-requests*") ? "c-show" : "" }} {{ request()->is("admin/cihzones*") ? "c-show" : "" }} {{ request()->is("admin/centres*") ? "c-show" : "" }} {{ request()->is("admin/cih-types-of-requests*") ? "c-show" : "" }} {{ request()->is("admin/cih-centers-inspections*") ? "c-show" : "" }} {{ request()->is("admin/inspectorate-groups*") ? "c-show" : "" }}">
         <a class="nav-link nav-group-toggle" href="#">
             <svg class="nav-icon">
-                <use xlink:href="coreui/vendors/@coreui/icons/svg/free.svg#cil-bell"></use>
+                <use xlink:href="coreui/vendors/@coreui/icons/svg/free.svg#cil-wrap-text"></use>
             </svg>
             {{ trans('cruds.cihManagement.title') }}
         </a>
@@ -440,7 +499,7 @@
         class="nav-group {{ request()->is("admin/empowerments*") ? "c-show" : "" }} {{ request()->is("admin/mailings*") ? "c-show" : "" }} {{ request()->is("admin/area-of-specializations*") ? "c-show" : "" }} {{ request()->is("admin/job-levels*") ? "c-show" : "" }} {{ request()->is("admin/empowerment-training-needs*") ? "c-show" : "" }}">
         <a class="nav-link nav-group-toggle" href="#">
             <svg class="nav-icon">
-                <use xlink:href="coreui/vendors/@coreui/icons/svg/free.svg#cil-bell"></use>
+                <use xlink:href="coreui/vendors/@coreui/icons/svg/free.svg#cil-weightlifitng"></use>
             </svg>
             {{ trans('cruds.joinEmpowerment.title') }}
         </a>
@@ -488,7 +547,7 @@
         <a href="{{ route("admin.payments.index") }}"
             class="nav-link {{ request()->is("admin/payments") || request()->is("admin/payments/*") ? "c-active" : "" }}">
             <svg class="nav-icon">
-                <use xlink:href="coreui/vendors/@coreui/icons/svg/free.svg#cil-bell"></use>
+                <use xlink:href="coreui/vendors/@coreui/icons/svg/free.svg#cil-wallet"></use>
             </svg> {{ trans('cruds.payment.title') }}
         </a>
     </li>
@@ -498,7 +557,7 @@
         class="nav-group {{ request()->is("admin/task-statuses*") ? "c-show" : "" }} {{ request()->is("admin/task-tags*") ? "c-show" : "" }} {{ request()->is("admin/tasks*") ? "c-show" : "" }} {{ request()->is("admin/tasks-calendars*") ? "c-show" : "" }}">
         <a class="nav-link nav-group-toggle" href="#">
             <svg class="nav-icon">
-                <use xlink:href="coreui/vendors/@coreui/icons/svg/free.svg#cil-calculator"></use>
+                <use xlink:href="coreui/vendors/@coreui/icons/svg/free.svg#cil-vector"></use>
             </svg>
             {{ trans('cruds.taskManagement.title') }}
         </a>
@@ -586,7 +645,7 @@
         class="nav-group {{request()->is("admin/faq-categories*") ? "c-show" : "" }} {{ request()->is("admin/faq-questions*") ? "c-show" : "" }}">
         <a class="nav-link nav-group-toggle" href="#">
             <svg class="nav-icon">
-                <use xlink:href="coreui/vendors/@coreui/icons/svg/free.svg#cil-calculator"></use>
+                <use xlink:href="coreui/vendors/@coreui/icons/svg/free.svg#cil-voice-over-record"></use>
             </svg>
             {{ trans('cruds.faqManagement.title') }}
         </a>
@@ -613,7 +672,7 @@
         class="nav-group {{ request()->is("admin/users*") ? "c-show" : "" }} {{ request()->is("admin/affinity-groups*") ? "c-show" : "" }} {{ request()->is("admin/ats-membership-records*") ? "c-show" : "" }} {{ request()->is("admin/departments*") ? "c-show" : "" }} {{ request()->is("admin/mountains-of-influences*") ? "c-show" : "" }} {{ request()->is("admin/missionary-forces*") ? "c-show" : "" }} {{ request()->is("admin/user-alerts*") ? "c-show" : "" }} {{ request()->is("admin/*") ? "c-show" : "" }}">
         <a class="nav-link nav-group-toggle" href="#">
             <svg class="nav-icon">
-                <use xlink:href="coreui/vendors/@coreui/icons/svg/free.svg#cil-calculator"></use>
+                <use xlink:href="coreui/vendors/@coreui/icons/svg/free.svg#cil-wc"></use>
             </svg>
             {{ trans('cruds.administrativeRole.title') }}
         </a>
@@ -672,7 +731,7 @@
                 class="nav-group {{ request()->is("admin/titles*") ? "c-show" : "" }} {{ request()->is("admin/marital-statuses*") ? "c-show" : "" }} {{ request()->is("admin/employment-statuses*") ? "c-show" : "" }} {{ request()->is("admin/qualification-settings*") ? "c-show" : "" }} {{ request()->is("admin/industry-sectors*") ? "c-show" : "" }} {{ request()->is("admin/sub-sectors*") ? "c-show" : "" }} {{ request()->is("admin/organization-types*") ? "c-show" : "" }} {{ request()->is("admin/sports*") ? "c-show" : "" }}">
                 <a class="nav-link nav-group-toggle" href="#">
                     <svg class="nav-icon">
-                        <use xlink:href="coreui/vendors/@coreui/icons/svg/free.svg#cil-calculator"></use>
+                        <use xlink:href="coreui/vendors/@coreui/icons/svg/free.svg#cil-view-module"></use>
                     </svg>
                     {{ trans('cruds.misc.title') }}
                 </a>
@@ -761,7 +820,7 @@
         class="nav-group {{ request()->is("admin/content-categories*") ? "c-show" : "" }} {{ request()->is("admin/content-tags*") ? "c-show" : "" }} {{ request()->is("admin/content-pages*") ? "c-show" : "" }}">
         <a class="nav-link nav-group-toggle" href="#">
             <svg class="nav-icon">
-                <use xlink:href="coreui/vendors/@coreui/icons/svg/free.svg#cil-bell"></use>
+                <use xlink:href="coreui/vendors/@coreui/icons/svg/free.svg#cil-newspaper"></use>
             </svg>
             {{ trans('cruds.contentManagement.title') }}
         </a>
@@ -796,7 +855,7 @@
         class="nav-group {{ request()->is("admin/contact-companies*") ? "c-show" : "" }} {{ request()->is("admin/contact-contacts*") ? "c-show" : "" }}">
         <a class="nav-link nav-group-toggle" href="#">
             <svg class="nav-icon">
-                <use xlink:href="coreui/vendors/@coreui/icons/svg/free.svg#cil-bell"></use>
+                <use xlink:href="coreui/vendors/@coreui/icons/svg/free.svg#cil-at"></use>
             </svg>
             {{ trans('cruds.contactManagement.title') }}
         </a>
@@ -824,7 +883,7 @@
         class="nav-group {{ request()->is("admin/courses*") ? "c-show" : "" }} {{ request()->is("admin/lessons*") ? "c-show" : "" }} {{ request()->is("admin/tests*") ? "c-show" : "" }} {{ request()->is("admin/questions*") ? "c-show" : "" }} {{ request()->is("admin/question-options*") ? "c-show" : "" }} {{ request()->is("admin/test-results*") ? "c-show" : "" }} {{ request()->is("admin/test-answers*") ? "c-show" : "" }}">
         <a class="nav-link nav-group-toggle" href="#">
             <svg class="nav-icon">
-                <use xlink:href="coreui/vendors/@coreui/icons/svg/free.svg#cil-bell"></use>
+                <use xlink:href="coreui/vendors/@coreui/icons/svg/free.svg#cil-barcode"></use>
             </svg>
             {{ trans('cruds.at.title') }}
         </a>
@@ -886,7 +945,7 @@
         class="nav-group {{ request()->is("admin/product-categories*") ? "c-show" : "" }} {{ request()->is("admin/product-tags*") ? "c-show" : "" }} {{ request()->is("admin/products*") ? "c-show" : "" }}">
         <a class="nav-link nav-group-toggle" href="#">
             <svg class="nav-icon">
-                <use xlink:href="coreui/vendors/@coreui/icons/svg/free.svg#cil-bell"></use>
+                <use xlink:href="coreui/vendors/@coreui/icons/svg/free.svg#cil-basket"></use>
             </svg>
             {{ trans('cruds.productManagement.title') }}
         </a>
@@ -919,9 +978,32 @@
         <a href="{{ route("admin.systemCalendar") }}"
             class="nav-link {{ request()->is("admin/system-calendar") || request()->is("admin/system-calendar/*") ? "c-active" : "" }}">
             <svg class="nav-icon">
-                <use xlink:href="coreui/vendors/@coreui/icons/svg/free.svg#cil-bell"></use>
+                <use xlink:href="coreui/vendors/@coreui/icons/svg/free.svg#cil-calendar"></use>
             </svg>
             {{ trans('global.systemCalendar') }}
         </a>
     </li>
+  
+	<div style="display: flex; flex-direction: column; align-items: center;">
+        <div style="width: 100%; height: 1px; background-color: white; margin-bottom: 10px;"></div>
+        <form action="{{ route('admin.switchToAdmin') }}" method="POST">
+            @csrf
+            <button type="submit" class="bg-black text-white btn btn-lg" style="font-size: 20px;">Switch to Admin Dashboard</button>
+        </form>
+    {{-- @endcan --}}
+     
+        <div style="width: 100%; height: 1px; background-color: white; margin-bottom: 10px;"></div>
+        <form action="{{ route('admin.switchToHOD') }}" method="POST">
+            @csrf
+            <button type="submit" class="bg-black text-white btn btn-lg" style="font-size: 20px;">Switch to HOD Dashboard</button>
+        </form>
+
+        <div style="width: 100%; height: 1px; background-color: white; margin-bottom: 10px;"></div>
+        <form action="{{ route('admin.switchToUser') }}" method="POST">
+            @csrf
+            <button type="submit" class="bg-black text-white btn btn-lg" style="font-size: 20px;">Switch to User Dashboard</button>
+        </form>
+        <div style="width: 100%; height: 1px; background-color: white; margin-bottom: 10px;"></div>
+    </div>
+      
 </ul>

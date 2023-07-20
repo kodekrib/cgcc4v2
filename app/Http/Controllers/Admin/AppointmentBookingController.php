@@ -30,7 +30,7 @@ class AppointmentBookingController extends Controller
 
         $member = Member::where('email', Auth::user()->email)->first();
         if($member == null){
-            abort_if(Gate::denies('member_not_available'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+            abort_if(Gate::denies('member_not_available'), Response::HTTP_FORBIDDEN, 'You are not a Member to view this page, please kindly register as a member to have access');
         }
         $appointmentBookings = AppointmentBooking::with(['appointment_type', 'assigned_to', 'created_by'])->where('assigned_to_id', $member->id)->get();
 

@@ -92,7 +92,7 @@
             </div>
             <div class="form-group">
                 <label class="required" for="date_of_birth">{{ trans('cruds.child.fields.date_of_birth') }}</label>
-                <input class="form-control date {{ $errors->has('date_of_birth') ? 'is-invalid' : '' }}" type="text" name="date_of_birth" id="date_of_birth" value="{{ old('date_of_birth', $child->date_of_birth) }}" required>
+                <input class="form-control date {{ $errors->has('date_of_birth') ? 'is-invalid' : '' }}" type="date" name="date_of_birth" id="date_of_birth" value="{{ old('date_of_birth', $child->date_of_birth) }}" required>
                 @if($errors->has('date_of_birth'))
                     <div class="invalid-feedback">
                         {{ $errors->first('date_of_birth') }}
@@ -137,6 +137,28 @@
     </div>
 </div>
 
+<!-- Add these scripts and styles to your HTML file -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
+<script>
+    $(function () {
+        // Get the current date
+        const currentDate = new Date();
+
+        // Calculate the date one year ago
+        const oneYearAgo = new Date(currentDate);
+        oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
+
+        // Set the max date to one year ago (restrict future dates)
+        const maxDate = oneYearAgo.toISOString().split('T')[0];
+        $(".child-date-picker").attr("max", maxDate);
+
+        // Set the default value for the input
+        const formattedOneYearAgo = oneYearAgo.toISOString().split('T')[0];
+        $(".child-date-picker").attr("value", formattedOneYearAgo);
+    });
+</script>
 
 @endsection

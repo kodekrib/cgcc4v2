@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+ @extends('layouts.admin')
 @section('content')
 @can('join_department_create')
     <div style="margin-bottom: 10px;" class="row">
@@ -19,10 +19,10 @@
 
         <ul class="nav nav-tabs" id="myTab">
                 <li class="nav-item">
-                    <a class="nav-link active" data-toggle="tab" href="#membersList" role="tab">{{ trans('cruds.joinDepartment.title_singular') }} {{ trans('global.list') }}</a>
+                    <a class="nav-link active" data-toggle="tab" href="#membersList" role="tab" style="color: black !important;">{{ trans('cruds.joinDepartment.title_singular') }} {{ trans('global.list') }}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#membersDelist" role="tab">Delisted Member</a>
+                    <a class="nav-link" data-toggle="tab" href="#membersDelist" role="tab" style="color: black !important;">Delisted Member</a>
                 </li>
 
             </ul>
