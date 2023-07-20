@@ -11,16 +11,36 @@ use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
+
 class SpouseDetailsController extends Controller
 {
+
     public function index()
     {
+        // Check if the user is authorized to access spouse detail records
         abort_if(Gate::denies('spouse_detail_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $spouseDetails = SpouseDetail::with(['created_by'])->get();
+        // Filter the SpouseDetail records based on the 'created_by_id' attribute
+        $authenticatedUserId = auth()->id();
+
+        $spouseDetails = SpouseDetail::where(function ($query) use ($authenticatedUserId) {
+            $query->where('created_by_id', $authenticatedUserId)
+                ->orWhereNull('created_by_id');
+        })
+        ->with(['created_by'])
+        ->get();
 
         return view('admin.spouseDetails.index', compact('spouseDetails'));
     }
+
+    // public function index()
+    // {
+    //     abort_if(Gate::denies('spouse_detail_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+    //     $spouseDetails = SpouseDetail::with(['created_by'])->get();
+
+    //     return view('admin.spouseDetails.index', compact('spouseDetails'));
+    // }
 
     public function create()
     {
