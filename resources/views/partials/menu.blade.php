@@ -80,19 +80,12 @@
                     </li>
                     @endcan
 
-                @can('dash_board_venue_info')
+                @can('child_access')
                 <li class="nav-item"><a class="nav-link {{ request()->is("admin/members") || request()->is("admin/members/*") ? "c-active" : "" }}"
                         href="{{ route('admin.children.index') }}"><span class="nav-icon"></span>
                         {{ trans('cruds.child.title') }}</a>
                   </li>
                   @endcan
-
-                  @can('child_access')
-                  <li class="nav-item"><a class="nav-link {{ request()->is("admin/members/create") || request()->is("admin/members/create/*") ? "c-active" : "" }}"
-                          href="{{ route('admin.children.create') }}"><span class="nav-icon"></span>
-                          Add Children</a>
-                    </li>
-                    @endcan
 
                 @can('dash_board_venue_info')
                 <li class="nav-item"><a class="nav-link {{ request()->is("admin/members") || request()->is("admin/members/*") ? "c-active" : "" }}"
