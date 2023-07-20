@@ -27,58 +27,100 @@
                 @can('dash_board_venue_info')
                 <li class="nav-item"><a class="nav-link {{ request()->is("admin/members") || request()->is("admin/members/*") ? "c-active" : "" }}"
                         href="{{ route('admin.members.index') }}"><span class="nav-icon"></span>
-                        {{ trans('cruds.member.title') }}</a>
+                        Biodata List</a>
                   </li>
                   @endcan
 
                 @can('member_access')
                   <li class="nav-item"><a class="nav-link {{ request()->is("admin/members/create") || request()->is("admin/members/create/*") ? "c-active" : "" }}"
                           href="{{ route('admin.members.create') }}"><span class="nav-icon"></span>
-                          Create Member</a>
+                          Add Biodata</a>
                     </li>
                 @endcan
 
-              @can('qualification_access')
+                @can('dash_board_venue_info')
                 <li class="nav-item"><a class="nav-link {{ request()->is("admin/members") || request()->is("admin/members/*") ? "c-active" : "" }}"
                         href="{{ route('admin.qualifications.index') }}"><span class="nav-icon"></span>
                         {{ trans('cruds.qualification.title') }}</a>
                   </li>
                   @endcan
 
-                  @can('employment_detail_access')
+                @can('qualification_access')
+                  <li class="nav-item"><a class="nav-link {{ request()->is("admin/members/create") || request()->is("admin/members/create/*") ? "c-active" : "" }}"
+                          href="{{ route('admin.qualifications.create') }}"><span class="nav-icon"></span>
+                          Add Qualification</a>
+                    </li>
+                 @endcan
+
+                 @can('dash_board_venue_info')
                 <li class="nav-item"><a class="nav-link {{ request()->is("admin/members") || request()->is("admin/members/*") ? "c-active" : "" }}"
                         href="{{ route("admin.employment-details.index") }}"><span class="nav-icon"></span>
                         {{ trans('cruds.employmentDetail.title') }}</a>
                   </li>
                   @endcan
 
-               @can('spouse_detail_access')
+                  @can('employment_detail_access')
+                  <li class="nav-item"><a class="nav-link {{ request()->is("admin/members/create") || request()->is("admin/members/create/*") ? "c-active" : "" }}"
+                          href="{{ route("admin.employment-details.create") }}"><span class="nav-icon"></span>
+                          Add Employment Details</a>
+                    </li>
+                    @endcan
+
+                @can('dash_board_venue_info')
                 <li class="nav-item"><a class="nav-link {{ request()->is("admin/members") || request()->is("admin/members/*") ? "c-active" : "" }}"
                         href="{{ route('admin.spouse-details.index') }}"><span class="nav-icon"></span>
                         {{ trans('cruds.spouseDetail.title') }}</a>
                   </li>
                   @endcan
 
-                @can('child_access')
+                  @can('spouse_detail_access')
+                  <li class="nav-item"><a class="nav-link {{ request()->is("admin/members/create") || request()->is("admin/members/create/*") ? "c-active" : "" }}"
+                          href="{{ route('admin.spouse-details.create') }}"><span class="nav-icon"></span>
+                          Add Spouse Detail</a>
+                    </li>
+                    @endcan
+
+                @can('dash_board_venue_info')
                 <li class="nav-item"><a class="nav-link {{ request()->is("admin/members") || request()->is("admin/members/*") ? "c-active" : "" }}"
                         href="{{ route('admin.children.index') }}"><span class="nav-icon"></span>
                         {{ trans('cruds.child.title') }}</a>
                   </li>
                   @endcan
 
-                @can('interest_access')
+                  @can('child_access')
+                  <li class="nav-item"><a class="nav-link {{ request()->is("admin/members/create") || request()->is("admin/members/create/*") ? "c-active" : "" }}"
+                          href="{{ route('admin.children.create') }}"><span class="nav-icon"></span>
+                          Add Children</a>
+                    </li>
+                    @endcan
+
+                @can('dash_board_venue_info')
                 <li class="nav-item"><a class="nav-link {{ request()->is("admin/members") || request()->is("admin/members/*") ? "c-active" : "" }}"
                         href="{{ route('admin.interests.index') }}"><span class="nav-icon"></span>
                         {{ trans('cruds.interest.title') }}</a>
                   </li>
                   @endcan
 
-                @can('mountain_of_influence_access')
+                  @can('interest_access')
+                  <li class="nav-item"><a class="nav-link {{ request()->is("admin/members/create") || request()->is("admin/members/create/*") ? "c-active" : "" }}"
+                          href="{{ route('admin.interests.create') }}"><span class="nav-icon"></span>
+                         Add Interests</a>
+                    </li>
+                    @endcan
+
+                @can('dash_board_venue_info')
                 <li class="nav-item"><a class="nav-link {{ request()->is("admin/members") || request()->is("admin/members/*") ? "c-active" : "" }}"
                         href="{{ route('admin.mountain-of-influences.index') }}"><span class="nav-icon"></span>
                         {{ trans('cruds.mountainOfInfluence.title') }}</a>
                   </li>
                   @endcan
+
+                  @can('mountain_of_influence_access')
+                  <li class="nav-item"><a class="nav-link {{ request()->is("admin/members/create") || request()->is("admin/members/create/*") ? "c-active" : "" }}"
+                          href="{{ route('admin.mountain-of-influences.create') }}"><span class="nav-icon"></span>
+                          Add Mountain of Influence</a>
+                    </li>
+                    @endcan
               </ul>
         </li>
 
@@ -95,10 +137,16 @@
                         href="{{ route('admin.ats-memberships.index') }}"><span class="nav-icon"></span>
                         {{ trans('cruds.atsMembership.title') }}</a></li>
                 @endcan
-                @can('join_department_access')
+                @can('dash_board_recent_member')
                 <li class="nav-item"><a
                         class="nav-link {{ request()->is("admin/join-departments") || request()->is("admin/join-departments/*") ? "c-active" : "" }}"
                         href="{{ route('admin.join-departments.index') }}"> {{ trans('cruds.joinDepartment.title') }}</a>
+                </li>
+                @endcan
+                @can('join_department_access')
+                <li class="nav-item"><a
+                        class="nav-link {{ request()->is("admin/join-departments/create") || request()->is("admin/join-departments/create/*") ? "c-active" : "" }}"
+                        href="{{ route('admin.join-departments.create') }}"> Join Department</a>
                 </li>
                 @endcan
                 @can('members_affinity_group_access')
