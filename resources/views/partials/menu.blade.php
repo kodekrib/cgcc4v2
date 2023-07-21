@@ -32,9 +32,19 @@
                   @endcan
 
                 @can('member_access')
-                  <li class="nav-item"><a class="nav-link {{ request()->is("admin/members/create") || request()->is("admin/members/create/*") ? "c-active" : "" }}"
-                          href="{{ route('admin.members.create') }}"><span class="nav-icon"></span>
-                          Add Biodata</a>
+                  <li class="nav-item">
+                        @if($memberExist == null)
+                            <a class="nav-link {{ request()->is("admin/members/create") || request()->is("admin/members/create/*") ? "c-active" : "" }}"
+                                href="{{ route('admin.members.create') }}"><span class="nav-icon"></span>
+                                Add Biodata
+                            </a>
+                        @endif
+                        @if($memberExist != null)
+                            <a class="nav-link {{ request()->is("admin/members/create") || request()->is("admin/members/create/*") ? "c-active" : "" }}"
+                                href="{{ route('admin.members.edit', $members->id) }}"><span class="nav-icon"></span>
+                                My Biodata
+                            </a>
+                        @endif
                     </li>
                 @endcan
 

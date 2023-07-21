@@ -143,17 +143,17 @@
                                 <use xlink:href="coreui/vendors/@coreui/icons/svg/brand.svg#cib-skype"></use>
                             </svg> Online</small>
                     </div>
-                    
+
                 </div>
             </div>
             <div class="tab-pane p-3" id="messages" role="tabpanel">
                 <div class="message">
                   <span>No chat alert</span>
                 </div>
-               
-                
-               
-               
+
+
+
+
             </div>
             <div class="tab-pane p-3" id="settings" role="tabpanel">
                 <h6>Settings</h6>
@@ -213,8 +213,8 @@
                             <div class="dropdown-header bg-light dark:bg-white dark:bg-opacity-10">
                                 <strong>You have {{ $unread }} {{ trans('global.messages') }}</strong>
                             </div>
-                            
-                            
+
+
                             <a class="dropdown-item text-center border-top"
                                 href="{{ route("admin.messenger.index") }}"><strong>View all messages</strong></a>
                         </div>
@@ -229,7 +229,7 @@
                                     alt="user@email.com"><span class="avatar-status bg-success"></span></div>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end pt-0">
-                            
+
                           	<a class="dropdown-item" href="#">
                                 <svg class="icon me-2">
                                     <use xlink:href="coreui/vendors/@coreui/icons/svg/free.svg#cil-crop-rotate">
@@ -305,6 +305,11 @@
 
     <script src="{{ asset('js/api.call.js') }}"></script>
     <script>
+
+    $(document).ready(() => {
+
+    });
+
     if (document.body.classList.contains('dark-theme')) {
         var element = document.getElementById('btn-dark-theme');
         if (typeof(element) != 'undefined' && element != null) {
@@ -329,6 +334,7 @@
         }
         document.body.dispatchEvent(event);
     }
+
     </script>
     @yield('scripts')
     <!-- Plugins and scripts required by this view-->

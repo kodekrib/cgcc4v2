@@ -562,4 +562,8 @@ $chart8->renderJs() !!}{!! $chart9->renderJs() !!}{!! $chart10->renderJs() !!}{!
 $chart19->renderJs() !!}{!! $chart22->renderJs() !!}{!! $chart24->renderJs() !!}{!! $chart26->renderJs() !!}{!!
 $chart27->renderJs() !!}{!! $chart28->renderJs() !!}{!! $chart31->renderJs() !!}{!! $chart32->renderJs() !!}{!!
 $chart33->renderJs() !!}
+
+<script>
+
+</script>
 @endsection
