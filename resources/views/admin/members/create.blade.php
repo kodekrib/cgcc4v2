@@ -45,7 +45,6 @@
                         <option value="Evangelist" {{ old('title', '') === 'Evangelist' ? 'selected' : '' }}>Evangelist</option>
                         <option value="Chief" {{ old('title', '') === 'Chief' ? 'selected' : '' }}>Chief</option>
                         <option value="Chief Mrs" {{ old('title', '') === 'Chief Mrs' ? 'selected' : '' }}>Chief Mrs</option>
-                        <option value="Prophet" {{ old('title', '') === 'Prophet' ? 'selected' : '' }}>Prophet</option>
                         <option value="Deacon" {{ old('title', '') === 'Deacon' ? 'selected' : '' }}>Deacon</option>
                         <option value="Deaconess" {{ old('title', '') === 'Deaconess' ? 'selected' : '' }}>Deaconess</option>
                         <option value="Pharm" {{ old('title', '') === 'Pharm' ? 'selected' : '' }}>Pharm</option>
@@ -669,12 +668,10 @@
             this.value === 'Evangelist' ||
             this.value === 'Engr' ||
             this.value === 'Rev' ||
-            this.value === 'Prophet' ||
             this.value === 'Deacon' ||
             this.value === 'Deaconess' ||
             this.value === 'Pharm' ||
-            this.value === 'Arch' ||
-            this.value === 'Chief'
+            this.value === 'Arch'
         ) {
             maidenName.style.display = 'block';
         } else {
@@ -682,7 +679,6 @@
         }
     });
 </script>
-
 
 
 @endsection

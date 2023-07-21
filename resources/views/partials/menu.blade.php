@@ -1048,13 +1048,15 @@
                 @csrf
                 <button type="submit" class="bg-black text-white btn btn-lg" style="font-size: 20px;">Switch to Admin Dashboard</button>
             </form>
-        {{-- @endcan --}}
+
 
             <div style="width: 100%; height: 1px; background-color: white; margin-bottom: 10px;"></div>
             <form action="admin/switch-to-hod" method="POST">
                 @csrf
                 <button type="submit" class="bg-black text-white btn btn-lg" style="font-size: 20px;">Switch to HOD Dashboard</button>
             </form>
+
+
 
             <div style="width: 100%; height: 1px; background-color: white; margin-bottom: 10px;"></div>
             <form action="admin/switch-to-user" method="POST">
@@ -1063,5 +1065,6 @@
             </form>
             <div style="width: 100%; height: 1px; background-color: white; margin-bottom: 10px;"></div>
         </div>
+
 
     </ul>

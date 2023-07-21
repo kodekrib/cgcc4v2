@@ -90,7 +90,7 @@
 
 <div class="row mt-2">
     <div class="col-md-4">
-        <a href="{{ url('admin/members') }}" class="card-link">
+        <a href="{{ url('admin/members/create') }}" class="card-link">
             <div class="card bg-warning text-white" style="height: 150px;">
                 <div class="card-body d-flex flex-column justify-content-center align-items-center">
                     <div class="text-center">
@@ -105,7 +105,7 @@
     </div>
 
     <div class="col-md-4">
-        <a href="{{ url('admin/qualifications') }}" class="card-link">
+        <a href="{{ url('admin/qualifications/create') }}" class="card-link">
             <div class="card bg-danger text-white" style="height: 150px;">
                 <div class="card-body d-flex flex-column justify-content-center align-items-center">
                     <div class="text-center">
@@ -120,7 +120,7 @@
     </div>
 
     <div class="col-md-4">
-        <a href="{{ url('admin/spouse-details') }}" class="card-link">
+        <a href="{{ url('admin/spouse-details/create') }}" class="card-link">
             <div class="card bg-info text-white" style="height: 150px;">
                 <div class="card-body d-flex flex-column justify-content-center align-items-center">
                     <div class="text-center">
@@ -136,7 +136,7 @@
 
     <div class="row mt-3">
       <div class="col-md-4">
-        <a href="{{ url('admin/interests') }}" class="card-link">
+        <a href="{{ url('admin/interests/create') }}" class="card-link">
             <div class="card bg-danger text-white" style="height: 150px;">
                 <div class="card-body d-flex flex-column justify-content-center align-items-center">
                     <div class="text-center">
@@ -158,7 +158,7 @@
                         <svg class="nav-icon">
                             <use xlink:href="coreui/vendors/@coreui/icons/svg/free.svg#cil-child"></use>
                         </svg>
-                        <h6 class="card-title"><i class="bi bi-people"></i>Child</h6>
+                        <h6 class="card-title"><i class="bi bi-people"></i>Child/Children</h6>
                     </div>
                 </div>
             </div>
@@ -166,7 +166,7 @@
     </div>
 
     <div class="col-md-4">
-        <a href="{{ url('admin/employment-details') }}" class="card-link">
+        <a href="{{ url('admin/employment-details/create') }}" class="card-link">
             <div class="card bg-warning text-white" style="height: 150px;">
                 <div class="card-body d-flex flex-column justify-content-center align-items-center">
                     <div class="text-center">
@@ -181,7 +181,7 @@
     </div>
 
     <div class="col-md-4 mt-3">
-        <a href="{{ url('admin/mountain-of-influences') }}" class="card-link">
+        <a href="{{ url('admin/mountain-of-influences/create') }}" class="card-link">
             <div class="card bg-info text-white" style="height: 150px;">
                 <div class="card-body d-flex flex-column justify-content-center align-items-center">
                     <div class="text-center">
