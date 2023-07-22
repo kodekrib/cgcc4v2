@@ -1032,22 +1032,23 @@
             </a>
         </li>
 
-        <div style="display: flex; flex-direction: column; align-items: center;">
+        {{-- <div style="display: flex; flex-direction: column; align-items: center;">
             <div style="width: 100%; height: 1px; background-color: white; margin-bottom: 10px;"></div>
             <form action="admin/switch-to-admin" method="POST">
                 @csrf
                 <button type="submit" class="bg-black text-white btn btn-lg" style="font-size: 20px;">Switch to Admin Dashboard</button>
-            </form>
+            </form> --}}
 
-
+        @can('dash_board_recent_member')
             <div style="width: 100%; height: 1px; background-color: white; margin-bottom: 10px;"></div>
             <form action="admin/switch-to-hod" method="POST">
                 @csrf
                 <button type="submit" class="bg-black text-white btn btn-lg" style="font-size: 20px;">Switch to HOD Dashboard</button>
             </form>
+            @endcan
 
 
-
+        @can('dash_board_recent_member')
             <div style="width: 100%; height: 1px; background-color: white; margin-bottom: 10px;"></div>
             <form action="admin/switch-to-user" method="POST">
                 @csrf
@@ -1055,6 +1056,7 @@
             </form>
             <div style="width: 100%; height: 1px; background-color: white; margin-bottom: 10px;"></div>
         </div>
+        @endcan
 
 
     </ul>

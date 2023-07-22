@@ -41,6 +41,17 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="title">{{ trans('cruds.spouseDetail.fields.title') }}</label>
+                        <input class="form-control {{ $errors->has('title') ? 'is-invalid' : '' }}" type="text" name="title" id="title" value="{{ old('title', '') }}">
+                        @if($errors->has('title'))
+                            <div class="invalid-feedback">
+                                {{ $errors->first('title') }}
+                            </div>
+                        @endif
+                        <span class="help-block">{{ trans('cruds.spouseDetail.fields.title_helper') }}</span>
+                    </div>
+
+                    <div class="form-group">
                         <label for="first_name">{{ trans('cruds.spouseDetail.fields.first_name') }}</label>
                         <input class="form-control {{ $errors->has('first_name') ? 'is-invalid' : '' }}" type="text" name="first_name" id="first_name" value="{{ old('first_name', '') }}">
                         @if($errors->has('first_name'))
