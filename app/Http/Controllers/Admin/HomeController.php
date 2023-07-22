@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Config;
 use LaravelDaily\LaravelCharts\Classes\LaravelChart;
 use App\Models\Member;
 use Carbon\Carbon;
@@ -27,8 +28,9 @@ class HomeController
                             ->count();
 
         // $progressPercentage = ($totalAdults / $totalMembers) * 100;
-        $memberExist = Member::all()->where('email', Auth::user()->email)->first();
-        return view('dashboard', compact('totalMembers', 'totalMale', 'totalFemale', 'totalChildren', 'totalAdults', 'memberExist'));
+
+
+        return view('dashboard', compact('totalMembers', 'totalMale', 'totalFemale', 'totalChildren', 'totalAdults'));
     }
 
 

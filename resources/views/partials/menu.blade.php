@@ -33,32 +33,46 @@
 
                 @can('member_access')
                   <li class="nav-item">
-                        @if($memberExist == null)
+                        @if( Config::get('memberExist') == null)
                             <a class="nav-link {{ request()->is("admin/members/create") || request()->is("admin/members/create/*") ? "c-active" : "" }}"
                                 href="{{ route('admin.members.create') }}"><span class="nav-icon"></span>
                                 Add Biodata
                             </a>
-                        @endif
-                        @if($memberExist != null)
+                        @else
                             <a class="nav-link {{ request()->is("admin/members/create") || request()->is("admin/members/create/*") ? "c-active" : "" }}"
-                                href="{{ route('admin.members.edit', $members->id) }}"><span class="nav-icon"></span>
+                                href="{{ route('admin.members.edit', Config::get('memberExist')->id) }}"><span class="nav-icon"></span>
                                 My Biodata
                             </a>
                         @endif
+
                     </li>
                 @endcan
 
                 @can('dash_board_venue_info')
-                <li class="nav-item"><a class="nav-link {{ request()->is("admin/members") || request()->is("admin/members/*") ? "c-active" : "" }}"
-                        href="{{ route('admin.qualifications.index') }}"><span class="nav-icon"></span>
-                        {{ trans('cruds.qualification.title') }}</a>
+                <li class="nav-item">
+
+                        <a class="nav-link {{ request()->is("admin/members") || request()->is("admin/members/*") ? "c-active" : "" }}"
+                            href="{{ route('admin.qualifications.index') }}"><span class="nav-icon"></span>
+                            {{ trans('cruds.qualification.title') }}
+                        </a>
+
+
                   </li>
                   @endcan
 
                 @can('qualification_access')
-                  <li class="nav-item"><a class="nav-link {{ request()->is("admin/members/create") || request()->is("admin/members/create/*") ? "c-active" : "" }}"
+                  <li class="nav-item">
+                    @if( Config::get('qualification') == null)
+                        <a class="nav-link {{ request()->is("admin/members/create") || request()->is("admin/members/create/*") ? "c-active" : "" }}"
                           href="{{ route('admin.qualifications.create') }}"><span class="nav-icon"></span>
-                          Add Qualification</a>
+                          Add Qualification
+                        </a>
+                    @else
+                        <a class="nav-link {{ request()->is("admin/members/create") || request()->is("admin/members/create/*") ? "c-active" : "" }}"
+                            href="{{ route('admin.qualifications.edit', Config::get('qualification')->id) }}"><span class="nav-icon"></span>
+                           My Qualification
+                        </a>
+                    @endif
                     </li>
                  @endcan
 
