@@ -28,6 +28,22 @@
                 <div class="col-md-6">
                     <div class="form-group" id="title">
                         <label>{{ trans('cruds.spouseDetail.fields.title') }}</label>
+                        <select class="form-control {{ $errors->has('title') ? 'is-invalid' : '' }}" name="title" id="spouse_title">
+                            <option value disabled {{ old('title', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
+                            <option value="Mr" {{ old('title', '') === 'Mr' ? 'selected' : '' }}>Mr</option>
+                            <option value="Mrs" {{ old('title', '') === 'Mrs' ? 'selected' : '' }}>Mrs</option>
+                            <!-- Add other title options as needed -->
+                        </select>
+                        @if($errors->has('title'))
+                            <div class="invalid-feedback">
+                                {{ $errors->first('title') }}
+                            </div>
+                        @endif
+                    </div>
+
+                {{-- <div class="col-md-6">
+                    <div class="form-group" id="title">
+                        <label>{{ trans('cruds.spouseDetail.fields.title') }}</label>
                         <select class="form-control {{ $errors->has('title') ? 'is-invalid' : '' }}" name="title">
                             <option value disabled {{ old('title', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
                             <option value="Mr" {{ old('title', '') === 'Mr' ? 'selected' : '' }}>Mr</option>
@@ -38,18 +54,7 @@
                                 {{ $errors->first('title') }}
                             </div>
                         @endif
-                    </div>
-
-                    <div class="form-group">
-                        <label for="title">{{ trans('cruds.spouseDetail.fields.title') }}</label>
-                        <input class="form-control {{ $errors->has('title') ? 'is-invalid' : '' }}" type="text" name="title" id="title" value="{{ old('title', '') }}">
-                        @if($errors->has('title'))
-                            <div class="invalid-feedback">
-                                {{ $errors->first('title') }}
-                            </div>
-                        @endif
-                        <span class="help-block">{{ trans('cruds.spouseDetail.fields.title_helper') }}</span>
-                    </div>
+                    </div> --}}
 
                     <div class="form-group">
                         <label for="first_name">{{ trans('cruds.spouseDetail.fields.first_name') }}</label>
@@ -170,6 +175,29 @@
         const formattedThreeYearsAgo = threeYearsAgo.toISOString().split('T')[0];
         $("#date_of_birth_input").attr("value", formattedThreeYearsAgo);
     });
+</script>
+
+<!-- Add these scripts to your HTML file -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    // Function to update the spouse title based on the selected member title
+    function updateSpouseTitle() {
+        const memberTitleSelect = document.querySelector('#member_title');
+        const spouseTitleSelect = document.querySelector('#spouse_title');
+
+        if (memberTitleSelect.value === 'Mr') {
+            spouseTitleSelect.value = 'Mrs';
+        } else if (memberTitleSelect.value === 'Mrs') {
+            spouseTitleSelect.value = 'Mr';
+        }
+    }
+
+    // Attach event listener to the member title select
+    document.querySelector('#member_title').addEventListener('change', updateSpouseTitle);
+
+    // Initial update of spouse title based on the current member title
+    updateSpouseTitle();
 </script>
 
 @endsection

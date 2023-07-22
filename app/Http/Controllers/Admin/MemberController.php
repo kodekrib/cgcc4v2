@@ -55,6 +55,7 @@ class MemberController extends Controller
 
         $employment_statuses = EmploymentStatus::pluck('employment_status', 'id')->prepend(trans('global.pleaseSelect'), '');
 
+
         return view('admin.members.create', compact('countries', 'states', 'employment_statuses', 'titles'));
     }
 
@@ -144,7 +145,6 @@ class MemberController extends Controller
                 'created_by_id'   => $member->id,
             ]);
         }
-
 
         return redirect()->route('admin.members.index');
     }

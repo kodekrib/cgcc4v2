@@ -9,6 +9,7 @@ use App\Http\Requests\StoreChildRequest;
 use App\Http\Requests\UpdateChildRequest;
 use App\Models\Child;
 use App\Models\Member;
+use App\Traits\MultiTenantModelTrait;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,24 +17,6 @@ use Symfony\Component\HttpFoundation\Response;
 class ChildrenController extends Controller
 {
     use CsvImportTrait;
-
-    public function index()
-    {
-        // Check if the user is authorized to access child records
-        abort_if(Gate::denies('child_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
-        // Filter the Child records based on the 'created_by_id' attribute
-        $authenticatedUserId = auth()->id();
-
-        $children = Child::where(function ($query) use ($authenticatedUserId) {
-            $query->where('created_by_id', $authenticatedUserId)
-                ->orWhereNull('created_by_id');
-        })
-        ->with(['father_name', 'mothers_name', 'created_by'])
-        ->get();
-
-        return view('admin.children.index', compact('children'));
-    }
 
     // public function index()
     // {
@@ -44,16 +27,62 @@ class ChildrenController extends Controller
     //     return view('admin.children.index', compact('children'));
     // }
 
+    public function index()
+    {
+        abort_if(Gate::denies('child_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        // Check if the authenticated user is an admin
+        $isAdmin = auth()->user()->roles->contains(1);
+
+        if ($isAdmin) {
+            // Admin can access all children
+            $children = Child::with(['father_name', 'mothers_name', 'created_by'])->get();
+        } else {
+            // Non-admin users can only access their own children
+            $currentUserId = auth()->id();
+            $children = Child::where('created_by_id', $currentUserId)
+                ->with(['father_name', 'mothers_name', 'created_by'])
+                ->get();
+        }
+
+        return view('admin.children.index', compact('children'));
+    }
+
     public function create()
     {
         abort_if(Gate::denies('child_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $father_names = Member::pluck('member_name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        // Check if the authenticated user is an admin
+        $isAdmin = auth()->user()->roles->contains(1);
 
-        $mothers_names = Member::pluck('member_name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        if ($isAdmin) {
+            // Admin can create children for any member
+            $father_names = Member::pluck('member_name', 'id')->prepend(trans('global.pleaseSelect'), '');
+            $mothers_names = Member::pluck('member_name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        } else {
+            // Non-admin users can only create children for themselves (father/mother)
+            $currentUserId = auth()->id();
+            $father_names = Member::where('created_by_id', $currentUserId)
+                ->pluck('member_name', 'id')
+                ->prepend(trans('global.pleaseSelect'), '');
+            $mothers_names = Member::where('created_by_id', $currentUserId)
+                ->pluck('member_name', 'id')
+                ->prepend(trans('global.pleaseSelect'), '');
+        }
 
         return view('admin.children.create', compact('father_names', 'mothers_names'));
     }
+
+    // public function create()
+    // {
+    //     abort_if(Gate::denies('child_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+    //     $father_names = Member::pluck('member_name', 'id')->prepend(trans('global.pleaseSelect'), '');
+
+    //     $mothers_names = Member::pluck('member_name', 'id')->prepend(trans('global.pleaseSelect'), '');
+
+    //     return view('admin.children.create', compact('father_names', 'mothers_names'));
+    // }
 
     public function store(StoreChildRequest $request)
     {
@@ -66,14 +95,37 @@ class ChildrenController extends Controller
     {
         abort_if(Gate::denies('child_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $father_names = Member::pluck('member_name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        // Check if the authenticated user is an admin
+        $isAdmin = auth()->user()->roles->contains(1);
 
-        $mothers_names = Member::pluck('member_name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        // Check if the child belongs to the authenticated user
+        $belongsToUser = $child->created_by_id === auth()->id();
 
-        $child->load('father_name', 'mothers_name', 'created_by');
+        if ($isAdmin || $belongsToUser) {
+            // Admin can edit all records, or the child belongs to the authenticated user
+            $father_names = Member::pluck('member_name', 'id')->prepend(trans('global.pleaseSelect'), '');
+            $mothers_names = Member::pluck('member_name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.children.edit', compact('child', 'father_names', 'mothers_names'));
+            $child->load('father_name', 'mothers_name', 'created_by');
+
+            return view('admin.children.edit', compact('child', 'father_names', 'mothers_names'));
+        } else {
+            abort(Response::HTTP_FORBIDDEN, '403 Forbidden');
+        }
     }
+
+    // public function edit(Child $child)
+    // {
+    //     abort_if(Gate::denies('child_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+    //     $father_names = Member::pluck('member_name', 'id')->prepend(trans('global.pleaseSelect'), '');
+
+    //     $mothers_names = Member::pluck('member_name', 'id')->prepend(trans('global.pleaseSelect'), '');
+
+    //     $child->load('father_name', 'mothers_name', 'created_by');
+
+    //     return view('admin.children.edit', compact('child', 'father_names', 'mothers_names'));
+    // }
 
     public function update(UpdateChildRequest $request, Child $child)
     {
@@ -109,5 +161,13 @@ class ChildrenController extends Controller
         }
 
         return response(null, Response::HTTP_NO_CONTENT);
+    }
+
+    // Example using a Form Request validation
+    public function rules()
+    {
+        return [
+            'date_of_birth' => 'required|date_format:Y-m-d',
+        ];
     }
 }

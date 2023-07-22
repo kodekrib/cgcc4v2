@@ -15,14 +15,14 @@
             </div>
             <table class="table table-bordered table-striped">
                 <tbody>
-                    <tr>
+                    {{-- <tr>
                         <th>
                             {{ trans('cruds.interest.fields.id') }}
                         </th>
                         <td>
                             {{ $interest->id }}
                         </td>
-                    </tr>
+                    </tr> --}}
                     <tr>
                         <th>
                             {{ trans('cruds.interest.fields.interests') }}

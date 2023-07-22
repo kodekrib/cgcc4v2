@@ -22,9 +22,9 @@
                         <th width="10">
 
                         </th>
-                        <th>
+                        {{-- <th>
                             {{ trans('cruds.interest.fields.id') }}
-                        </th>
+                        </th> --}}
                         <th>
                             {{ trans('cruds.interest.fields.interests') }}
                         </th>
@@ -51,9 +51,9 @@
                             <td>
 
                             </td>
-                            <td>
+                            {{-- <td>
                                 {{ $interest->id ?? '' }}
-                            </td>
+                            </td> --}}
                             <td>
                                 @foreach($interest->interests as $key => $item)
                                     <span class="badge badge-info">{{ $item->sports }}</span>
