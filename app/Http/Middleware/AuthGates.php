@@ -2,8 +2,11 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Member;
+use App\Models\Qualification;
 use App\Models\Role;
 use Closure;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Gate;
 
 class AuthGates
@@ -15,7 +18,11 @@ class AuthGates
         if (!$user) {
             return $next($request);
         }
+         $memberExist = Member::all()->where('email', $user->email)->first();
+         Config::set('memberExist', $memberExist);
 
+         $qualification = Qualification::all()->where('created_by_id', $user->id)->first();
+         Config::set('qualification', $qualification);
         $roles            = Role::with('permissions')->get();
         $permissionsArray = [];
 

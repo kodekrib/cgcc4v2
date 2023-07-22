@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Models\Member;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\DashboardController;
@@ -18,7 +20,11 @@ Route::get('/home', function () {
 Route::get('userVerification/{token}', 'UserVerificationController@approve')->name('userVerification');
 Auth::routes();
 Route::post('/user/login', [LoginController::class, 'sendLoginLink'])->name('userLogin');
-Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth']], function () {
+Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => '
+', 'middleware' => ['auth']], function () {
+
+
+
     Route::get('/', 'HomeController@index')->name('home');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
