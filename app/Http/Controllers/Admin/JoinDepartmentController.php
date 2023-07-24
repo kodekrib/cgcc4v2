@@ -37,21 +37,45 @@ class JoinDepartmentController extends Controller
 
         $departments = Department::pluck('department_name', 'id')->prepend(trans('global.pleaseSelect'), '');
 
-        return view('admin.joinDepartments.create', compact('departments'));
+        $userId = Auth::user()->email;
+
+        $member =Member::all()->where('email', $userId)->first();
+        $jointDepartment =  null;
+        if($member != null){
+            $jointDepartment = JoinDepartment::with(['department', 'department.hod'])->where('member_Id', $member->id)->get();
+        }
+
+        return view('admin.joinDepartments.create', compact('departments', 'member', 'jointDepartment'));
     }
 
     public function store(StoreJoinDepartmentRequest $request)
     {
+
+
+        $mailSeting = (new MailingSetupController);
+        $verifyEmailTemplete = $mailSeting->VerifyEmailTemplate('1');
+        if($verifyEmailTemplete == false){
+            return redirect()->back()->withInput()->withErrors(['error' => 'Email template for joining department not set, please kindly contact the administrator']);
+        }
+
+
         $userId = Auth::user()->email;
 
         $member =Member::all()->where('email', $userId)->first();
         //dd($member);
-        if($member == null) return redirect()->route('admin.join-departments.index');
+        if($member == null) return redirect()->back()->withInput()->withErrors(['error' => 'User can not join Department with become a member, please kindly join as member first']);
 
         $dept = Department::with(['hod', 'organization_type', 'created_by'])->where('id', $request['department_id'])->first();
 
+        if($dept->hod() == null) return redirect()->back()->withInput()->withErrors(['error' => 'No HOD for the selected Department']);
+
         $request['member_Id']=$member->id;
         $request['status'] = 0;
+
+        $verify = JoinDepartment::all()->where('member_Id', $request['member_Id'])->where('department_id', $request['department_id'])->where('approval_status', 2)->where('status', 1)->first();
+        if( $verify != null){
+            return redirect()->back()->withInput()->withErrors(['error' => 'You are part of the selected department, you can\'t join again']);
+        }
 
         $joinDepartment = JoinDepartment::create($request->all());
 
@@ -59,7 +83,7 @@ class JoinDepartmentController extends Controller
 
         if($dept != null){
 
-            $mailSeting = (new MailingSetupController);
+
             $email = $mailSeting->GetEmailList(1, $member->id,$joinDepartment->department_id);
             $data['subject'] = 'Notification For Joining a Department';
             $data['template'] =  $mailSeting->BuildEmailTemplate('1', $member->id);
@@ -83,11 +107,27 @@ class JoinDepartmentController extends Controller
 
         $joinDepartment->load('department', 'created_by', 'member');
 
-        return view('admin.joinDepartments.edit', compact('departments', 'joinDepartment'));
+        $userId = Auth::user()->email;
+
+        $member =Member::all()->where('email', $userId)->first();
+        $jointDepartment =  null;
+        if($member != null){
+            $jointDepartment = JoinDepartment::with(['department', 'department.hod'])->where('member_Id', $member->id)->get();
+        }
+
+
+        return view('admin.joinDepartments.edit', compact('departments', 'joinDepartment', 'jointDepartment'));
     }
 
     public function update(UpdateJoinDepartmentRequest $request, JoinDepartment $joinDepartment)
     {
+
+        $mailSeting = (new MailingSetupController);
+        $verifyEmailTemplete = $mailSeting->VerifyEmailTemplate('2');
+        $verifyEmailTempleteD = $mailSeting->VerifyEmailTemplate('3');
+        if($verifyEmailTemplete == false || $verifyEmailTempleteD == false){
+            return redirect()->back()->withInput()->withErrors(['error' => 'Email template for Approved/Disapproved joining department not set, please kindly contact the administrator']);
+        }
 
         $member =Member::all()->where('id', $joinDepartment['member_Id'])->first();
 
