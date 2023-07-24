@@ -86,8 +86,8 @@
                 </div>
             </div> --}}
 
-            
-            {{-- <div class="row">        
+
+            {{-- <div class="row">
                 <div class="col-md-6">
                     <div class="form-group" id="title_id">
                         <label class="required" for="title_id">{{ trans('cruds.member.fields.title') }}</label>
@@ -540,6 +540,9 @@
         } else if (age >= 50 ){
             affinity_group.val( "Crown of Glory");
         }
+        else if(age < 14){
+            affinity_group.val( "Children");
+        }
 
       } else if (marital_status === "Married".toLowerCase()) {
         if (age >= 50 ) {
@@ -548,8 +551,13 @@
             affinity_group.val("Couple Fellowship");
         }
       } else if (
-        ["Widow".toLowerCase(), "Widower".toLowerCase(), "Divorced".toLowerCase(), "Separated".toLowerCase(), "Single Parent".toLowerCase()].includes(marital_status)
+        ["Widow".toLowerCase(), "Widower".toLowerCase(), "Divorced".toLowerCase(), "Separated".toLowerCase(), "Single Parent".toLowerCase(), "Engaged".toLowerCase(), "Widower/Married".toLowerCase(), "Divorced/Remarried".toLowerCase(), "Widow/Remarried".toLowerCase()].includes(marital_status)
       ) {
+
+        if(age <= 13){
+            ErrorNotification(`Please kindly check age and marital staus, it does not match`);
+            return;
+        }
 
         if(age >= 50){
             affinity_group.val("Crown of Glory, 686 Fellowship");

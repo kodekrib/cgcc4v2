@@ -64,7 +64,7 @@
                             {{ trans('cruds.member.fields.mobile') }}
                         </th>
                         <td>
-                            {{ $member->mobile }}
+                            {{ $member->mobile??'N/A' }}
                         </td>
                     </tr>
                     <tr>
@@ -128,7 +128,8 @@
                             {{ trans('cruds.member.fields.place_of_birth') }}
                         </th>
                         <td>
-                            {{ App\Models\Member::PLACE_OF_BIRTH_SELECT[$member->place_of_birth] ?? '' }}
+                        {{ $member->place_of_birth ?? 'N/A' }}
+
                         </td>
                     </tr>
                     <tr>
@@ -136,7 +137,8 @@
                             {{ trans('cruds.member.fields.country_of_birth') }}
                         </th>
                         <td>
-                            {{ App\Models\Member::COUNTRY_OF_BIRTH_SELECT[$member->country_of_birth] ?? '' }}
+                            {{ $member->country_of_birth ?? 'N/A' }}
+
                         </td>
                     </tr>
                     <tr>
@@ -144,7 +146,8 @@
                             {{ trans('cruds.member.fields.nationality') }}
                         </th>
                         <td>
-                            {{ App\Models\Member::NATIONALITY_SELECT[$member->nationality] ?? '' }}
+                        {{ $member->nationality ?? 'N/A' }}
+
                         </td>
                     </tr>
                     <tr>
@@ -152,7 +155,8 @@
                             {{ trans('cruds.member.fields.state_of_origin') }}
                         </th>
                         <td>
-                            {{ App\Models\Member::STATE_OF_ORIGIN_SELECT[$member->state_of_origin] ?? '' }}
+                        {{ $member->state_of_origin ?? 'N/A' }}
+
                         </td>
                     </tr>
                     <tr>
@@ -160,7 +164,8 @@
                             {{ trans('cruds.member.fields.lga') }}
                         </th>
                         <td>
-                            {{ App\Models\Member::LGA_SELECT[$member->lga] ?? '' }}
+                            {{ $member->lga ?? 'N/A' }}
+
                         </td>
                     </tr>
                     <tr>

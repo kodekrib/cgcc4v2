@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\EmploymentDetail;
 use App\Models\Member;
 use App\Models\Qualification;
 use App\Models\Role;
@@ -18,11 +19,16 @@ class AuthGates
         if (!$user) {
             return $next($request);
         }
-         $memberExist = Member::all()->where('email', $user->email)->first();
-         Config::set('memberExist', $memberExist);
+        $memberExist = Member::all()->where('email', $user->email)->first();
+        Config::set('memberExist', $memberExist);
 
-         $qualification = Qualification::all()->where('created_by_id', $user->id)->first();
-         Config::set('qualification', $qualification);
+        $qualification = Qualification::all()->where('created_by_id', $user->id)->first();
+        Config::set('qualification', $qualification);
+
+        $employmentDetail = EmploymentDetail::all()->where('created_by_id', $user->id)->first();
+        Config::set('employmentDetail', $employmentDetail);
+
+
         $roles            = Role::with('permissions')->get();
         $permissionsArray = [];
 
