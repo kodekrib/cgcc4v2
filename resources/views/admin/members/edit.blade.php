@@ -126,7 +126,7 @@
                 <select class="form-control {{ $errors->has('marital_status') ? 'is-invalid' : '' }}" name="marital_status" id="marital_status" required onchange="calculateAge()">
                     <option value disabled {{ old('marital_status', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
                     @foreach(App\Models\Member::MARITAL_STATUS_SELECT as $key => $label)
-                        <option value="{{ $key }}" {{ old('marital_status', $member->marital_status) === (string) $key ? 'selected' : '' }}>{{ $label }}</option>
+                        <option value="{{ $label }}" {{ old('marital_status', $member->marital_status) === (string) $label ? 'selected' : '' }}>{{ $label }}</option>
                     @endforeach
                 </select>
                 @if($errors->has('marital_status'))
@@ -419,7 +419,7 @@
          }
     }
     function fillAffinityGroup(age) {
-      var marital_status =  $('#marital_status').val();
+      var marital_status =  $('#marital_status_select').val();
       if(marital_status === undefined) return;
       var affinity_group = $('[name=affinity_group]');
       marital_status = marital_status.toLowerCase();
@@ -429,6 +429,9 @@
         } else if (age >= 50 ){
             affinity_group.val( "Crown of Glory");
         }
+        else if(age < 14){
+            affinity_group.val( "Children");
+        }
 
       } else if (marital_status === "Married".toLowerCase()) {
         if (age >= 50 ) {
@@ -437,8 +440,13 @@
             affinity_group.val("Couple Fellowship");
         }
       } else if (
-        ["Widow".toLowerCase(), "Widower".toLowerCase(), "Divorced".toLowerCase(), "Separated".toLowerCase(), "Single Parent".toLowerCase()].includes(marital_status)
+        ["Widow".toLowerCase(), "Widower".toLowerCase(), "Divorced".toLowerCase(), "Separated".toLowerCase(), "Single Parent".toLowerCase(), "Engaged".toLowerCase(), "Widower/Married".toLowerCase(), "Divorced/Remarried".toLowerCase(), "Widow/Remarried".toLowerCase()].includes(marital_status)
       ) {
+
+        if(age <= 13){
+            ErrorNotification(`Please kindly check age and marital staus, it does not match`);
+            return;
+        }
 
         if(age >= 50){
             affinity_group.val("Crown of Glory, 686 Fellowship");

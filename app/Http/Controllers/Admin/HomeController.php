@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Config;
 use LaravelDaily\LaravelCharts\Classes\LaravelChart;
 use App\Models\Member;
 use Carbon\Carbon;
@@ -27,6 +29,7 @@ class HomeController
 
         // $progressPercentage = ($totalAdults / $totalMembers) * 100;
 
+
         return view('dashboard', compact('totalMembers', 'totalMale', 'totalFemale', 'totalChildren', 'totalAdults'));
     }
 
@@ -49,7 +52,7 @@ class HomeController
     {
         $now = Carbon::now();
         $hour = $now->hour;
-    
+
         if ($hour >= 5 && $hour < 12) {
             return 'Good Morning';
         } elseif ($hour >= 12 && $hour < 17) {

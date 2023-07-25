@@ -55,16 +55,17 @@ class MemberController extends Controller
 
         $employment_statuses = EmploymentStatus::pluck('employment_status', 'id')->prepend(trans('global.pleaseSelect'), '');
 
+
         return view('admin.members.create', compact('countries', 'states', 'employment_statuses', 'titles'));
     }
 
     public function store(StoreMemberRequest $request)
     {
         // Check if a record already exists
-        if (Member::count() > 0) {
+        if (Member::all()->where('email', $request['email'])->count() > 0) {
             return redirect()->back()->withInput()->withErrors(['error' => 'Only one member record is allowed']);
         }
-        
+
         $member = Member::create($request->all());
 
         $memberId = $member->id;
@@ -144,7 +145,6 @@ class MemberController extends Controller
                 'created_by_id'   => $member->id,
             ]);
         }
-
 
         return redirect()->route('admin.members.index');
     }

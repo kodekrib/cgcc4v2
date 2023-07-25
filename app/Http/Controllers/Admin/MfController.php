@@ -13,14 +13,36 @@ use Symfony\Component\HttpFoundation\Response;
 
 class MfController extends Controller
 {
+
     public function index()
     {
         abort_if(Gate::denies('mf_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $mfs = Mf::with(['created_by'])->get();
+        // Check if the authenticated user is an admin
+        $isAdmin = auth()->user()->roles->contains(1);
+
+        if ($isAdmin) {
+            // Admin can access all Mfs
+            $mfs = Mf::with(['created_by'])->get();
+        } else {
+            // Non-admin users can only access Mfs they created
+            $currentUserId = auth()->id();
+            $mfs = Mf::where('created_by_id', $currentUserId)
+                ->with(['created_by'])
+                ->get();
+        }
 
         return view('admin.mfs.index', compact('mfs'));
     }
+    
+    // public function index()
+    // {
+    //     abort_if(Gate::denies('mf_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+    //     $mfs = Mf::with(['created_by'])->get();
+
+    //     return view('admin.mfs.index', compact('mfs'));
+    // }
 
     public function create()
     {

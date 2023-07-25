@@ -67,16 +67,16 @@ class Member extends Model implements HasMedia
     }
 
     public const MARITAL_STATUS_SELECT = [
-        'divorced'           => 'Divorced',
-        'divorced_remarried' => 'Divorced/Remarried',
-        'engaged'            => 'Engaged',
-        'married'            => 'Married',
-        'widower'            => 'Widower',
-        'widower_remarried'  => 'Widower/Remarried',
-        'single'             => 'Single',
-        'single_parent'      => 'Single Parent',
-        'widow'              => 'Widow',
-        'widow_remarried'    => 'Widow/Remarried',
+        'Divorced'           => 'Divorced',
+        'Divorced/Remarried' => 'Divorced/Remarried',
+        'Engaged'            => 'Engaged',
+        'Married'            => 'Married',
+        'Widower'            => 'Widower',
+        'Widower/Remarried'  => 'Widower/Remarried',
+        'Single'             => 'Single',
+        'Single Parent'      => 'Single Parent',
+        'Widow'              => 'Widow',
+        'Widow/Remarried'    => 'Widow/Remarried',
     ];
 
     public $table = 'members';

@@ -9,20 +9,44 @@ use App\Http\Requests\UpdateInterestRequest;
 use App\Models\IndustrySector;
 use App\Models\Interest;
 use App\Models\Sport;
+use App\Traits\MultiTenantModelTrait;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class InterestsController extends Controller
 {
+
     public function index()
     {
         abort_if(Gate::denies('interest_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $interests = Interest::with(['interests', 'industry_sector', 'created_by'])->get();
+        // Check if the authenticated user is an admin
+        $isAdmin = auth()->user()->roles->contains(1);
+
+        if ($isAdmin) {
+            // Admin can access all interests
+            $interests = Interest::with(['interests', 'industry_sector', 'created_by'])->get();
+        } else {
+            // Non-admin users can only access their own interests
+            $currentUserId = auth()->id();
+            $interests = Interest::where('created_by_id', $currentUserId)
+                ->with(['interests', 'industry_sector', 'created_by'])
+                ->get();
+        }
+
 
         return view('admin.interests.index', compact('interests'));
     }
+
+    // public function index()
+    // {
+    //     abort_if(Gate::denies('interest_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+    //     $interests = Interest::with(['interests', 'industry_sector', 'created_by'])->get();
+
+    //     return view('admin.interests.index', compact('interests'));
+    // }
 
     public function create()
     {

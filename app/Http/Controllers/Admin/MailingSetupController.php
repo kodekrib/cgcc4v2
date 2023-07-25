@@ -144,6 +144,15 @@ class MailingSetupController extends Controller
         return $emailist;
     }
 
+    public function VerifyEmailTemplate(string $operationCode){
+        $template = $this->getMailingTemplaterationCode($operationCode);
+        if($template == null){
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     public function BuildEmailTemplate(string $operationCode, $userId, $userParameter = [], $isMember = true){
 
         $template = $this->getMailingTemplaterationCode($operationCode);

@@ -9,6 +9,20 @@
     <div class="card-body">
         <form method="POST" action="{{ route("admin.join-departments.store") }}" enctype="multipart/form-data">
             @csrf
+            @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
+            @if ($member == null)
+                <div class="alert alert-danger">
+                    You are not eligible to join any Department, please register as member before joining department
+                </div>
+            @endif
             <div class="form-group">
                 <label class="required" for="department_id">{{ trans('cruds.joinDepartment.fields.department') }}</label>
                 <select class="form-control select2 {{ $errors->has('department') ? 'is-invalid' : '' }}" name="department_id" id="department_id" required>

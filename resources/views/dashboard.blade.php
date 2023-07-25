@@ -250,8 +250,6 @@
         </div>
     @endcan
 
-
-
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const ctx = document.getElementById("meetingChart").getContext("2d");

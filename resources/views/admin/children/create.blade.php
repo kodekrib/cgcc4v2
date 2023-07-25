@@ -120,7 +120,7 @@
                     <!-- Second column -->
                     <div class="form-group">
                         <label class="required" for="date_of_birth">{{ trans('cruds.child.fields.date_of_birth') }}</label>
-                        <input class="form-control child-date-picker {{ $errors->has('date_of_birth') ? 'is-invalid' : '' }}" type="date" name="date_of_birth" id="date_of_birth_input" value="{{ old('date_of_birth') }}" required>
+                        <input class="form-control date {{ $errors->has('date_of_birth') ? 'is-invalid' : '' }}" type="text" name="date_of_birth" id="date_of_birth" value="{{ old('date_of_birth') }}" required>
                         @if($errors->has('date_of_birth'))
                             <div class="invalid-feedback">
                                 {{ $errors->first('date_of_birth') }}

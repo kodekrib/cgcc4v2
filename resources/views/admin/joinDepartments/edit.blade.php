@@ -10,6 +10,16 @@
         <form method="POST" action="{{ route("admin.join-departments.update", [$joinDepartment->id]) }}" enctype="multipart/form-data">
             @method('PUT')
             @csrf
+            @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
+
             <div class="form-group">
                 <label class="required" for="member_name">{{ trans('cruds.joinDepartment.fields.member_name') }}</label>
                 <input class="form-control {{ $errors->has('member') ? 'is-invalid' : '' }}" disabled type="text" name="member_name" id="member_name" value="{{{ $joinDepartment->member->member_name }}}">
