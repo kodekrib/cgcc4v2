@@ -163,7 +163,7 @@ return [
             'deleted_at_helper'        => ' ',
             'created_by'               => 'Created by',
             'created_by_helper'        => ' ',
-            'middlename'               => 'Middle Names',
+            'middlename'               => 'Middle Name',
             'middlename_helper'        => ' ',
             'email'                    => 'Email',
             'email_helper'             => ' ',

@@ -29,11 +29,69 @@
                 @endif
                 <span class="help-block">{{ trans('cruds.member.fields.image_helper') }}</span>
             </div>
+
             <div class="row">
                 <div class="col-md-6">
-                    <div class="form-group">
+                    <div class="form-group" id="title_id">
+                    <label>{{ trans('cruds.member.fields.title') }}</label>
+                    <select class="form-control {{ $errors->has('title_id') ? 'is-invalid' : '' }}" name="title_id">
+                        <option value disabled {{ old('title', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
+                        <option value="1" {{ old('title', '') === 'Mr' ? 'selected' : '' }}>Mr</option>
+                        <option value="2" {{ old('title', '') === 'Mrs' ? 'selected' : '' }}>Mrs</option>
+                        <option value="3" {{ old('title', '') === 'Miss' ? 'selected' : '' }}>Miss</option>
+                        <option value="4" {{ old('title', '') === 'Master' ? 'selected' : '' }}>Master</option>
+                        <option value="5" {{ old('title', '') === 'Pastor' ? 'selected' : '' }}>Pastor</option>
+                        <option value="6" {{ old('title', '') === 'Dr' ? 'selected' : '' }}>Dr</option>
+                        <option value="7" {{ old('title', '') === 'Arch' ? 'selected' : '' }}>Arch</option>
+                        <option value="8" {{ old('title', '') === 'Evangelist' ? 'selected' : '' }}>Evangelist</option>
+                        <option value="9" {{ old('title', '') === 'Chief' ? 'selected' : '' }}>Chief</option>
+                        <option value="10" {{ old('title', '') === 'Chief Mrs' ? 'selected' : '' }}>Chief Mrs</option>
+                        <option value="11" {{ old('title', '') === 'Deacon' ? 'selected' : '' }}>Deacon</option>
+                        <option value="12" {{ old('title', '') === 'Deaconess' ? 'selected' : '' }}>Deaconess</option>
+                        <option value="13" {{ old('title', '') === 'Pharm' ? 'selected' : '' }}>Pharm</option>
+                    </select>
+                    @if($errors->has('title_id'))
+                        <div class="invalid-feedback">
+                            {{ $errors->first('title_id') }}
+                        </div>
+                    @endif
+                </div>
+            </div>
+
+            {{-- <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group" id="title_id">
+                    <label>{{ trans('cruds.member.fields.title') }}</label>
+                    <select class="form-control {{ $errors->has('title_id') ? 'is-invalid' : '' }}" name="title_id">
+                        <option value disabled {{ old('title', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
+                        <option value="Mr" {{ old('title', '') === 'Mr' ? 'selected' : '' }}>Mr</option>
+                        <option value="Mrs" {{ old('title', '') === 'Mrs' ? 'selected' : '' }}>Mrs</option>
+                        <option value="Miss" {{ old('title', '') === 'Miss' ? 'selected' : '' }}>Miss</option>
+                        <option value="Master" {{ old('title', '') === 'Master' ? 'selected' : '' }}>Master</option>
+                        <option value="Pastor" {{ old('title', '') === 'Pastor' ? 'selected' : '' }}>Pastor</option>
+                        <option value="Dr" {{ old('title', '') === 'Dr' ? 'selected' : '' }}>Dr</option>
+                        <option value="Arch" {{ old('title', '') === 'Arch' ? 'selected' : '' }}>Arch</option>
+                        <option value="Evangelist" {{ old('title', '') === 'Evangelist' ? 'selected' : '' }}>Evangelist</option>
+                        <option value="Chief" {{ old('title', '') === 'Chief' ? 'selected' : '' }}>Chief</option>
+                        <option value="Chief Mrs" {{ old('title', '') === 'Chief Mrs' ? 'selected' : '' }}>Chief Mrs</option>
+                        <option value="Deacon" {{ old('title', '') === 'Deacon' ? 'selected' : '' }}>Deacon</option>
+                        <option value="Deaconess" {{ old('title', '') === 'Deaconess' ? 'selected' : '' }}>Deaconess</option>
+                        <option value="Pharm" {{ old('title', '') === 'Pharm' ? 'selected' : '' }}>Pharm</option>
+                    </select>
+                    @if($errors->has('title_id'))
+                        <div class="invalid-feedback">
+                            {{ $errors->first('title_id') }}
+                        </div>
+                    @endif
+                </div>
+            </div> --}}
+
+            
+            {{-- <div class="row">        
+                <div class="col-md-6">
+                    <div class="form-group" id="title_id">
                         <label class="required" for="title_id">{{ trans('cruds.member.fields.title') }}</label>
-                        <select class="form-control select2 {{ $errors->has('title') ? 'is-invalid' : '' }}" name="title_id" id="title_id" required>
+                        <select class="form-control select2 {{ $errors->has('title') ? 'is-invalid' : '' }}" name="title_id" required>
                             @foreach($titles as $id => $entry)
                                 <option value="{{ $id }}" {{ old('title_id') == $id ? 'selected' : '' }}>{{ $entry }}</option>
                             @endforeach
@@ -45,7 +103,8 @@
                         @endif
                         <span class="help-block">{{ trans('cruds.member.fields.title_helper') }}</span>
                     </div>
-                </div>
+                </div> --}}
+
                 <div class="col-md-6">
                     <div class="form-group">
                         <label class="required" for="member_name">{{ trans('cruds.member.fields.member_name') }}</label>
@@ -59,7 +118,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
@@ -73,18 +132,20 @@
                         <span class="help-block">{{ trans('cruds.member.fields.middlename_helper') }}</span>
                     </div>
                 </div>
+
                 <div class="col-md-6" id="maiden_name" style="display: none;">
                     <div class="form-group">
-                        <label for="maiden_name">Maiden Name</label>
-                        <input class="form-control {{ $errors->has('maiden_name') ? 'is-invalid' : '' }}" type="text" name="maiden_name" value="{{ old('maiden_name', '') }}">
-                        @if($errors->has('maiden_name'))
-                            <div class="invalid-feedback">
-                                {{ $errors->first('maiden_name') }}
-                            </div>
-                        @endif
-                        {{-- <span class="help-block">{{ trans('cruds.member.fields.maiden_name_helper') }}</span> --}}
-                    </div>
+                    <label for="maiden_name">Maiden Name</label>
+                    <input class="form-control {{ $errors->has('maiden_name') ? 'is-invalid' : '' }}" type="text" name="maiden_name" id="maiden_name" value="{{ old('maiden_name', '') }}">
+                    @if($errors->has('maiden_name'))
+                        <div class="invalid-feedback">
+                            {{ $errors->first('maiden_name') }}
+                        </div>
+                    @endif
+
                 </div>
+            </div>
+
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="mobile">{{ trans('cruds.member.fields.mobile') }}</label>
@@ -98,7 +159,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
@@ -116,7 +177,7 @@
                     <div class="form-group">
                         <label class="required" for="date_of_birth">{{ trans('cruds.member.fields.date_of_birth') }}</label>
                         <input name="date_of_birth" id="date_of_birth" hidden/>
-                        <input class="form-control {{ $errors->has('date_of_birth') ? 'is-invalid' : '' }}"  type="date" id="date_of_birth_date" value="{{ old('date_of_birth') }}" required onchange="calculateAge()">
+                        <input class="form-control {{ $errors->has('date_of_birth') ? 'is-invalid' : '' }}"  type="text" id="date_of_birth_date" value="{{ old('date_of_birth') }}" required onchange="calculateAge()">
                         @if($errors->has('date_of_birth'))
                             <div class="invalid-feedback">
                                 {{ $errors->first('date_of_birth') }}
@@ -132,16 +193,7 @@
                   <input class="form-control" type="text" value="{{ $member->age ?? '' }}" id="member_age" disabled onchange="calculateAge()">
                 </div>
               </div>
-            {{-- <div class="form-group">
-                <label for="age">{{ trans('cruds.member.fields.age') }}</label>
-                <input class="form-control {{ $errors->has('age') ? 'is-invalid' : '' }}" type="number" name="age" id="age" value="{{ old('age', '') }}" step="1">
-                @if($errors->has('age'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('age') }}
-                    </div>
-                @endif
-                <span class="help-block">{{ trans('cruds.member.fields.age_helper') }}</span>
-            </div> --}}
+
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
@@ -184,7 +236,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
@@ -211,22 +263,6 @@
                     </div>
                 </div>
             </div>
-            
-            {{-- <div class="form-group">
-                <label class="required">{{ trans('cruds.member.fields.marital_status') }}</label>
-                <select class="form-control {{ $errors->has('marital_status') ? 'is-invalid' : '' }}" name="marital_status" id="marital_status" required>
-                    <option value disabled {{ old('marital_status', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
-                    @foreach(App\Models\Member::MARITAL_STATUS_SELECT as $key => $label)
-                        <option value="{{ $key }}" {{ old('marital_status', 'Select Marital Status') === (string) $key ? 'selected' : '' }}>{{ $label }}</option>
-                    @endforeach
-                </select>
-                @if($errors->has('marital_status'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('marital_status') }}
-                    </div>
-                @endif
-                <span class="help-block">{{ trans('cruds.member.fields.marital_status_helper') }}</span>
-            </div> --}}
 
                     <div class="form-group">
                         <label class="required" for="employment_status_id">{{ trans('cruds.member.fields.employment_status') }}</label>
@@ -322,7 +358,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group" id="lgaContainer">
@@ -354,7 +390,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
@@ -381,8 +417,8 @@
                             </div>
                         </div>
                     </div>
-                    
-                            
+
+
             <div class="form-group">
                 <button class="btn btn-danger" type="submit">
                     {{ trans('global.save') }}
@@ -531,6 +567,7 @@
      $('#date_of_birth').val(formatDate());
      var selectDate = (new Date($('#date_of_birth_date').val()));
      $('member_age').val(dt.getFullYear() - selectDate.getFullYear());
+     debugger;
      this.fillAffinityGroup(dt.getFullYear() - selectDate.getFullYear());
     }
 
@@ -553,8 +590,23 @@
 
 <script>
     $(document).ready(function () {
-        // On change of state select field
+         // Restrict dates to 5 years ago
+        var today = new Date();
+        var fiveYearsAgo = new Date(today.getFullYear() - 5, today.getMonth(), today.getDate());
+        var formattedFiveYearsAgo = fiveYearsAgo.toISOString().split('T')[0];
 
+        // On change of state select field
+        $('#date_of_birth_date').datetimepicker({
+        format: 'MM-DD-YYYY',
+        locale: 'en',
+        maxDate: new Date(formattedFiveYearsAgo),
+        icons: {
+            up: 'fas fa-chevron-up',
+            down: 'fas fa-chevron-down',
+            previous: 'fas fa-chevron-left',
+            next: 'fas fa-chevron-right'
+            },
+        });
         $('#state_of_origin').on('change', function () {
             $('#lga').empty();
                 // Use Ajax to get the LGAs for the selected state
@@ -583,10 +635,45 @@
 </script>
 
 <script>
-    // Restrict dates to 5 years ago
-    var today = new Date();
-    var fiveYearsAgo = new Date(today.getFullYear() - 5, today.getMonth(), today.getDate());
-    var formattedFiveYearsAgo = fiveYearsAgo.toISOString().split('T')[0];
-    document.getElementById("date_of_birth_date").setAttribute("max", formattedFiveYearsAgo);
+    const titleSelect = document.querySelector('select[name="title_id"]');
+    const maidenName = document.querySelector('#maiden_name');
+
+    titleSelect.addEventListener('change', function() {
+        // Add or modify the integer values based on the associated titles
+        const selectedValuesToShowMaidenName = [5, 6, 2, 10, 8, 12, 13, 7 /* Add more values as needed */];
+
+        if (selectedValuesToShowMaidenName.includes(parseInt(this.value))) {
+            maidenName.style.display = 'block';
+        } else {
+            maidenName.style.display = 'none';
+        }
+    });
 </script>
+
+{{-- <script>
+    const titleSelect = document.querySelector('select[name="title_id"]');
+    const maidenName = document.querySelector('#maiden_name');
+
+    titleSelect.addEventListener('change', function() {
+        if (
+            this.value === 'Pastor' ||
+            this.value === 'Dr' ||
+            this.value === 'Mrs' ||
+            this.value === 'Chief Mrs' ||
+            this.value === 'Evangelist' ||
+            this.value === 'Engr' ||
+            this.value === 'Rev' ||
+            this.value === 'Deacon' ||
+            this.value === 'Deaconess' ||
+            this.value === 'Pharm' ||
+            this.value === 'Arch'
+        ) {
+            maidenName.style.display = 'block';
+        } else {
+            maidenName.style.display = 'none';
+        }
+    });
+</script> --}}
+
+
 @endsection

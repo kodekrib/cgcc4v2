@@ -19,12 +19,30 @@ class ChildrenController extends Controller
 
     public function index()
     {
+        // Check if the user is authorized to access child records
         abort_if(Gate::denies('child_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $children = Child::with(['father_name', 'mothers_name', 'created_by'])->get();
+        // Filter the Child records based on the 'created_by_id' attribute
+        $authenticatedUserId = auth()->id();
+
+        $children = Child::where(function ($query) use ($authenticatedUserId) {
+            $query->where('created_by_id', $authenticatedUserId)
+                ->orWhereNull('created_by_id');
+        })
+        ->with(['father_name', 'mothers_name', 'created_by'])
+        ->get();
 
         return view('admin.children.index', compact('children'));
     }
+
+    // public function index()
+    // {
+    //     abort_if(Gate::denies('child_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+    //     $children = Child::with(['father_name', 'mothers_name', 'created_by'])->get();
+
+    //     return view('admin.children.index', compact('children'));
+    // }
 
     public function create()
     {

@@ -26,9 +26,9 @@
                         <th width="10">
 
                         </th>
-                        <th>
+                        {{-- <th>
                             {{ trans('cruds.child.fields.id') }}
-                        </th>
+                        </th> --}}
                         <th>
                             {{ trans('cruds.child.fields.position_in_family') }}
                         </th>
@@ -70,9 +70,9 @@
                             <td>
 
                             </td>
-                            <td>
+                            {{-- <td>
                                 {{ $child->id ?? '' }}
-                            </td>
+                            </td> --}}
                             <td>
                                 {{ $child->position_in_family ?? '' }}
                             </td>

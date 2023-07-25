@@ -22,9 +22,9 @@
                         <th width="10">
 
                         </th>
-                        <th>
+                        {{-- <th>
                             {{ trans('cruds.spouseDetail.fields.id') }}
-                        </th>
+                        </th> --}}
                         <th>
                             {{ trans('cruds.spouseDetail.fields.title') }}
                         </th>
@@ -57,9 +57,9 @@
                             <td>
 
                             </td>
-                            <td>
+                            {{-- <td>
                                 {{ $spouseDetail->id ?? '' }}
-                            </td>
+                            </td> --}}
                             <td>
                                 {{ App\Models\SpouseDetail::TITLE_SELECT[$spouseDetail->title] ?? '' }}
                             </td>
