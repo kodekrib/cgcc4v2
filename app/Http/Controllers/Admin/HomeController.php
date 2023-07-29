@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use LaravelDaily\LaravelCharts\Classes\LaravelChart;
 use App\Models\Member;
+use App\Models\Meeting;
 use Carbon\Carbon;
 
 class HomeController
@@ -29,38 +30,10 @@ class HomeController
 
         // $progressPercentage = ($totalAdults / $totalMembers) * 100;
 
+                // Fetch upcoming meetings scheduled in the future
+        $upcomingMeetings = Meeting::where('date_of_meeting', '>=', Carbon::now())->get();
 
-        return view('dashboard', compact('totalMembers', 'totalMale', 'totalFemale', 'totalChildren', 'totalAdults'));
-    }
 
-
-    // public function index()
-    // {
-    //     $totalMembers = Member::count(); // Total number of members
-    //     $totalMale = Member::where('gender', 'Male')->count();
-    //     $totalFemale = Member::where('gender', 'Female')->count();
-
-    //     $totalAdults = Member::where('age', '>=', 18)->count(); // Number of members who are adults (age >= 18)
-    //     $totalChildren = Member::where('age', '<', 18)->count(); // Number of members who are children (age < 18)
-
-    //     // $progressPercentage = ($totalAdults / $totalMembers) * 100;
-
-    //     return view('dashboard', compact('totalMembers', 'totalMale', 'totalFemale', 'totalChildren', 'totalAdults'));
-    // }
-
-    private function getGreeting()
-    {
-        $now = Carbon::now();
-        $hour = $now->hour;
-
-        if ($hour >= 5 && $hour < 12) {
-            return 'Good Morning';
-        } elseif ($hour >= 12 && $hour < 17) {
-            return 'Good Afternoon';
-        } elseif ($hour >= 17 && $hour < 21) {
-            return 'Good Evening';
-        } else {
-            return 'Good Night';
-        }
+        return view('dashboard', compact('totalMembers', 'totalMale', 'totalFemale', 'totalChildren', 'totalAdults', 'upcomingMeetings'));
     }
 }

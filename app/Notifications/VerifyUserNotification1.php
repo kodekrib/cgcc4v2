@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Notifications;
 
 use App\Models\User;
@@ -26,11 +25,10 @@ class VerifyUserNotification extends Notification
 
     public function toMail($notifiable)
     {
-        $url = route('userVerification', $this->user->verification_token);
-
         return (new MailMessage())
-            ->subject('Account Verification')
-            ->markdown('auth.verify_user', ['user' => $this->user, 'url' => $url]);
+            ->line(trans('global.verifyYourUser'))
+            ->action(trans('global.clickHereToVerify'), route('userVerification', $this->user->verification_token))
+            ->line(trans('global.thankYouForUsingOurApplication'));
     }
 
     public function toArray($notifiable)
