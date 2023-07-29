@@ -37,11 +37,41 @@ class UsersController extends Controller
 
     public function store(StoreUserRequest $request)
     {
+        // Validate the uploaded file
+        $request->validate([
+            'profile_picture' => 'nullable|image|mimes:jpeg,jpg,png|max:600', // Adjust the max file size as per your needs
+        ]);
+    
+        // Check if a file was uploaded
+        if ($request->hasFile('profile_picture')) {
+            // Get the file from the request
+            $file = $request->file('profile_picture');
+    
+            // Generate a unique file name to store the uploaded file
+            $fileName = time() . '_' . $file->getClientOriginalName();
+    
+            // Store the uploaded file in the 'public/uploads' directory
+            $filePath = $file->storeAs('uploads', $fileName, 'public');
+    
+            // Set the 'profile_picture' attribute of the user to the file path
+            $request->merge(['profile_picture' => $filePath]);
+        }
+    
+        // Create the user with the updated request data
         $user = User::create($request->all());
         $user->roles()->sync($request->input('roles', []));
-
+    
         return redirect()->route('admin.users.index');
     }
+    
+
+    // public function store(StoreUserRequest $request)
+    // {
+    //     $user = User::create($request->all());
+    //     $user->roles()->sync($request->input('roles', []));
+
+    //     return redirect()->route('admin.users.index');
+    // }
 
     public function edit(User $user)
     {

@@ -51,6 +51,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => '
     Route::get('user/GetUserList', 'UsersController@getUserList');
     Route::resource('users', 'UsersController', ['except' => ['destroy']]);
 
+    Route::post('/admin/users/{user}/upload-profile-picture', 'Admin\UsersController@uploadProfilePicture')
+    ->name('admin.users.uploadProfilePicture');
+
+
     // Title
     Route::post('titles/parse-csv-import', 'TitleController@parseCsvImport')->name('titles.parseCsvImport');
     Route::post('titles/process-csv-import', 'TitleController@processCsvImport')->name('titles.processCsvImport');

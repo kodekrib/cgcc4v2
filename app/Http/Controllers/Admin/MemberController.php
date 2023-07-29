@@ -199,4 +199,16 @@ class MemberController extends Controller
 
         return response()->json(['id' => $media->id, 'url' => $media->getUrl()], Response::HTTP_CREATED);
     }
+
+    public function showUserWithImage($userId)
+    {
+        $user = User::findOrFail($userId); // Assuming your user model is named 'User'
+        $media = $user->media()->where('collection_name', 'ck-media')->first(); // Assuming the media relationship is defined in your User model
+
+        return view('user_with_image', [
+            'user' => $user,
+            'mediaId' => $media ? $media->id : null,
+            'filename' => $media ? $media->file_name : null,
+        ]);
+    }
 }

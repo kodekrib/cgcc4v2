@@ -18,7 +18,7 @@
                 </ul>
             </div>
         @endif
-            <div class="form-group">
+            {{-- <div class="form-group">
                 <label for="image">{{ trans('cruds.member.fields.image') }}</label>
                 <div class="needsclick dropzone {{ $errors->has('image') ? 'is-invalid' : '' }}" id="image-dropzone">
                 </div>
@@ -28,7 +28,7 @@
                     </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.member.fields.image_helper') }}</span>
-            </div>
+            </div> --}}
 
             <div class="row">
                 <div class="col-md-6">

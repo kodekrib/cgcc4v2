@@ -51,9 +51,9 @@ class LoginController extends Controller
     {
 
         $email = $request->get('email');
-        //dd($email);
+
         $user = User::where('email', '=', $email)->Orwhere('mobile', '=', $email)->first();
-        // dd($user);
+
         if(empty($user)){
             return redirect()->back()->withErrors(['email' => "Sorry, your Email ID or Mobile No. is not Registered on the System"]);
         }

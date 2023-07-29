@@ -8,7 +8,7 @@
 
     <div class="card-body">
         <form method="POST" action="{{ route("admin.users.store") }}" enctype="multipart/form-data">
-            @csrf
+            @csrf         
             <div class="form-group">
                 <label class="required" for="name">{{ trans('cruds.user.fields.name') }}</label>
                 <input class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" type="text" name="name" id="name" value="{{ old('name', '') }}" required>
@@ -48,7 +48,11 @@
                     </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.user.fields.mobile_helper') }}</span>
-            </div>
+            </div>  
+            <div class="form-group">
+                <label for="profile_picture">Upload Picture (JPG, JPEG, PNG only)</label>
+                <input type="file" class="form-control-file" name="profile_picture" id="profile_picture" accept=".jpg,.jpeg,.png">
+            </div>         
             <div class="form-group">
                 <label class="required" for="password">{{ trans('cruds.user.fields.password') }}</label>
                 <input class="form-control {{ $errors->has('password') ? 'is-invalid' : '' }}" type="password" name="password" id="password" required>
@@ -59,6 +63,7 @@
                 @endif
                 <span class="help-block">{{ trans('cruds.user.fields.password_helper') }}</span>
             </div>
+
             <div class="form-group">
                 <div class="form-check {{ $errors->has('policy') ? 'is-invalid' : '' }}">
                     <input class="form-check-input" type="checkbox" name="policy" id="policy" value="1" required {{ old('policy', 0) == 1 ? 'checked' : '' }}>

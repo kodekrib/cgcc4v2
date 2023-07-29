@@ -41,6 +41,7 @@ class User extends Authenticatable
         'name',
         'firstname',
         'email',
+        'profile_picture',
         'mobile',
         'verified',
         'verified_at',

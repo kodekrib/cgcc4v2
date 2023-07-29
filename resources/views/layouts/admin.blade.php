@@ -201,20 +201,22 @@
                     <svg width="118" height="46" alt="CoreUI Logo">
                         <use xlink:href="coreui/assets/brand/coreui.svg#full"></use>
                     </svg></a>
-
+                                    
                 <ul class="header-nav ms-auto me-3">
                     <li class="nav-item dropdown d-md-down-none"><a class="nav-link" data-coreui-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                             <svg class="icon icon-lg my-1 mx-2" style="color: #999">
                                 <use xlink:href="coreui/vendors/@coreui/icons/svg/free.svg#cil-envelope-open"></use>
-                            </svg><span class="position-absolute top-0 start-50 translate-middle p-1 ms-2 mt-2">
-                            {{-- </svg><span class="position-absolute top-0 start-50 translate-middle p-1 ms-2 mt-2 bg-danger rounded-circle"> --}}
-                      <span class="visually-hidden">New alerts</span></span></a>
+                            </svg>
+                    @if($unread ?? 0 > 0)
+                            <span class="position-absolute top-0 start-50 translate-middle p-1 ms-2 mt-2 bg-danger rounded-circle">
+                      <span class="visually-hidden">New alerts</span></span>
+                      @endif
+                    </a>
                         <div class="dropdown-menu dropdown-menu-end dropdown-menu-lg pt-0">
                             @php($unread = \App\Models\QaTopic::unreadCount())
                             <div class="dropdown-header bg-light dark:bg-white dark:bg-opacity-10">
                                 <strong>You have {{ $unread }} {{ trans('global.messages') }}</strong>
                             </div>
-
 
                             <a class="dropdown-item text-center border-top"
                                 href="{{ route("admin.messenger.index") }}"><strong>View all messages</strong></a>
@@ -226,16 +228,27 @@
                     <li class="nav-item dropdown d-flex align-items-center"><a class="nav-link py-0"
                             data-coreui-toggle="dropdown" href="#" role="button" aria-haspopup="true"
                             aria-expanded="false">
-                            <div class="avatar avatar-md"><img class="avatar-img" src="coreui/assets/img/avatars/8.jpeg"
-                                    alt="user@email.com"><span class="avatar-status bg-success"></span></div>
+
+                            <div class="avatar avatar-md">
+                                @if(isset($user) && $user->profile_picture)
+                                    <img class="avatar-img" src="{{ asset($user->profile_picture) }}" alt="{{ $user->email }}">
+                                @else
+                                    <img class="avatar-img" src="{{ asset('coreui/assets/img/avatars/8.jpeg') }}" alt="{{ $user->email ?? '' }}">
+                                @endif
+                                <span class="avatar-status bg-success"></span>
+                            </div>
+                            
+                            {{-- <div class="avatar avatar-md"><img class="avatar-img" src="coreui/assets/img/avatars/8.jpeg"
+                                    alt="user@email.com"><span class="avatar-status bg-success"></span></div> --}}
+                                    
                         </a>
                         <div class="dropdown-menu dropdown-menu-end pt-0">
-
-                          	{{-- <a class="dropdown-item" href="#">
+                          	{{-- <a class="dropdown-item" href="{{ url('admin/users/create') }}">
                                 <svg class="icon me-2">
                                     <use xlink:href="coreui/vendors/@coreui/icons/svg/free.svg#cil-crop-rotate">
                                     </use>
                                 </svg> Change Profile Picture</a> --}}
+
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="#"
                                 onclick="event.preventDefault(); document.getElementById('logoutform').submit();">

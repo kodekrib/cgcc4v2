@@ -26,12 +26,12 @@
                         <th width="10">
 
                         </th>
-                        <th>
+                        {{-- <th>
                             {{ trans('cruds.member.fields.id') }}
                         </th>
                         <th>
                             {{ trans('cruds.member.fields.image') }}
-                        </th>
+                        </th> --}}
                         <th>
                             {{ trans('cruds.member.fields.title') }}
                         </th>
@@ -103,7 +103,7 @@
                             <td>
 
                             </td>
-                            <td>
+                            {{-- <td>
                                 {{ $member->id ?? '' }}
                             </td>
                             <td>
@@ -112,7 +112,7 @@
                                         <img src="{{ $member->image->getUrl('thumb') }}">
                                     </a>
                                 @endif
-                            </td>
+                            </td> --}}
                             <td>
                                 {{ $member->title->title ?? '' }}
                             </td>

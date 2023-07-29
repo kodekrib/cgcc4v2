@@ -15,15 +15,15 @@
             </div>
             <table class="table table-bordered table-striped">
                 <tbody>
-                    <tr>
+                    {{-- <tr>
                         <th>
                             {{ trans('cruds.member.fields.id') }}
                         </th>
                         <td>
                             {{ $member->id }}
                         </td>
-                    </tr>
-                    <tr>
+                    </tr> --}}
+                    {{-- <tr>
                         <th>
                             {{ trans('cruds.member.fields.image') }}
                         </th>
@@ -34,7 +34,7 @@
                                 </a>
                             @endif
                         </td>
-                    </tr>
+                    </tr> --}}
                     <tr>
                         <th>
                             {{ trans('cruds.member.fields.title') }}

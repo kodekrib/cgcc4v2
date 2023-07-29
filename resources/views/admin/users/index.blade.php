@@ -26,9 +26,9 @@
                         <th width="10">
 
                         </th>
-                        <th>
+                        {{-- <th>
                             {{ trans('cruds.user.fields.id') }}
-                        </th>
+                        </th> --}}
                         <th>
                             {{ trans('cruds.user.fields.name') }}
                         </th>
@@ -40,6 +40,9 @@
                         </th>
                         <th>
                             {{ trans('cruds.user.fields.mobile') }}
+                        </th>
+                        <th>
+                            Profile Picture
                         </th>
                         <th>
                             {{ trans('cruds.user.fields.verified') }}
@@ -64,9 +67,9 @@
                             <td>
 
                             </td>
-                            <td>
+                            {{-- <td>
                                 {{ $user->id ?? '' }}
-                            </td>
+                            </td> --}}
                             <td>
                                 {{ $user->name ?? '' }}
                             </td>
@@ -78,6 +81,9 @@
                             </td>
                             <td>
                                 {{ $user->mobile ?? '' }}
+                            </td>
+                            <td>
+                                {{ $user->profile_picture ?? '' }}
                             </td>
                             <td>
                                 <span style="display:none">{{ $user->verified ?? '' }}</span>

@@ -11,7 +11,7 @@
             @csrf
             <div class="form-group">
                 <label class="required" for="highest_qualifications_id">Highest Educational Qualification</label>
-                <select class="form-control select2 {{ $errors->has('highest_qualifications') ? 'is-invalid' : '' }}" name="highest_qualifications_id" id="highest_qualifications_id" required>
+                <select class="form-control select2 {{ $errors->has('highest_qualifications') ? 'is-invalid' : '' }}" name="highest_qualifications_id" id="highest_qualifications_id">
                     @foreach($highest_qualifications as $id => $entry)
                         <option value="{{ $id }}" {{ old('highest_qualifications_id') == $id ? 'selected' : '' }}>{{ $entry }}</option>
                     @endforeach
