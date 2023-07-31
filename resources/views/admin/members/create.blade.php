@@ -30,12 +30,15 @@
                 <span class="help-block">{{ trans('cruds.member.fields.image_helper') }}</span>
             </div> --}}
 
-            <div class="row">
+            {{--<div class="row">
                 <div class="col-md-6">
                     <div class="form-group" id="title_id">
                     <label>{{ trans('cruds.member.fields.title') }}</label>
                     <select class="form-control {{ $errors->has('title_id') ? 'is-invalid' : '' }}" name="title_id">
                         <option value disabled {{ old('title', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
+                        @foreach ($titles as $title)
+                        <option value="1" {{ old('title', '') === 'Mr' ? 'selected' : '' }}>Mr</option>
+                        @endforeach
                         <option value="1" {{ old('title', '') === 'Mr' ? 'selected' : '' }}>Mr</option>
                         <option value="2" {{ old('title', '') === 'Mrs' ? 'selected' : '' }}>Mrs</option>
                         <option value="3" {{ old('title', '') === 'Miss' ? 'selected' : '' }}>Miss</option>
@@ -56,7 +59,7 @@
                         </div>
                     @endif
                 </div>
-            </div>
+            </div> --}}
 
             {{-- <div class="row">
                 <div class="col-md-6">
@@ -87,7 +90,7 @@
             </div> --}}
 
 
-            {{-- <div class="row">
+             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group" id="title_id">
                         <label class="required" for="title_id">{{ trans('cruds.member.fields.title') }}</label>
@@ -103,7 +106,7 @@
                         @endif
                         <span class="help-block">{{ trans('cruds.member.fields.title_helper') }}</span>
                     </div>
-                </div> --}}
+                </div>
 
                 <div class="col-md-6">
                     <div class="form-group">

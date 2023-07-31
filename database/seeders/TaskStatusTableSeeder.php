@@ -24,6 +24,6 @@ class TaskStatusTableSeeder extends Seeder
             ],
         ];
 
-        TaskStatus::insert($taskStatuses);
+        //TaskStatus::insert($taskStatuses);
     }
 }
