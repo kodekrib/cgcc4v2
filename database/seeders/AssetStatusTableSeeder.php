@@ -36,6 +36,9 @@ class AssetStatusTableSeeder extends Seeder
             ],
         ];
 
-        AssetStatus::insert($assetStatuses);
+       // AssetStatus::insert($assetStatuses);
+        foreach ($assetStatuses as $item) {
+            AssetStatus::updateOrCreate(['id' => $item['id']], $item);
+        }
     }
 }

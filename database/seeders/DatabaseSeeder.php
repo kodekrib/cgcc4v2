@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
             RoleUserTableSeeder::class,
             AssetStatusTableSeeder::class,
             TaskStatusTableSeeder::class,
+            TitleTableSeeder::class,
         ]);
     }
 }

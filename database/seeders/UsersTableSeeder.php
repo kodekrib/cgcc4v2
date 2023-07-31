@@ -23,7 +23,9 @@ class UsersTableSeeder extends Seeder
                 'verification_token' => '',
             ],
         ];
+        foreach ($users as $item) {
+            //User::updateOrCreate(['id' => $item['id']], $item);
+        }
 
-        User::insert($users);
     }
 }

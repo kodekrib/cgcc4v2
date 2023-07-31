@@ -19,7 +19,9 @@ class RolesTableSeeder extends Seeder
                 'title' => 'User',
             ],
         ];
+        foreach ($roles as $item) {
+            Role::updateOrCreate(['id' => $item['id']], $item);
+        }
 
-        Role::insert($roles);
     }
 }
