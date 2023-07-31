@@ -61,6 +61,14 @@
                     </tr>
                     <tr>
                         <th>
+                            {{ trans('cruds.member.fields.maiden_name') }}
+                        </th>
+                        <td>
+                            {{ $member->maiden_name }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
                             {{ trans('cruds.member.fields.mobile') }}
                         </th>
                         <td>

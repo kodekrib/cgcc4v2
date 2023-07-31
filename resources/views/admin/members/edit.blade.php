@@ -3,7 +3,8 @@
 
 <div class="card">
     <div class="card-header">
-        {{ trans('global.edit') }} {{ trans('cruds.member.title_singular') }}
+         {{-- {{ trans('global.edit') }} {{ trans('cruds.member.title_singular') }} --}}
+      Edit My Biodata
     </div>
 
     <div class="card-body">
@@ -54,6 +55,16 @@
                     </div>
                 @endif
                 <span class="help-block">{{ trans('cruds.member.fields.middlename_helper') }}</span>
+            </div>
+            <div class="form-group">
+                <label for="maiden_name">Maiden Name</label>
+                <input class="form-control {{ $errors->has('maiden_name') ? 'is-invalid' : '' }}" type="text" name="maiden_name" id="maiden_name" value="{{ old('maiden_name', $member->maiden_name) }}">
+                @if($errors->has('maiden_name'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('maiden_name') }}
+                    </div>
+                @endif
+                {{-- <span class="help-block">{{ trans('cruds.member.fields.maiden_name_helper') }}</span> --}}
             </div>
             <div class="form-group">
                 <label for="mobile">{{ trans('cruds.member.fields.mobile') }}</label>

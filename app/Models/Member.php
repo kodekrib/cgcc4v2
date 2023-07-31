@@ -96,6 +96,7 @@ class Member extends Model implements HasMedia
         'title_id',
         'member_name',
         'middlename',
+      	'maiden_name',
         'mobile',
         'email',
         'date_of_birth',

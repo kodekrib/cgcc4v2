@@ -16,7 +16,7 @@
 			<div id="login_panel">
                 <h3>A link has been sent to your email</h3>
 				<span>Check your email for a link to log into your account</span>
-              	<div id="nuser">If you didn't receive login email after 5 mins, goto  <a href="{{ route('login') }}"">Login page</a> to request a new one...</div>
+              	<div id="nuser">If you didn't receive login email after 5 mins, goto  <a href="{{ route('login') }}">Login page</a> to request a new one...</div>
 
 			</div>
 		</div>

@@ -43,6 +43,12 @@ class EmploymentDetailsController extends Controller
 
     public function store(StoreEmploymentDetailRequest $request)
     {
+
+        // Check if a record already exists
+        if (EmploymentDetail::count() > 0) {
+            return redirect()->back()->withInput()->withErrors(['error' => 'Only one Employment detail record is allowed']);
+        }
+        
         $request['created_by_id']= Auth::id();
         $employmentDetail = EmploymentDetail::create($request->all());
 
