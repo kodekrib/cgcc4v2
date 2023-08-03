@@ -30,15 +30,12 @@
                 <span class="help-block">{{ trans('cruds.member.fields.image_helper') }}</span>
             </div> --}}
 
-            {{--<div class="row">
+            <div class="row">
                 <div class="col-md-6">
                     <div class="form-group" id="title_id">
                     <label>{{ trans('cruds.member.fields.title') }}</label>
                     <select class="form-control {{ $errors->has('title_id') ? 'is-invalid' : '' }}" name="title_id">
                         <option value disabled {{ old('title', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
-                        @foreach ($titles as $title)
-                        <option value="1" {{ old('title', '') === 'Mr' ? 'selected' : '' }}>Mr</option>
-                        @endforeach
                         <option value="1" {{ old('title', '') === 'Mr' ? 'selected' : '' }}>Mr</option>
                         <option value="2" {{ old('title', '') === 'Mrs' ? 'selected' : '' }}>Mrs</option>
                         <option value="3" {{ old('title', '') === 'Miss' ? 'selected' : '' }}>Miss</option>
@@ -59,38 +56,10 @@
                         </div>
                     @endif
                 </div>
-            </div> --}}
-
-            {{-- <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group" id="title_id">
-                    <label>{{ trans('cruds.member.fields.title') }}</label>
-                    <select class="form-control {{ $errors->has('title_id') ? 'is-invalid' : '' }}" name="title_id">
-                        <option value disabled {{ old('title', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
-                        <option value="Mr" {{ old('title', '') === 'Mr' ? 'selected' : '' }}>Mr</option>
-                        <option value="Mrs" {{ old('title', '') === 'Mrs' ? 'selected' : '' }}>Mrs</option>
-                        <option value="Miss" {{ old('title', '') === 'Miss' ? 'selected' : '' }}>Miss</option>
-                        <option value="Master" {{ old('title', '') === 'Master' ? 'selected' : '' }}>Master</option>
-                        <option value="Pastor" {{ old('title', '') === 'Pastor' ? 'selected' : '' }}>Pastor</option>
-                        <option value="Dr" {{ old('title', '') === 'Dr' ? 'selected' : '' }}>Dr</option>
-                        <option value="Arch" {{ old('title', '') === 'Arch' ? 'selected' : '' }}>Arch</option>
-                        <option value="Evangelist" {{ old('title', '') === 'Evangelist' ? 'selected' : '' }}>Evangelist</option>
-                        <option value="Chief" {{ old('title', '') === 'Chief' ? 'selected' : '' }}>Chief</option>
-                        <option value="Chief Mrs" {{ old('title', '') === 'Chief Mrs' ? 'selected' : '' }}>Chief Mrs</option>
-                        <option value="Deacon" {{ old('title', '') === 'Deacon' ? 'selected' : '' }}>Deacon</option>
-                        <option value="Deaconess" {{ old('title', '') === 'Deaconess' ? 'selected' : '' }}>Deaconess</option>
-                        <option value="Pharm" {{ old('title', '') === 'Pharm' ? 'selected' : '' }}>Pharm</option>
-                    </select>
-                    @if($errors->has('title_id'))
-                        <div class="invalid-feedback">
-                            {{ $errors->first('title_id') }}
-                        </div>
-                    @endif
-                </div>
-            </div> --}}
+            </div>
 
 
-             <div class="row">
+             {{-- <div class="row">
                 <div class="col-md-6">
                     <div class="form-group" id="title_id">
                         <label class="required" for="title_id">{{ trans('cruds.member.fields.title') }}</label>
@@ -106,7 +75,7 @@
                         @endif
                         <span class="help-block">{{ trans('cruds.member.fields.title_helper') }}</span>
                     </div>
-                </div>
+                </div> --}}
 
                 <div class="col-md-6">
                     <div class="form-group">
