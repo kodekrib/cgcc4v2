@@ -9,6 +9,7 @@ trait MultiTenantModelTrait
 {
     public static function bootMultiTenantModelTrait()
     {
+        return;
         if (!app()->runningInConsole() && auth()->check()) {
             $isAdmin = auth()->user()->roles->contains(1);
             static::creating(function ($model) use ($isAdmin) {
