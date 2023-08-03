@@ -106,4 +106,5 @@ class UsersController extends Controller
 
         return new UserResource(User::all()->load(['roles']));
     }
+
 }

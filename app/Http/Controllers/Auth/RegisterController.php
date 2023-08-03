@@ -44,6 +44,35 @@ class RegisterController extends Controller
      *
      * @return \Illuminate\Contracts\Validation\Validator
      */
+
+    //  protected function validator(array $data)
+    //  {
+    //      return Validator::make($data, [
+    //          'name' => ['required', 'string', 'max:255'],
+    //          'firstname' => ['required', 'string', 'max:255'],
+    //          'email' => [
+    //              'required',
+    //              'string',
+    //              'email',
+    //              'max:255',
+    //              'unique:users',
+    //              function ($attribute, $value, $fail) {
+    //                  // Check if the email contains more than four digits (0-9)
+    //                  if (preg_match('/\d{5,}/', $value)) {
+    //                      $fail('Email address cannot contain more than four digits.');
+    //                  }
+     
+    //                  // Check if digits (0-9) appear after the '@' sign
+    //                  $domain = explode('@', $value);
+    //                  if (isset($domain[1]) && preg_match('/\d/', $domain[1])) {
+    //                      $fail("Digits cannot appear after the '@' sign in the email address.");
+    //                  }
+    //              },
+    //          ],
+    //          'mobile' => ['required', 'string', 'regex:/^(?:\+\d{1,3}|0\d{1,3}|00\d{1,2})?(?:\d{8,12}|\d{4}[\s.-]\d{4})$/', 'max:15', 'unique:users'],
+    //      ]);
+    //  }
+
     protected function validator(array $data)
     {
         return Validator::make($data, [

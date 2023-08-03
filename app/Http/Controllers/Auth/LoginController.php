@@ -13,6 +13,9 @@ use App\Mail\UserLoginMail;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
+
 // use App\Http\Controllers\Controller;
 // use App\Providers\RouteServiceProvider;
 // use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -68,5 +71,4 @@ class LoginController extends Controller
         // inform the user
         return view('auth.login-sent');
     }
-
 }

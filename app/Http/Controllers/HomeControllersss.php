@@ -1,12 +1,17 @@
 <?php
 
+// namespace App\Http\Controllers;
+
 namespace App\Http\Controllers;
 
+
+use App\Models\Member;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
-        /**
+    /**
      * Create a new controller instance.
      *
      * @return void

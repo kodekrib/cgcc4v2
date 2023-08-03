@@ -1,8 +1,6 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
-use App\Models\Member;
-use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\DashboardController;
@@ -16,15 +14,14 @@ Route::get('/home', function () {
 
     return redirect()->route('admin.home');
 });
+Route::get('/privacy', function () {
+    return view('privacy');
+});
 
 Route::get('userVerification/{token}', 'UserVerificationController@approve')->name('userVerification');
 Auth::routes();
 Route::post('/user/login', [LoginController::class, 'sendLoginLink'])->name('userLogin');
-Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => '
-', 'middleware' => ['auth']], function () {
-
-
-
+Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth']], function () {
     Route::get('/', 'HomeController@index')->name('home');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
@@ -50,10 +47,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => '
     Route::post('users/process-csv-import', 'UsersController@processCsvImport')->name('users.processCsvImport');
     Route::get('user/GetUserList', 'UsersController@getUserList');
     Route::resource('users', 'UsersController', ['except' => ['destroy']]);
-
-    Route::post('/admin/users/{user}/upload-profile-picture', 'Admin\UsersController@uploadProfilePicture')
-    ->name('admin.users.uploadProfilePicture');
-
 
     // Title
     Route::post('titles/parse-csv-import', 'TitleController@parseCsvImport')->name('titles.parseCsvImport');
