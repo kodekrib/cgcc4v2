@@ -16,7 +16,7 @@ trait MultiTenantModelTrait
                 // If required, remove the surrounding IF condition and admins will act as users
                 if (!$isAdmin) {
                     $model->created_by_id = auth()->id();
-                }
+                }ff
             });
             if (!$isAdmin) {
                 static::addGlobalScope('created_by_id', function (Builder $builder) {
