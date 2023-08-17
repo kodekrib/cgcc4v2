@@ -47,9 +47,9 @@ class Member extends Model implements HasMedia
         2 => 'Joining Department Approval',
         3 => 'Joining Department Disapproval',
         4 => 'Delist a member from a department',
-        5 => 'Notification For Approintment',
-        6 => 'Approintment Approval',
-        7 => 'Approintment Disapproval',
+        5 => 'Notification For Appointment',
+        6 => 'Appointment Approval',
+        7 => 'Appointment Disapproval',
         8 => 'Notification for Meetings',
         9 => 'Notification On Issue Management',
 

@@ -24,7 +24,7 @@ class UsersTableSeeder extends Seeder
             ],
         ];
         foreach ($users as $item) {
-            //User::updateOrCreate(['id' => $item['id']], $item);
+            User::updateOrCreate(['id' => $item['id']], $item);
         }
 
     }
